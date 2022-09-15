@@ -8,9 +8,11 @@
 
 <main class="container mx-auto px-4">
 	<div class="flex flex-col gap-2">
-		<div>
+		<div class="flex flex-col gap-2">
 			<span class="font-bold text-2xl">{@html data.submission.title}</span>
-			{@html data.submission.selftext_html ?? ''}
+			<div class="reddit-md max-w-4xl bg-gray-200 p-4 rounded-md">
+				{@html data.submission.selftext_html ?? ''}
+			</div>
 		</div>
 
 		<div class="flex flex-col gap-2">
