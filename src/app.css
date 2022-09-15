@@ -1,3 +1,56 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Style Reddit MD which mostly uses default css values
+   See https://www.w3schools.com/cssref/css_default_values.asp */
+.reddit-md a {
+	color: #0079d3;
+}
+
+.reddit-md strong {
+	font-weight: bold;
+}
+
+.reddit-md del,
+strike {
+	text-decoration: line-through;
+}
+
+.reddit-md em {
+	font-style: italic;
+}
+
+.reddit-md p {
+	margin-top: 0.33em;
+	margin-bottom: 0.33em;
+}
+
+.reddit-md h1 {
+	font-size: larger;
+	font-weight: bold;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+}
+
+.reddit-md hr {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: inset;
+	border-width: 1px;
+}
+
+.reddit-md li {
+	display: list-item;
+}
+
+.reddit-md ul {
+	list-style-type: disc;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 40px;
+}
