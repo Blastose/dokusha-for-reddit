@@ -1,8 +1,6 @@
 <script lang="ts">
 	import type Snoowrap from 'snoowrap';
 	export let comment: Snoowrap.Comment;
-
-	console.log(comment.replies);
 </script>
 
 <div class="flex flex-col gap-2">
@@ -12,7 +10,7 @@
 			<span class="font-semibold">{comment.score} points</span>
 			<span>{new Date(comment.created_utc * 1000)}</span>
 		</div>
-		<div>
+		<div class="max-w-4xl">
 			{@html comment.body_html}
 		</div>
 	</div>

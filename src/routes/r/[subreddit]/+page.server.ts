@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	const posts = await r.getSubreddit(`${params.subreddit}`).getHot();
 
 	if (posts) {
-		console.log(JSON.parse(JSON.stringify(posts[0])));
+		// console.log(JSON.parse(JSON.stringify(posts[0])));
 		return {
 			posts: JSON.parse(JSON.stringify(posts)) as Snoowrap.Submission[]
 		};
