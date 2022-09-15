@@ -13,7 +13,19 @@ export const load: PageServerLoad = async ({ params }) => {
 		grantType: 'client_credentials'
 	});
 
-	const posts = await r.getSubreddit(`${params.subreddit}`).getHot();
+	let posts = undefined;
+
+	if (params.sort === 'new') {
+		posts = await r.getSubreddit(`${params.subreddit}`).getNew();
+	} else if (params.sort === 'rising') {
+		posts = await r.getSubreddit(`${params.subreddit}`).getRising();
+	} else if (params.sort === 'controversial') {
+		posts = await r.getSubreddit(`${params.subreddit}`).getControversial();
+	} else if (params.sort === 'top') {
+		posts = await r.getSubreddit(`${params.subreddit}`).getTop();
+	} else {
+		throw error(404, 'Not found');
+	}
 
 	if (posts) {
 		return {

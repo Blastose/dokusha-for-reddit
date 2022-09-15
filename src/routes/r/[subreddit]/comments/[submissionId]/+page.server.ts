@@ -21,7 +21,7 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	if (submission) {
 		return {
-			submission: JSON.parse(JSON.stringify(submission)) as Snoowrap.Submission[]
+			submission: JSON.parse(JSON.stringify(submission)) as Snoowrap.Submission
 		};
 	}
 
