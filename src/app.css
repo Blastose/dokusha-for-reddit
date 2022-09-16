@@ -4,6 +4,11 @@
 
 /* Style Reddit MD which mostly uses default css values
    See https://www.w3schools.com/cssref/css_default_values.asp */
+
+.reddit-md {
+	word-wrap: break-word;
+}
+
 .reddit-md a {
 	color: #0079d3;
 }
@@ -70,6 +75,7 @@ strike {
 }
 
 .reddit-md pre {
+	overflow-x: auto;
 	font-size: small;
 }
 
