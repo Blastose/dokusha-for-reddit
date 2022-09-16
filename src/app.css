@@ -55,6 +55,13 @@ strike {
 	padding-left: 40px;
 }
 
+.reddit-md blockquote {
+	border-left: 2px solid gray;
+	color: rgb(99, 99, 99);
+	padding-left: 0.5rem;
+	margin-left: 2rem;
+}
+
 .reddit-md .md-spoiler-text {
 	background: #4f4f4f;
 	border-radius: 2px;
