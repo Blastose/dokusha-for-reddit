@@ -37,7 +37,7 @@
 	<div class="flex flex-col gap-1 rounded">
 		<a
 			class={submission.stickied ? 'text-green-700' : 'text-blue-700'}
-			href={`${$page.url.pathname}/comments/${submission.id}`}
+			href={`/r/${submission.subreddit}/comments/${submission.id}`}
 		>
 			<span class="font-medium">{submission.title}</span>
 		</a>
@@ -47,7 +47,7 @@
 				submitted {new Date(submission.created_utc * 1000).toLocaleString()} by
 				<span class="text-blue-700">{submission.author}</span>
 			</p>
-			<a href={`${$page.url.pathname}/comments/${submission.id}`}>
+			<a href={`/r/${submission.subreddit}/comments/${submission.id}`}>
 				<span>{submission.num_comments} comments</span>
 			</a>
 		</div>
