@@ -15,7 +15,7 @@
 			</div>
 		</div>
 
-		<div class="flex flex-col gap-2">
+		<div class="flex flex-col gap-2 px-4 py-2 bg-gray-300 rounded-md">
 			{#each data.submission.comments as comment}
 				<Comment {comment} />
 			{/each}
