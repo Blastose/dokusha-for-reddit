@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Submission from '$lib/components/Submission.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -34,13 +35,7 @@
 			>
 		</div>
 		{#each data.posts as post}
-			<div class="flex gap-2">
-				<span>{post.ups}</span>
-				<a class="text-blue-700" href={`/r/${data.posts[0]?.subreddit}/comments/${post.id}`}>
-					<span>{post.title}</span>
-				</a>
-				<span>{post.num_comments} comments</span>
-			</div>
+			<Submission submission={post} />
 		{/each}
 	</div>
 </main>
