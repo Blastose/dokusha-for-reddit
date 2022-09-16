@@ -8,7 +8,7 @@
 		<div class="flex gap-2">
 			<span class="text-blue-800 font-semibold">{comment.author}</span>
 			<span class="font-semibold">{comment.score} points</span>
-			<span>{new Date(comment.created_utc * 1000)}</span>
+			<span>{new Date(comment.created_utc * 1000).toLocaleString()}</span>
 		</div>
 		<div class="reddit-md max-w-4xl">
 			{@html comment.body_html}
