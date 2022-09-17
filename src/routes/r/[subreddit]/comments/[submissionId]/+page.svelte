@@ -10,7 +10,7 @@
 	<div class="flex flex-col gap-2">
 		<div class="flex flex-col gap-2">
 			<div>
-				<p class="font-bold text-2xl">{@html data.submission.title}</p>
+				<p class="font-bold text-2xl">{data.submission.title}</p>
 				<p>
 					submitted {new Date(data.submission.created_utc * 1000).toLocaleString()} by
 					<span class="text-blue-500">{data.submission.author}</span>
