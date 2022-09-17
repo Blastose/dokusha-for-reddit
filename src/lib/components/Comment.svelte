@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type Snoowrap from 'snoowrap';
 	export let comment: Snoowrap.Comment;
+	console.log(comment);
 </script>
 
 <div
@@ -11,15 +12,20 @@
 		<div class="flex gap-2 text-sm">
 			<p>
 				<span
-					class="{comment.is_submitter
-						? 'text-white bg-blue-500 rounded-sm px-1 py-[0.075rem]'
-						: 'text-blue-800'} font-semibold"
+					class="
+					text-blue-800
+					{comment.is_submitter ? 'text-white bg-blue-500 rounded-sm px-1 py-[0.075rem]' : ''} 
+					{comment.stickied ? 'text-white bg-green-600 rounded-sm px-1 py-[0.075rem]' : ''}	
+					font-semibold"
 				>
 					{comment.author}
 				</span>
 			</p>
 			<span class="font-semibold">{comment.score} points</span>
 			<span>{new Date(comment.created_utc * 1000).toLocaleString()}</span>
+			{#if comment.stickied}
+				<span class="text-green-700"> - stickied comment</span>
+			{/if}
 		</div>
 		<div class="reddit-md max-w-4xl">
 			{@html comment.body_html}
