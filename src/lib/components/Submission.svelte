@@ -2,26 +2,18 @@
 	import { page } from '$app/stores';
 	import type Snoowrap from 'snoowrap';
 	export let submission: Snoowrap.Submission;
-	console.log(submission);
+	// console.log(submission);
+
+	// default is for link's w/o thumbnails?
+	const nonThumbnailSrcs = ['self', 'spoiler', 'default', 'nsfw', ''];
 </script>
 
-<!-- <div class="flex gap-2">
-	<span>{submission.ups}</span>
-	<a
-		class={submission.stickied ? 'text-green-700' : 'text-blue-700'}
-		href={`${$page.url.pathname}/comments/${submission.id}`}
-	>
-		<span>{submission.title}</span>
-	</a>
-	<span>{submission.num_comments} comments</span>
-</div> -->
-
-<div class="card">
+<div class="container bg-[#d6dbe0]">
 	<div class="flex items-center justify-center">
 		{submission.score}
 	</div>
 
-	{#if submission.thumbnail !== 'self' && submission.thumbnail !== 'spoiler' && submission.thumbnail !== 'nsfw'}
+	{#if !nonThumbnailSrcs.includes(submission.thumbnail)}
 		<div class="w-[70px] h-[70px]">
 			<img
 				src={submission.thumbnail}
@@ -31,16 +23,20 @@
 			/>
 		</div>
 	{:else}
-		<div class="w-[70px] h-[70px]" />
+		<div class="w-[70px] h-[70px] flex items-center justify-center">
+			{submission.thumbnail}
+		</div>
 	{/if}
 
 	<div class="flex flex-col gap-1 rounded">
-		<a
-			class={submission.stickied ? 'text-green-700' : 'text-blue-700'}
-			href={`/r/${submission.subreddit}/comments/${submission.id}`}
-		>
-			<span class="font-medium">{submission.title}</span>
-		</a>
+		<div>
+			<a
+				class={submission.stickied ? 'text-green-700' : 'text-blue-700'}
+				href={`/r/${submission.subreddit}/comments/${submission.id}`}
+			>
+				<span class="font-medium">{submission.title}</span>
+			</a>
+		</div>
 
 		<div class="text-sm">
 			<p>
@@ -55,9 +51,8 @@
 </div>
 
 <style>
-	.card {
+	.container {
 		display: grid;
-		background-color: rgb(199, 199, 199);
 		border-radius: 0.375rem;
 		padding: 0.25rem;
 		column-gap: 0.5rem;
