@@ -1,7 +1,12 @@
 <script lang="ts">
 	import type Snoowrap from 'snoowrap';
 	export let comment: Snoowrap.Comment;
-	console.log(comment);
+	// console.log(comment);
+
+	let childCommentHidden = false;
+	const toggleChildComments = () => {
+		childCommentHidden = !childCommentHidden;
+	};
 </script>
 
 <div
@@ -30,13 +35,21 @@
 		<div class="reddit-md max-w-4xl">
 			{@html comment.body_html}
 		</div>
+
+		{#if comment.replies.length > 0}
+			<button on:click={toggleChildComments}>
+				<span class="text-gray-600 text-xs"
+					>{childCommentHidden ? 'show child comments' : 'hide child comments'}</span
+				>
+			</button>
+		{/if}
 	</div>
 
-	<div class="pl-8">
-		{#if comment.replies}
+	{#if comment.replies.length > 0}
+		<div class="flex flex-col gap-2 pl-8 {childCommentHidden ? 'hidden' : ''}">
 			{#each comment.replies as reply}
 				<svelte:self comment={reply} />
 			{/each}
-		{/if}
-	</div>
+		</div>
+	{/if}
 </div>
