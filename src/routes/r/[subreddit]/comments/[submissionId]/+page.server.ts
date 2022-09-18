@@ -4,6 +4,8 @@ import reddit from '$lib/reddit';
 import type Snoowrap from 'snoowrap';
 
 export const load: PageServerLoad = async ({ params }) => {
+	// Type error from snoowrap
+	// See https://github.com/not-an-aardvark/snoowrap/issues/221
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
 	const submission = await reddit.getSubmission(params.submissionId).expandReplies({
