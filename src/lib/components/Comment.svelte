@@ -31,6 +31,10 @@
 			</p>
 			<span class="font-semibold">{comment.score} points</span>
 			<span>{new Date(comment.created_utc * 1000).toLocaleString()}</span>
+			{#if typeof comment.edited === 'number'}
+				<span>* (last edited {new Date(comment.edited * 1000).toLocaleString()})</span>
+			{/if}
+			<span />
 			{#if comment.stickied}
 				<span class="text-green-700"> - stickied comment</span>
 			{/if}
