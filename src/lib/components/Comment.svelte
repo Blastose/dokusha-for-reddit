@@ -10,10 +10,10 @@
 </script>
 
 <div
-	class="flex flex-col gap-2 
-  {comment.replies.length > 0 ? 'border-l' : ''} border-gray-200 rounded-tl-md"
+	class="flex flex-col gap-2 border-gray-200 rounded-tl-md
+  {comment.replies.length > 0 ? 'border-l' : ''}"
 >
-	<div class="bg-gray-200 p-2 rounded-md">
+	<div class="bg-gray-200 p-2 rounded-md shadow-sm">
 		<div class="flex gap-2 text-sm">
 			<p>
 				<span
