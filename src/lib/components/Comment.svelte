@@ -21,6 +21,9 @@
 					text-blue-800
 					{comment.is_submitter ? 'text-white bg-blue-500 rounded-sm px-1 py-[0.075rem]' : ''} 
 					{comment.stickied ? 'text-white bg-green-600 rounded-sm px-1 py-[0.075rem]' : ''}	
+					{comment.distinguished === 'moderator'
+						? 'text-white bg-green-600 rounded-sm px-1 py-[0.075rem]'
+						: ''}	
 					font-semibold"
 				>
 					{comment.author}
