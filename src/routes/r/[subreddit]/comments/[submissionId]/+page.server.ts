@@ -1,21 +1,14 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { CLIENT_ID } from '$env/static/private';
-import { CLIENT_SECRET } from '$env/static/private';
-import snoowrap from 'snoowrap';
+import reddit from '$lib/reddit';
 import type Snoowrap from 'snoowrap';
 
 export const load: PageServerLoad = async ({ params }) => {
-	const r = await snoowrap.fromApplicationOnlyAuth({
-		userAgent: 'Cygnet',
-		clientId: CLIENT_ID,
-		clientSecret: CLIENT_SECRET,
-		grantType: 'client_credentials'
-	});
-
+	// Type error from snoowrap
+	// See https://github.com/not-an-aardvark/snoowrap/issues/221
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore
-	const submission = await r.getSubmission(params.submissionId).expandReplies({
+	const submission = await reddit.getSubmission(params.submissionId).expandReplies({
 		limit: 1
 	});
 

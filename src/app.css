@@ -4,6 +4,11 @@
 
 /* Style Reddit MD which mostly uses default css values
    See https://www.w3schools.com/cssref/css_default_values.asp */
+
+.reddit-md {
+	word-wrap: break-word;
+}
+
 .reddit-md a {
 	color: #0079d3;
 }
@@ -53,4 +58,30 @@ strike {
 	margin-left: 0;
 	margin-right: 0;
 	padding-left: 40px;
+}
+
+.reddit-md blockquote {
+	border-left: 2px solid gray;
+	color: rgb(99, 99, 99);
+	padding-left: 0.5rem;
+	margin-left: 2rem;
+}
+
+.reddit-md .md-spoiler-text {
+	background: #4f4f4f;
+	border-radius: 2px;
+	cursor: pointer;
+	color: transparent;
+}
+
+.reddit-md pre {
+	overflow-x: auto;
+	font-size: small;
+}
+
+.reddit-md .md-spoiler-text.revealed {
+	background: rgba(79, 79, 79, 0.1);
+	border-radius: 2px;
+	cursor: text;
+	color: black;
 }

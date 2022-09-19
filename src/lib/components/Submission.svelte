@@ -1,0 +1,62 @@
+<script lang="ts">
+	import { page } from '$app/stores';
+	import type Snoowrap from 'snoowrap';
+	export let submission: Snoowrap.Submission;
+	// console.log(submission);
+
+	// default is for link's w/o thumbnails?
+	const nonThumbnailSrcs = ['self', 'spoiler', 'default', 'nsfw', ''];
+</script>
+
+<div class="container bg-[#d6dbe0]">
+	<div class="flex items-center justify-center">
+		{submission.score}
+	</div>
+
+	{#if !nonThumbnailSrcs.includes(submission.thumbnail)}
+		<div class="w-[70px] h-[70px]">
+			<img
+				src={submission.thumbnail}
+				alt="thumbnail"
+				width={submission.thumbnail_width}
+				height={submission.thumbnail_height}
+			/>
+		</div>
+	{:else}
+		<div class="w-[70px] h-[70px] flex items-center justify-center">
+			{submission.thumbnail}
+		</div>
+	{/if}
+
+	<div class="flex flex-col gap-1 rounded">
+		<div>
+			<a
+				class={submission.stickied ? 'text-green-700' : 'text-blue-700'}
+				href={`/r/${submission.subreddit}/comments/${submission.id}`}
+			>
+				<span class="font-medium">{submission.title}</span>
+			</a>
+		</div>
+
+		<div class="text-sm">
+			<p>
+				submitted {new Date(submission.created_utc * 1000).toLocaleString()} by
+				<span class="text-blue-700">{submission.author}</span>
+			</p>
+			<a href={`/r/${submission.subreddit}/comments/${submission.id}`}>
+				<span>{submission.num_comments} comments</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<style>
+	.container {
+		display: grid;
+		border-radius: 0.375rem;
+		padding: 0.25rem;
+		column-gap: 0.5rem;
+		grid-template-areas: 'score thumbnail main';
+		grid-template-columns: 50px 70px 1fr;
+	}
+</style>
