@@ -8,10 +8,10 @@
 	export let subreddit: string;
 </script>
 
-<nav class="flex gap-2">
+<nav class="flex">
 	{#each listings as listing}
 		<a
-			class="capitalize py-1 px-2 rounded-sm
+			class="capitalize py-1 px-2 duration-150
       {currentListing === listing || (currentListing === undefined && listing === 'hot')
 				? 'bg-gray-500 text-white'
 				: 'bg-gray-300 hover:bg-gray-400'}"
