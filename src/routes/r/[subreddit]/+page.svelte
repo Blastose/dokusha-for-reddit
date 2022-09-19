@@ -1,38 +1,15 @@
 <script lang="ts">
-	import Submission from '$lib/components/Submission.svelte';
+	import Subreddit from '$lib/components/Subreddit.svelte';
 	import type { PageData } from './$types';
-	import { page } from '$app/stores';
 
 	export let data: PageData;
+	let subreddit = data.posts[0]?.subreddit as unknown as string;
 </script>
 
 <svelte:head>
-	<title>{data.posts[0]?.subreddit}</title>
+	<title>{subreddit}</title>
 </svelte:head>
 
 <main class="container mx-auto px-4">
-	<div class="flex flex-col gap-2">
-		<span class="font-bold text-2xl">{data.posts[0]?.subreddit}</span>
-		<div class="flex gap-2">
-			<a class="py-1 px-2 rounded-sm bg-gray-300 hover:bg-gray-400" href={$page.url.pathname}>Hot</a
-			>
-			<a class="py-1 px-2 rounded-sm bg-gray-300 hover:bg-gray-400" href="{$page.url.pathname}/new"
-				>New</a
-			>
-			<a
-				class="py-1 px-2 rounded-sm bg-gray-300 hover:bg-gray-400"
-				href="{$page.url.pathname}/rising">Rising</a
-			>
-			<a
-				class="py-1 px-2 rounded-sm bg-gray-300 hover:bg-gray-400"
-				href="{$page.url.pathname}/controversial">Controversial</a
-			>
-			<a class="py-1 px-2 rounded-sm bg-gray-300 hover:bg-gray-400" href="{$page.url.pathname}/top"
-				>Top</a
-			>
-		</div>
-		{#each data.posts as post}
-			<Submission submission={post} />
-		{/each}
-	</div>
+	<Subreddit {subreddit} submissions={data.posts} />
 </main>
