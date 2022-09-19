@@ -2,8 +2,20 @@ import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import reddit from '$lib/reddit';
 import type Snoowrap from 'snoowrap';
+import type { Timespan } from 'snoowrap/dist/objects/Subreddit';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, url }) => {
+	const times = ['all', 'day', 'hour', 'month', 'week', 'year'];
+	let time = url.searchParams.get('t');
+
+	if (time === null) {
+		time = 'day';
+	}
+
+	if (!times.includes(time)) {
+		throw error(400, 'Invalid time parameter');
+	}
+
 	let posts = undefined;
 
 	if (params.sort === 'new') {
@@ -11,9 +23,11 @@ export const load: PageServerLoad = async ({ params }) => {
 	} else if (params.sort === 'rising') {
 		posts = await reddit.getSubreddit(`${params.subreddit}`).getRising();
 	} else if (params.sort === 'controversial') {
-		posts = await reddit.getSubreddit(`${params.subreddit}`).getControversial();
+		posts = await reddit
+			.getSubreddit(`${params.subreddit}`)
+			.getControversial({ time: time as Timespan });
 	} else if (params.sort === 'top') {
-		posts = await reddit.getSubreddit(`${params.subreddit}`).getTop();
+		posts = await reddit.getSubreddit(`${params.subreddit}`).getTop({ time: time as Timespan });
 	} else {
 		throw error(404, 'Not found');
 	}
