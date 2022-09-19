@@ -2,6 +2,7 @@
 	import Comment from '$lib/components/Comment.svelte';
 	import type Snoowrap from 'snoowrap';
 	import type { PageData } from './$types';
+	import relativeTime from '$lib/relativeTime';
 
 	export let data: { submission: Snoowrap.Submission };
 </script>
@@ -14,7 +15,11 @@
 			<div>
 				<p class="font-bold text-2xl">{data.submission.title}</p>
 				<p>
-					submitted {new Date(data.submission.created_utc * 1000).toLocaleString()} by
+					submitted
+					<span title={new Date(data.submission.created_utc * 1000).toString()}>
+						{relativeTime(data.submission.created_utc)}
+					</span>
+					by
 					<span class="text-blue-500">{data.submission.author}</span>
 				</p>
 			</div>
