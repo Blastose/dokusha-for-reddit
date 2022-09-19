@@ -11,7 +11,7 @@
 
 <div
 	class="flex flex-col gap-2 border-gray-200 rounded-tl-md
-  {comment.replies.length > 0 ? 'border-l' : ''}"
+  {comment.replies.length > 0 && !childCommentHidden ? 'border-l' : ''}"
 >
 	<div class="bg-gray-200 p-2 rounded-md shadow-sm">
 		<div class="flex gap-2 text-sm">
