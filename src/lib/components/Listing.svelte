@@ -62,10 +62,6 @@
 		position: absolute;
 	}
 
-	.dropdown:hover .dropdown-items {
-		display: flex;
-	}
-
 	.dropdown:focus-within .dropdown-items {
 		display: flex;
 	}
