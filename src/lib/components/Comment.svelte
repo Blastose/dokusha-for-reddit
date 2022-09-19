@@ -1,4 +1,5 @@
 <script lang="ts">
+	import relativeTime from '$lib/relativeTime';
 	import type Snoowrap from 'snoowrap';
 	export let comment: Snoowrap.Comment;
 	// console.log(comment);
@@ -30,9 +31,13 @@
 				</span>
 			</p>
 			<span class="font-semibold">{comment.score} points</span>
-			<span>{new Date(comment.created_utc * 1000).toLocaleString()}</span>
+			<span title={new Date(comment.created_utc * 1000).toString()}>
+				{relativeTime(comment.created_utc)}
+			</span>
 			{#if typeof comment.edited === 'number'}
-				<span>* (last edited {new Date(comment.edited * 1000).toLocaleString()})</span>
+				<span title={new Date(comment.edited * 1000).toString()}>
+					* (last edited {relativeTime(comment.edited)})
+				</span>
 			{/if}
 			<span />
 			{#if comment.stickied}

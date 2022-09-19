@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import relativeTime from '$lib/relativeTime';
 	import type Snoowrap from 'snoowrap';
 	export let submission: Snoowrap.Submission;
 	// console.log(submission);
@@ -40,7 +41,11 @@
 
 		<div class="text-sm">
 			<p>
-				submitted {new Date(submission.created_utc * 1000).toLocaleString()} by
+				submitted
+				<span title={new Date(submission.created_utc * 1000).toString()}>
+					{relativeTime(submission.created_utc)}
+				</span>
+				by
 				<span class="text-blue-700">{submission.author}</span>
 			</p>
 			<a href={`/r/${submission.subreddit}/comments/${submission.id}`}>
