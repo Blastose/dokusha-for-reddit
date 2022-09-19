@@ -22,7 +22,7 @@ const relativeTime = (unixTimestampSeconds: number): string => {
 	for (const key in unitsInSeconds) {
 		const unitValue = unitsInSeconds[key as keyof typeof unitsInSeconds];
 		if (differenceInSeconds > unitValue) {
-			return formatRelativeTimeOutput(Math.floor(differenceInSeconds / unitValue), key);
+			return formatRelativeTimeOutput(Math.round(differenceInSeconds / unitValue), key);
 		}
 	}
 
