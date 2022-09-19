@@ -37,7 +37,7 @@
 		<div class="flex items-center">
 			<span>links from: </span>
 			<div class="dropdown">
-				<button class="p-2">{formatTimeFilter(currentTimeFilter)}▾</button>
+				<button class="px-2">{formatTimeFilter(currentTimeFilter)}▾</button>
 				<nav class="dropdown-items flex flex-col bg-gray-300">
 					{#each times as time}
 						<a
