@@ -6,6 +6,8 @@
 	export let data: { submission: Snoowrap.Submission };
 </script>
 
+<svelte:head><title>{data.submission.title} : {data.submission.subreddit}</title></svelte:head>
+
 <main class="container mx-auto px-4">
 	<div class="flex flex-col gap-2">
 		<div class="flex flex-col gap-2">
