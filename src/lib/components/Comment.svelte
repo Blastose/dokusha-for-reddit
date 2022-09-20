@@ -2,7 +2,7 @@
 	import relativeTime from '$lib/relativeTime';
 	import type Snoowrap from 'snoowrap';
 	export let comment: Snoowrap.Comment;
-	// console.log(comment);
+	console.log(comment);
 
 	let childCommentHidden = false;
 	const toggleChildComments = () => {
@@ -30,7 +30,9 @@
 					{comment.author}
 				</span>
 			</p>
-			<span class="font-semibold">{comment.score} points</span>
+			<span class="font-semibold">
+				{comment.score_hidden ? '[score hidden]' : `${comment.score} points`}
+			</span>
 			<span title={new Date(comment.created_utc * 1000).toString()}>
 				{relativeTime(comment.created_utc)}
 			</span>
