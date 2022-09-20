@@ -2,7 +2,7 @@
 	import relativeTime from '$lib/relativeTime';
 	import type Snoowrap from 'snoowrap';
 	export let comment: Snoowrap.Comment;
-	console.log(comment);
+	// console.log(comment);
 
 	let childCommentHidden = false;
 	const toggleChildComments = () => {
