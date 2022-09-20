@@ -5,6 +5,7 @@
 	import relativeTime from '$lib/relativeTime';
 
 	export let data: { submission: Snoowrap.Submission };
+	console.log(data.submission);
 </script>
 
 <svelte:head><title>{data.submission.title} : {data.submission.subreddit}</title></svelte:head>
@@ -22,6 +23,7 @@
 					by
 					<span class="text-blue-500">{data.submission.author}</span>
 				</p>
+				<span>{data.submission.num_comments} comments</span>
 			</div>
 			{#if data.submission.selftext_html}
 				<div class="reddit-md max-w-4xl bg-gray-200 p-4 rounded-md">
