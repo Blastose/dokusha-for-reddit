@@ -23,7 +23,9 @@
 					by
 					<span class="text-blue-500">{data.submission.author}</span>
 				</p>
-				<p>{data.submission.score} points ({data.submission.upvote_ratio * 100}% upvoted)</p>
+				<p>
+					{data.submission.score} points ({Math.round(data.submission.upvote_ratio * 100)}% upvoted)
+				</p>
 			</div>
 			{#if data.submission.selftext_html}
 				<div class="reddit-md max-w-4xl bg-gray-200 p-4 rounded-md">
