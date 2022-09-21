@@ -33,9 +33,13 @@
 		</div>
 
 		<div class="flex flex-col gap-2 px-4 py-2 bg-gray-300 rounded-md">
-			{#each data.submission.comments as comment}
-				<Comment {comment} />
-			{/each}
+			{#if data.submission.num_comments > 0}
+				{#each data.submission.comments as comment}
+					<Comment {comment} />
+				{/each}
+			{:else}
+				<p>No comments</p>
+			{/if}
 		</div>
 	</div>
 </main>
