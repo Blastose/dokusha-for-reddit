@@ -27,6 +27,7 @@
 					? 'bg-gray-500 text-white'
 					: 'bg-gray-300 hover:bg-gray-400'}"
 				href={listing === 'hot' ? `/r/${subreddit}` : `/r/${subreddit}/${listing}`}
+				data-sveltekit-prefetch
 			>
 				{listing}
 			</a>
@@ -42,8 +43,11 @@
 					{#each times as time}
 						<a
 							class="p-2 hover:bg-gray-400 duration-150"
-							href="/r/{subreddit}/{currentListing}?t={time}">{formatTimeFilter(time)}</a
+							href="/r/{subreddit}/{currentListing}?t={time}"
+							data-sveltekit-prefetch
 						>
+							{formatTimeFilter(time)}
+						</a>
 					{/each}
 				</nav>
 			</div>

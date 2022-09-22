@@ -36,6 +36,7 @@
 				href={submission.is_self
 					? `/r/${submission.subreddit}/comments/${submission.id}`
 					: submission.url}
+				data-sveltekit-prefetch
 			>
 				<span class="font-medium">{submission.title}</span>
 			</a>
@@ -51,7 +52,7 @@
 				by
 				<span class="text-blue-700">{submission.author}</span>
 			</p>
-			<a href={`/r/${submission.subreddit}/comments/${submission.id}`}>
+			<a href={`/r/${submission.subreddit}/comments/${submission.id}`} data-sveltekit-prefetch>
 				<span>{submission.num_comments} comments</span>
 			</a>
 		</div>
