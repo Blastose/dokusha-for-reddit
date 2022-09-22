@@ -15,7 +15,13 @@
 		<div class="flex flex-col gap-2">
 			<div>
 				<p class="font-bold text-2xl">
-					{data.submission.title}
+					{#if data.submission.is_self}
+						{data.submission.title}
+					{:else}
+						<a href={data.submission.url}>
+							{data.submission.title}
+						</a>
+					{/if}
 					<span class="text-gray-700 font-normal text-xl">({data.submission.domain})</span>
 				</p>
 				<p>
