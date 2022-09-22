@@ -30,14 +30,17 @@
 	{/if}
 
 	<div class="flex flex-col gap-1 rounded">
-		<div>
+		<p class="flex gap-2 items-center">
 			<a
 				class={submission.stickied ? 'text-green-700' : 'text-blue-700'}
-				href={`/r/${submission.subreddit}/comments/${submission.id}`}
+				href={submission.is_self
+					? `/r/${submission.subreddit}/comments/${submission.id}`
+					: submission.url}
 			>
 				<span class="font-medium">{submission.title}</span>
 			</a>
-		</div>
+			<span class="text-gray-700 text-sm">({submission.domain})</span>
+		</p>
 
 		<div class="text-sm">
 			<p>

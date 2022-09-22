@@ -14,7 +14,10 @@
 	<div class="flex flex-col gap-2">
 		<div class="flex flex-col gap-2">
 			<div>
-				<p class="font-bold text-2xl">{data.submission.title}</p>
+				<p class="font-bold text-2xl">
+					{data.submission.title}
+					<span class="text-gray-700 font-normal text-xl">({data.submission.domain})</span>
+				</p>
 				<p>
 					submitted
 					<span title={new Date(data.submission.created_utc * 1000).toString()}>
