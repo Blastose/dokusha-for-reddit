@@ -30,7 +30,7 @@
 	{/if}
 
 	<div class="flex flex-col gap-1 rounded">
-		<p class="flex gap-2 items-center">
+		<p>
 			<a
 				class={submission.stickied ? 'text-green-700' : 'text-blue-700'}
 				href={submission.is_self
