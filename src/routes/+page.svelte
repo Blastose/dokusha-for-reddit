@@ -1,7 +1,14 @@
 <script lang="ts">
+	import Submission from '$lib/components/Submission.svelte';
+	import type { PageData } from './$types';
+	export let data: PageData;
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-
-<a class="text-blue-400" href="/r/puzzleanddragons">PAD</a>
+<main class="container mx-auto px-4">
+	<div class="flex flex-col gap-2">
+		<span class="font-bold text-2xl">The Front Page of Reddit</span>
+		{#each data.posts as submission}
+			<Submission {submission} showSubredditName={true} />
+		{/each}
+	</div>
+</main>

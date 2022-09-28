@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import relativeTime from '$lib/relativeTime';
 	import type Snoowrap from 'snoowrap';
+
+	export let showSubredditName = false;
 	export let submission: Snoowrap.Submission;
 	// console.log(submission);
 
@@ -51,6 +52,14 @@
 				</span>
 				by
 				<span class="text-blue-700">{submission.author}</span>
+				{#if showSubredditName}
+					to
+					<span>
+						<a href={`/r/${submission.subreddit}`} class="text-blue-700"
+							>/r/{submission.subreddit}</a
+						>
+					</span>
+				{/if}
 			</p>
 			<a href={`/r/${submission.subreddit}/comments/${submission.id}`} data-sveltekit-prefetch>
 				<span>{submission.num_comments} comments</span>
