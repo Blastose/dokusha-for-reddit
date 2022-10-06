@@ -16,5 +16,6 @@
 			'content';
 		grid-template-rows: min-content 1fr;
 		row-gap: 0.5rem;
+		padding-bottom: 1.5rem;
 	}
 </style>
