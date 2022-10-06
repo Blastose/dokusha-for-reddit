@@ -5,7 +5,7 @@
 
 	onMount(() => {
 		let prevScrollPos = window.scrollY;
-		window.onscroll = () => {
+		const changeHeaderVisibilityStatus = () => {
 			let currentScrollPos = window.scrollY;
 			if (prevScrollPos > currentScrollPos) {
 				hideHeader = false;
@@ -13,6 +13,12 @@
 				hideHeader = true;
 			}
 			prevScrollPos = currentScrollPos;
+		};
+
+		window.addEventListener('scroll', changeHeaderVisibilityStatus);
+
+		return () => {
+			window.removeEventListener('scoll', changeHeaderVisibilityStatus);
 		};
 	});
 </script>
