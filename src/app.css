@@ -76,7 +76,8 @@ strike {
 
 .reddit-md pre {
 	overflow-x: auto;
-	font-size: small;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
 }
 
 .reddit-md .md-spoiler-text.revealed {
