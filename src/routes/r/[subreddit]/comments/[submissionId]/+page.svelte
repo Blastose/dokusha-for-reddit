@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Comment from '$lib/components/Comment.svelte';
 	import type Snoowrap from 'snoowrap';
-	import type { PageData } from './$types';
 	import relativeTime from '$lib/relativeTime';
 
 	export let data: { submission: Snoowrap.Submission };
@@ -44,7 +43,7 @@
 		</div>
 
 		<span>{data.submission.num_comments} comments</span>
-		<div class="flex flex-col gap-2 px-4 py-2 bg-gray-300 rounded-md">
+		<div class="flex flex-col gap-2 px-4 py-2 bg-gray-200 rounded-md">
 			{#if data.submission.num_comments > 0}
 				{#each data.submission.comments as comment}
 					<Comment {comment} />
