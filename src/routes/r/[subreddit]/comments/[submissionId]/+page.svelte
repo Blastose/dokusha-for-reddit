@@ -43,7 +43,7 @@
 		</div>
 
 		<span>{data.submission.num_comments} comments</span>
-		<div class="flex flex-col gap-2 p-2 bg-gray-200 rounded-md">
+		<div class="flex flex-col p-2 bg-gray-200 rounded-md">
 			{#if data.submission.num_comments > 0}
 				{#each data.submission.comments as comment}
 					<Comment {comment} />
