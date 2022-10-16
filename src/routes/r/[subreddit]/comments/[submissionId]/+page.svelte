@@ -36,14 +36,14 @@
 				</p>
 			</div>
 			{#if data.submission.selftext_html}
-				<div class="reddit-md max-w-4xl bg-gray-200 p-4 rounded-md">
+				<div class="reddit-md max-w-4xl p-4 rounded-md">
 					{@html data.submission.selftext_html}
 				</div>
 			{/if}
 		</div>
 
 		<span>{data.submission.num_comments} comments</span>
-		<div class="flex flex-col p-2 bg-gray-200 rounded-md">
+		<div class="flex flex-col rounded-md">
 			{#if data.submission.num_comments > 0}
 				{#each data.submission.comments as comment}
 					<Comment {comment} />
