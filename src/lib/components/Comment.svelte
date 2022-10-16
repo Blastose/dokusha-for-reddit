@@ -32,21 +32,19 @@
 
 	<div class="flex flex-col">
 		<div class="p-2">
-			<div class="flex flex-wrap gap-2 text-sm {commentHidden ? 'italic' : ''}">
-				<p>
-					<span
-						class="
+			<p class="text-sm {commentHidden ? 'italic' : ''}">
+				<span
+					class="
 					text-blue-800
 					{comment.is_submitter ? 'text-white bg-blue-500 rounded-sm px-1 py-[0.075rem]' : ''} 
 					{comment.stickied ? 'text-white bg-green-600 rounded-sm px-1 py-[0.075rem]' : ''}	
 					{comment.distinguished === 'moderator'
-							? 'text-white bg-green-600 rounded-sm px-1 py-[0.075rem]'
-							: ''}	
+						? 'text-white bg-green-600 rounded-sm px-1 py-[0.075rem]'
+						: ''}	
 					font-semibold"
-					>
-						{comment.author}
-					</span>
-				</p>
+				>
+					{comment.author}
+				</span>
 				<span class="font-semibold">
 					{comment.score_hidden ? '[score hidden]' : `${comment.score} points`}
 				</span>
@@ -62,7 +60,7 @@
 				{#if comment.stickied}
 					<span class="text-green-700"> - stickied comment</span>
 				{/if}
-			</div>
+			</p>
 
 			{#if !commentHidden}
 				<div class="reddit-md max-w-4xl">
