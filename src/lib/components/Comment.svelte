@@ -20,9 +20,13 @@
 			<div class="w-0.5 my-2 bg-gray-400 group-hover:bg-orange-600 duration-150" />
 		</button>
 	{:else}
-		<button
-			class="text-2xl text-orange-600 hover:text-orange-700"
-			on:click={toggleCommentVisibility}>⤡</button
+		<button class="text-2xl text-gray-400 hover:text-orange-600" on:click={toggleCommentVisibility}
+			><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+				<path
+					fill="currentColor"
+					d="M10,21V19H6.41L10.91,14.5L9.5,13.09L5,17.59V14H3V21H10M14.5,10.91L19,6.41V10H21V3H14V5H17.59L13.09,9.5L14.5,10.91Z"
+				/>
+			</svg></button
 		>
 	{/if}
 
