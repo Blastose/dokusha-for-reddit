@@ -50,6 +50,11 @@
 				<span title={new Date(submission.created_utc * 1000).toString()}>
 					{relativeTime(submission.created_utc)}
 				</span>
+				{#if typeof submission.edited === 'number'}
+					<span title={new Date(submission.edited * 1000).toString()}>
+						* (last edited {relativeTime(submission.edited)})
+					</span>
+				{/if}
 				by
 				<span class="text-blue-700">{submission.author}</span>
 				{#if showSubredditName}
