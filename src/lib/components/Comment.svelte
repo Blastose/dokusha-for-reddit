@@ -17,10 +17,14 @@
 <div class="grid grid-cols-[1.5rem,_1fr]">
 	{#if !commentHidden}
 		<button class="flex justify-center group" on:click={toggleCommentVisibility}>
-			<div class="w-0.5 my-2 bg-gray-400 group-hover:bg-orange-600 duration-150" />
+			<div
+				class="w-0.5 my-2 bg-gray-400 group-hover:bg-orange-600 dark:group-hover:bg-orange-800 duration-150"
+			/>
 		</button>
 	{:else}
-		<button class="text-2xl text-gray-400 hover:text-orange-600" on:click={toggleCommentVisibility}
+		<button
+			class="text-2xl text-gray-400 hover:text-orange-600 dark:hover:text-orange-800"
+			on:click={toggleCommentVisibility}
 			><svg style="width:24px;height:24px" viewBox="0 0 24 24">
 				<path
 					fill="currentColor"
@@ -35,16 +39,15 @@
 			<p class="text-sm {commentHidden ? 'italic' : ''}">
 				<span
 					class="
-					text-blue-800
-					{comment.is_submitter ? 'text-white bg-blue-500 rounded-sm px-1 py-[0.075rem]' : ''} 
-					{comment.stickied ? 'text-white bg-green-600 rounded-sm px-1 py-[0.075rem]' : ''}	
-					{comment.distinguished === 'moderator'
-						? 'text-white bg-green-600 rounded-sm px-1 py-[0.075rem]'
-						: ''}	
-					font-semibold"
+					dark:text-[#ffffffe8] font-bold
+					{comment.is_submitter ? 'text-blue-600 dark:text-blue-400' : ''} 
+					{comment.stickied ? 'text-green-700 dark:text-green-400' : ''}	
+					{comment.distinguished === 'moderator' ? 'text-green-700 dark:text-green-400' : ''}	
+					"
 				>
 					{comment.author}
 				</span>
+				|
 				<span class="font-semibold">
 					{comment.score_hidden ? '[score hidden]' : `${comment.score} points`}
 				</span>
@@ -58,7 +61,7 @@
 				{/if}
 				<span />
 				{#if comment.stickied}
-					<span class="text-green-700"> - stickied comment</span>
+					<span class="text-green-700 dark:text-green-400"> - stickied comment</span>
 				{/if}
 			</p>
 
@@ -70,7 +73,7 @@
 
 			{#if comment.replies.length > 0 && !commentHidden}
 				<button on:click={toggleChildComments}>
-					<span class="text-gray-600 text-xs"
+					<span class="text-gray-600 dark:text-[#ffffff81] text-xs"
 						>{childCommentHidden ? 'show child comments' : 'hide child comments'}</span
 					>
 				</button>

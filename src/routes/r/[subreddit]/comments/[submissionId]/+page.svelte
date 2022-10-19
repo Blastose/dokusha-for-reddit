@@ -22,7 +22,9 @@
 							{data.submission.title}
 						</a>
 					{/if}
-					<span class="text-gray-700 font-normal text-xl">({data.submission.domain})</span>
+					<span class="text-gray-700 dark:text-gray-400 font-normal text-xl"
+						>({data.submission.domain})</span
+					>
 				</p>
 				<p>
 					submitted
@@ -33,9 +35,8 @@
 						<span title={new Date(data.submission.edited * 1000).toString()}>
 							* (last edited {relativeTime(data.submission.edited)})
 						</span>
-					{/if}
-					by
-					<span class="text-blue-500">{data.submission.author}</span>
+					{/if}by
+					<span class="text-blue-500 dark:text-gray-300">{data.submission.author}</span>
 				</p>
 				<p>
 					{data.submission.score} points ({Math.round(data.submission.upvote_ratio * 100)}% upvoted)

@@ -39,7 +39,10 @@
 	};
 </script>
 
-<header class="sticky top-0 z-50 shadow-sm bg-white duration-150 {hideHeader ? `-top-[60px]` : ''}">
+<header
+	class="sticky top-0 z-50 shadow-sm bg-white dark:bg-[#1b1b1b] transition-[top] duration-150 
+	{hideHeader ? `-top-[60px]` : ''}"
+>
 	<div class="container mx-auto p-4 flex justify-between items-center">
 		<a href="/" class="text-xl font-bold"> Dokusha for Reddit </a>
 		<div class="flex gap-2">

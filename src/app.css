@@ -6,6 +6,8 @@
 	color-scheme: dark;
 	background: #1b1b1b;
 	scrollbar-color: #ffffff50 transparent;
+	transition-duration: 0.15s;
+	color: #e2e2e2;
 }
 
 /* Style Reddit MD which mostly uses default css values
@@ -17,6 +19,10 @@
 
 .reddit-md a {
 	color: #0079d3;
+}
+
+._dark .reddit-md a {
+	color: #5aade0;
 }
 
 .reddit-md strong {
