@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+._dark {
+	color-scheme: dark;
+	background: #1b1b1b;
+	scrollbar-color: #ffffff50 transparent;
+}
+
 /* Style Reddit MD which mostly uses default css values
    See https://www.w3schools.com/cssref/css_default_values.asp */
 
@@ -67,11 +73,19 @@ strike {
 	margin-left: 0.5rem;
 }
 
+._dark .reddit-md blockquote {
+	color: rgb(190, 190, 190);
+}
+
 .reddit-md .md-spoiler-text {
 	background: #4f4f4f;
 	border-radius: 2px;
 	cursor: pointer;
 	color: transparent;
+}
+
+._dark .reddit-md .md-spoiler-text {
+	background: rgb(190, 190, 190);
 }
 
 .reddit-md pre {
