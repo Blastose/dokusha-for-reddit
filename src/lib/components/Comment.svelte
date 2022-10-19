@@ -35,7 +35,7 @@
 	{/if}
 
 	<div class="flex flex-col">
-		<div class="p-2">
+		<div class="p-1">
 			<p class="text-sm {commentHidden ? 'italic' : ''}">
 				<span
 					class="
@@ -81,7 +81,7 @@
 		</div>
 
 		{#if comment.replies.length > 0}
-			<div class="flex flex-col gap-2 pl-2 {childCommentHidden || commentHidden ? 'hidden' : ''}">
+			<div class="flex flex-col {childCommentHidden || commentHidden ? 'hidden' : ''}">
 				{#each comment.replies as reply}
 					<svelte:self comment={reply} />
 				{/each}
