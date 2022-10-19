@@ -24,8 +24,8 @@
 			<a
 				class="capitalize py-1 px-2 duration-150
       {currentListing === listing || (currentListing === undefined && listing === 'hot')
-					? 'bg-gray-500 text-white'
-					: 'bg-gray-300 hover:bg-gray-400'}"
+					? 'bg-gray-300 dark:bg-orange-800'
+					: 'bg-gray-100 dark:bg-[#252525] hover:bg-gray-300 dark:hover:bg-[#ffffff1c]'}"
 				href={listing === 'hot' ? `/r/${subreddit}` : `/r/${subreddit}/${listing}`}
 				data-sveltekit-prefetch
 			>
@@ -39,10 +39,10 @@
 			<span>links from: </span>
 			<div class="dropdown">
 				<button class="px-2">{formatTimeFilter(currentTimeFilter)}▾</button>
-				<nav class="dropdown-items flex flex-col bg-gray-300">
+				<nav class="dropdown-items flex flex-col bg-gray-100 dark:bg-[#252525]">
 					{#each times as time}
 						<a
-							class="p-2 hover:bg-gray-400 duration-150"
+							class="p-2 hover:bg-gray-300 dark:hover:bg-[#ffffff1c] duration-150"
 							href="/r/{subreddit}/{currentListing}?t={time}"
 							data-sveltekit-prefetch
 						>
