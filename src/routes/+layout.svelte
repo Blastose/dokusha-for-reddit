@@ -23,6 +23,9 @@
 			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 				document.documentElement.classList.add('dark');
 				document.documentElement.classList.add('_dark');
+				localStorage.setItem('theme', 'dark');
+			} else {
+				localStorage.setItem('theme', 'light');
 			}
 		} else {
 			if (localStorage.getItem('theme') === 'dark') {
