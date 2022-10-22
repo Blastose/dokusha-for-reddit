@@ -22,12 +22,12 @@
 			aria-label="collapse comment"
 		>
 			<div
-				class="w-0.5 my-2 bg-gray-400 group-hover:bg-orange-600 dark:group-hover:bg-orange-800 duration-150"
+				class="w-0.5 my-2 bg-gray-500 group-hover:bg-orange-600 dark:group-hover:bg-orange-800 duration-150"
 			/>
 		</button>
 	{:else}
 		<button
-			class="text-2xl text-gray-400 hover:text-orange-600 dark:hover:text-orange-800"
+			class="text-2xl text-gray-500 hover:text-orange-600 dark:hover:text-orange-800"
 			on:click={toggleCommentVisibility}
 			aria-label="expand comment"
 			><svg aria-hidden="true" style="width:24px;height:24px" viewBox="0 0 24 24">

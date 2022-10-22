@@ -40,7 +40,7 @@
 </script>
 
 <header
-	class="sticky top-0 z-50 shadow-sm bg-white dark:bg-[#1b1b1b] transition-[top] duration-150 
+	class="sticky top-0 z-50 shadow-sm bg-white dark:bg-[#212224] transition-[top] duration-150 
 	{hideHeader ? `-top-[60px]` : ''}"
 >
 	<div class="container mx-auto p-4 flex justify-between items-center">
