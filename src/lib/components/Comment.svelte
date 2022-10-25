@@ -40,7 +40,7 @@
 	{/if}
 
 	<div class="flex flex-col">
-		<div class="p-1">
+		<div class="p-1" id={comment.id}>
 			<p class="text-sm {commentHidden ? 'italic' : ''}">
 				<span
 					class="
@@ -76,13 +76,20 @@
 				</div>
 			{/if}
 
-			{#if comment.replies.length > 0 && !commentHidden}
-				<button on:click={toggleChildComments}>
-					<span class="text-gray-600 dark:text-[#ffffff81] text-xs"
-						>{childCommentHidden ? 'show child comments' : 'hide child comments'}</span
-					>
-				</button>
-			{/if}
+			<div class="flex gap-2">
+				{#if comment.replies.length > 0 && !commentHidden}
+					<button on:click={toggleChildComments}>
+						<span class="text-gray-600 dark:text-[#ffffff81] text-xs">
+							{childCommentHidden ? 'show child comments' : 'hide child comments'}
+						</span>
+					</button>
+				{/if}
+				{#if comment.parent_id && comment.parent_id.startsWith('t1_')}
+					<a href="#{comment.parent_id.replace('t1_', '')}" rel="nofollow">
+						<span class="text-gray-600 dark:text-[#ffffff81] text-xs"> parent </span>
+					</a>
+				{/if}
+			</div>
 		</div>
 
 		{#if comment.replies.length > 0}
