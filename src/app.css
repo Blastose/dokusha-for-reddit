@@ -96,8 +96,15 @@ strike {
 
 .reddit-md pre {
 	overflow-x: auto;
+	background-color: rgb(221, 221, 221);
+	border-radius: 0.5rem;
+	padding: 0.25rem 0.5rem;
 	font-size: 0.875rem;
 	line-height: 1.25rem;
+}
+
+._dark .reddit-md pre {
+	background-color: rgb(66, 66, 66);
 }
 
 .reddit-md .md-spoiler-text.revealed {
