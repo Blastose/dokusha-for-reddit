@@ -10,9 +10,9 @@
 
 <svelte:head><title>{data.submission.title} : {data.submission.subreddit}</title></svelte:head>
 
-<main class="container mx-auto px-4 overflow-x-hidden">
+<main class="container mx-auto overflow-x-hidden">
 	<div class="flex flex-col gap-2">
-		<div class="flex flex-col gap-2">
+		<div class="flex flex-col px-4 gap-2">
 			<div>
 				<p class="font-bold text-2xl">
 					{#if data.submission.is_self}
@@ -49,8 +49,8 @@
 			{/if}
 		</div>
 
-		<span>{data.submission.num_comments} comments</span>
-		<div class="flex flex-col gap-4">
+		<span class="px-4">{data.submission.num_comments} comments</span>
+		<div class="flex flex-col px-1 sm:px-4 gap-4">
 			{#if data.submission.num_comments > 0}
 				{#each data.submission.comments as comment}
 					<Comment {comment} />
