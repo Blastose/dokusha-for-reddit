@@ -39,7 +39,7 @@
 		>
 	{/if}
 
-	<div class="flex flex-col">
+	<div class="flex flex-col overflow-x-hidden">
 		<div class="p-1" id={comment.id}>
 			<p class="text-sm {commentHidden ? 'italic' : ''}">
 				<span
