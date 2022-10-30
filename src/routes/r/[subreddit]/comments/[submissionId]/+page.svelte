@@ -48,15 +48,17 @@
 			{/if}
 		</div>
 
-		<span class="px-4">{data.submission.num_comments} comments</span>
-		<div class="flex flex-col px-1 sm:px-4 gap-8">
-			{#if data.submission.num_comments > 0}
-				{#each data.submission.comments as comment}
-					<Comment {comment} />
-				{/each}
-			{:else}
-				<p>No comments</p>
-			{/if}
+		<div class="flex flex-col gap-4">
+			<p class="px-4">{data.submission.num_comments} comments</p>
+			<div class="flex flex-col px-1 sm:px-4 gap-8">
+				{#if data.submission.num_comments > 0}
+					{#each data.submission.comments as comment}
+						<Comment {comment} />
+					{/each}
+				{:else}
+					<p>No comments</p>
+				{/if}
+			</div>
 		</div>
 	</div>
 </main>

@@ -14,7 +14,11 @@
 	};
 </script>
 
-<div class="grid grid-cols-[1.5rem,_1fr]">
+<div
+	class="grid {commentHidden
+		? 'grid-cols-[min-content,_1fr] gap-1'
+		: 'grid-cols-[0.75rem,_1fr] sm:grid-cols-[1.25rem,_1fr]'}"
+>
 	{#if !commentHidden}
 		<button
 			class="flex justify-center group"
