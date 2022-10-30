@@ -53,7 +53,7 @@
 			<span class="text-gray-700 dark:text-gray-400 text-sm">({submission.domain})</span>
 		</p>
 
-		<div class="text-sm">
+		<div class="text-sm flex flex-col gap-1">
 			<p>
 				submitted
 				<span title={new Date(submission.created_utc * 1000).toString()}>
