@@ -36,7 +36,7 @@
 							* (last edited {relativeTime(data.submission.edited)})
 						</span>
 					{/if}by
-					<span class="text-blue-500 dark:text-gray-300">{data.submission.author}</span>
+					<span class="font-bold text-blue-600 dark:text-blue-400">{data.submission.author}</span>
 				</p>
 				<p>
 					{data.submission.score} points ({Math.round(data.submission.upvote_ratio * 100)}% upvoted)
