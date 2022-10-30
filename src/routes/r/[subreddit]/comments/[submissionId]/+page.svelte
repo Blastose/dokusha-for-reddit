@@ -2,7 +2,6 @@
 	import Comment from '$lib/components/Comment.svelte';
 	import type Snoowrap from 'snoowrap';
 	import relativeTime from '$lib/relativeTime';
-	import Submission from '$lib/components/Submission.svelte';
 
 	export let data: { submission: Snoowrap.Submission };
 	console.log(data.submission);
@@ -50,7 +49,7 @@
 		</div>
 
 		<span class="px-4">{data.submission.num_comments} comments</span>
-		<div class="flex flex-col px-1 sm:px-4 gap-4">
+		<div class="flex flex-col px-1 sm:px-4 gap-8">
 			{#if data.submission.num_comments > 0}
 				{#each data.submission.comments as comment}
 					<Comment {comment} />
