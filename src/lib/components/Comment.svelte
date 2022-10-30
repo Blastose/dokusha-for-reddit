@@ -14,7 +14,11 @@
 	};
 </script>
 
-<div class="grid grid-cols-[1.5rem,_1fr]">
+<div
+	class="grid {commentHidden
+		? 'grid-cols-[min-content,_1fr] gap-1'
+		: 'grid-cols-[0.75rem,_1fr] sm:grid-cols-[1.25rem,_1fr]'}"
+>
 	{#if !commentHidden}
 		<button
 			class="flex justify-center group"
@@ -22,7 +26,7 @@
 			aria-label="collapse comment"
 		>
 			<div
-				class="w-0.5 my-2 bg-gray-400 dark:bg-[#616161] group-hover:bg-orange-600 dark:group-hover:bg-orange-800 duration-150"
+				class="h-full w-0.5 bg-gray-400 dark:bg-[#616161] group-hover:bg-orange-600 dark:group-hover:bg-orange-800 duration-150"
 			/>
 		</button>
 	{:else}
@@ -39,8 +43,8 @@
 		>
 	{/if}
 
-	<div class="flex flex-col overflow-x-hidden">
-		<div class="p-1" id={comment.id}>
+	<div class="flex flex-col gap-2 overflow-x-hidden">
+		<div class="" id={comment.id}>
 			<p class="text-sm {commentHidden ? 'italic' : ''}">
 				<span
 					class="
@@ -93,7 +97,7 @@
 		</div>
 
 		{#if comment.replies.length > 0}
-			<div class="flex flex-col {childCommentHidden || commentHidden ? 'hidden' : ''}">
+			<div class="flex flex-col gap-2 {childCommentHidden || commentHidden ? 'hidden' : ''}">
 				{#each comment.replies as reply}
 					<svelte:self comment={reply} />
 				{/each}
