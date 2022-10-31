@@ -2,7 +2,6 @@
 	import Comment from '$lib/components/Comment.svelte';
 	import type Snoowrap from 'snoowrap';
 	import relativeTime from '$lib/relativeTime';
-	import Submission from '$lib/components/Submission.svelte';
 
 	export let data: { submission: Snoowrap.Submission };
 	console.log(data.submission);
