@@ -48,7 +48,8 @@
 			<p class="text-sm {commentHidden ? 'italic' : ''}">
 				<span
 					class="
-					dark:text-[#ffffffe8] font-bold
+					text-orange-700
+					dark:text-[#d68a67] font-bold
 					{comment.is_submitter ? 'text-blue-600 dark:text-blue-400' : ''} 
 					{comment.stickied ? 'text-green-700 dark:text-green-400' : ''}	
 					{comment.distinguished === 'moderator' ? 'text-green-700 dark:text-green-400' : ''}	
