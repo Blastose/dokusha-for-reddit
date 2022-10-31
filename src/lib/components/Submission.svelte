@@ -23,7 +23,11 @@
 			/>
 		</div>
 	{:else}
-		<div class="w-[70px] h-[70px] flex items-center justify-center">
+		<div
+			class="w-[70px] h-[70px] 
+			{submission.thumbnail === '' ? '' : 'bg-orange-300	dark:bg-[#a04a22]'}
+		 rounded-full flex items-center justify-center"
+		>
 			{#if submission.thumbnail === 'default'}
 				<svg style="width:24px;height:24px" viewBox="0 0 24 24">
 					<path
@@ -64,10 +68,7 @@
 						* (last edited {relativeTime(submission.edited)})
 					</span>
 				{/if}by
-				<span
-					class="text-orange-700
-				dark:text-[#d68a67] font-bold">{submission.author}</span
-				>
+				<span class="text-blue-600 dark:text-blue-400 font-bold">{submission.author}</span>
 				{#if showSubredditName}
 					to
 					<span>
