@@ -10,6 +10,6 @@
 	<title>{subreddit}</title>
 </svelte:head>
 
-<main class="container mx-auto px-4">
+<main class="w-full sm:max-w-5xl mx-auto px-4">
 	<Subreddit {subreddit} submissions={data.posts} />
 </main>

@@ -9,7 +9,7 @@
 
 <svelte:head><title>{data.submission.title} : {data.submission.subreddit}</title></svelte:head>
 
-<main class="container mx-auto overflow-x-hidden">
+<main class="w-full sm:max-w-5xl mx-auto overflow-x-hidden">
 	<div class="flex flex-col gap-2">
 		<div class="flex flex-col px-4 gap-2">
 			<div>

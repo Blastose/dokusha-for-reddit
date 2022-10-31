@@ -19,7 +19,7 @@
 </script>
 
 <header class="shadow-sm bg-white dark:bg-[#212224] transition-[top] duration-150">
-	<div class="container mx-auto p-4 flex justify-between items-center">
+	<div class="w-full sm:max-w-5xl mx-auto p-4 flex justify-between items-center">
 		<a href="/" class="text-xl font-bold"> Dokusha for Reddit </a>
 		<div class="flex gap-2">
 			<button on:click={toggleTheme} aria-label="switch theme">

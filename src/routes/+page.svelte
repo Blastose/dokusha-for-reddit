@@ -4,7 +4,7 @@
 	export let data: PageData;
 </script>
 
-<main class="container mx-auto px-4">
+<main class="w-full sm:max-w-5xl mx-auto px-4">
 	<div class="flex flex-col gap-2">
 		<span class="font-bold text-2xl">The Front Page of Reddit</span>
 		{#each data.posts as submission}
