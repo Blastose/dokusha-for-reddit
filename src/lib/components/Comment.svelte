@@ -1,4 +1,5 @@
 <script lang="ts">
+	import formatNumber from '$lib/formatNumber';
 	import relativeTime from '$lib/relativeTime';
 	import type Snoowrap from 'snoowrap';
 	export let comment: Snoowrap.Comment;
@@ -58,8 +59,11 @@
 					{comment.author}
 				</span>
 				|
-				<span class="font-semibold">
-					{comment.score_hidden ? '[score hidden]' : `${comment.score} points`}
+				<span
+					class="font-semibold"
+					title={comment.score_hidden ? 'score hidden' : comment.score.toString()}
+				>
+					{comment.score_hidden ? '[score hidden]' : `${formatNumber(comment.score)} points`}
 				</span>
 				<span title={new Date(comment.created_utc * 1000).toString()}>
 					{relativeTime(comment.created_utc)}
