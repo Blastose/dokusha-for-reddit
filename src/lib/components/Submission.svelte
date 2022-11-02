@@ -46,7 +46,7 @@
 			<a
 				class={submission.stickied
 					? 'text-green-700 dark:text-green-400'
-					: 'text-blue-700 dark:text-[#e2e2e2]'}
+					: 'text-blue-600 dark:text-[#e2e2e2]'}
 				href={submission.is_self
 					? `/r/${submission.subreddit}/comments/${submission.id}`
 					: submission.url}
@@ -72,7 +72,7 @@
 				{#if showSubredditName}
 					to
 					<span>
-						<a href={`/r/${submission.subreddit}`} class="text-blue-700 dark:text-blue-400"
+						<a href={`/r/${submission.subreddit}`} class="text-blue-600 dark:text-blue-400"
 							>/r/{submission.subreddit}</a
 						>
 					</span>
