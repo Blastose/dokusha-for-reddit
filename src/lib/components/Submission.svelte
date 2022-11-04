@@ -79,7 +79,10 @@
 				{/if}
 			</p>
 			<div class="flex gap-2">
-				<div class="flex gap-2 justify-center items-center">
+				<div
+					class="flex gap-2 justify-center items-center py-1 px-2 rounded-md
+					bg-[#d4d4d47c] hover:bg-[#d4d4d4a4] dark:bg-[#7474744d] hover:dark:bg-[#74747427]"
+				>
 					<svg style="width:12px;height:12px" viewBox="0 0 24 24">
 						<path fill="currentColor" d="M1,21H23L12,2" />
 					</svg>
@@ -88,17 +91,27 @@
 						<path fill="currentColor" d="M1,21H23L12,2" />
 					</svg>
 				</div>
-				<a href={`/r/${submission.subreddit}/comments/${submission.id}`} data-sveltekit-prefetch>
-					<div class="flex gap-1">
-						<svg style="width:20px;height:20px" viewBox="0 0 24 24">
-							<path
-								fill="currentColor"
-								d="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10M6,7H18V9H6V7M6,11H15V13H6V11Z"
-							/>
-						</svg>
-						<span class="font-semibold">{submission.num_comments} comments</span>
-					</div>
-				</a>
+				<div
+					class="rounded-md duration-150 
+					bg-[#d4d4d47c] hover:bg-[#d4d4d4a4]
+					dark:bg-[#7474744d] hover:dark:bg-[#74747427]"
+				>
+					<a
+						class="flex py-1 px-2"
+						href={`/r/${submission.subreddit}/comments/${submission.id}`}
+						data-sveltekit-prefetch
+					>
+						<div class="flex gap-1">
+							<svg style="width:20px;height:20px" viewBox="0 0 24 24">
+								<path
+									fill="currentColor"
+									d="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10M6,7H18V9H6V7M6,11H15V13H6V11Z"
+								/>
+							</svg>
+							<span class="font-semibold">{submission.num_comments} comments</span>
+						</div>
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -106,15 +119,21 @@
 
 <style>
 	.post-container {
+		background-color: rgba(219, 218, 217, 0.377);
 		display: grid;
 		border-radius: 0.375rem;
-		padding: 0.25rem;
+		padding: 0.25rem 0.5rem;
 		column-gap: 0.5rem;
 		grid-template-areas: 'thumbnail main';
 		grid-template-columns: 70px 1fr;
 	}
 
+	:global(.dark) .post-container {
+		background-color: rgba(44, 44, 44, 0.774);
+	}
+
 	.post-container-no-thumbs {
 		grid-template-columns: 0px 1fr;
+		padding: 0.25rem;
 	}
 </style>
