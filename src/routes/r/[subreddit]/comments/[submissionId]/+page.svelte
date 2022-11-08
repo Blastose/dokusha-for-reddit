@@ -4,7 +4,7 @@
 	import relativeTime from '$lib/relativeTime';
 
 	export let data: { submission: Snoowrap.Submission };
-	console.log(data.submission);
+	// console.log(data.submission);
 </script>
 
 <svelte:head><title>{data.submission.title} : {data.submission.subreddit}</title></svelte:head>
