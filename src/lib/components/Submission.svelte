@@ -8,7 +8,7 @@
 	// console.log(submission);
 
 	// default is for link's w/o thumbnails?
-	const nonThumbnailSrcs = ['self', 'spoiler', 'default', 'nsfw', ''];
+	const nonThumbnailSrcs = ['self', 'spoiler', 'default', 'nsfw', 'image', ''];
 </script>
 
 <div class="post-container {submission.thumbnail === '' ? 'post-container-no-thumbs' : ''}">
