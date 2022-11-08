@@ -117,8 +117,14 @@ strike {
 }
 
 .reddit-md .md-spoiler-text.revealed {
+	transition-duration: 450ms;
 	background: rgba(79, 79, 79, 0.1);
 	border-radius: 2px;
 	cursor: text;
 	color: black;
+}
+
+._dark .reddit-md .md-spoiler-text.revealed {
+	color: #e2e2e2;
+	background: rgba(121, 121, 121, 0.315);
 }
