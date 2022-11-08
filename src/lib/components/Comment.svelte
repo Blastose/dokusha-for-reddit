@@ -2,7 +2,7 @@
 	import formatNumber from '$lib/formatNumber';
 	import relativeTime from '$lib/relativeTime';
 	import type Snoowrap from 'snoowrap';
-	import { onMount } from 'svelte';
+	import CommentHtml from './CommentHTML.svelte';
 	export let comment: Snoowrap.Comment;
 
 	let childCommentHidden = false;
@@ -14,17 +14,6 @@
 	const toggleCommentVisibility = () => {
 		commentHidden = !commentHidden;
 	};
-
-	let commentContainer: HTMLDivElement;
-
-	onMount(() => {
-		const spoilerTextElements = commentContainer.querySelectorAll('.md-spoiler-text');
-		spoilerTextElements.forEach((element) => {
-			element.addEventListener('click', () => {
-				element.classList.add('revealed');
-			});
-		});
-	});
 </script>
 
 <div
@@ -91,11 +80,7 @@
 				{/if}
 			</p>
 
-			{#if !commentHidden}
-				<div class="reddit-md max-w-4xl" bind:this={commentContainer}>
-					{@html comment.body_html}
-				</div>
-			{/if}
+			<CommentHtml rawHTML={comment.body_html} {commentHidden} />
 
 			{#if !commentHidden}
 				<div class="flex gap-2">
