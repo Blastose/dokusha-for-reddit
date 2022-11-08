@@ -18,7 +18,9 @@
 	};
 </script>
 
-<header class="shadow-sm bg-white dark:bg-[#212224] transition-[top] duration-150">
+<header
+	class="border-b border-[#4b4b4b15] dark:border-[#ffffff25] bg-white dark:bg-[#212224] transition-[top] duration-150"
+>
 	<div class="w-full sm:max-w-5xl mx-auto p-4 flex justify-between items-center">
 		<a href="/" class="text-xl font-bold"> Dokusha for Reddit </a>
 		<div class="flex gap-2">
