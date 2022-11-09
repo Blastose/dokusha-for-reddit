@@ -2,6 +2,7 @@
 	import formatNumber from '$lib/formatNumber';
 	import relativeTime from '$lib/relativeTime';
 	import type Snoowrap from 'snoowrap';
+	import Flair from './Flair.svelte';
 
 	export let showSubredditName = false;
 	export let submission: Snoowrap.Submission;
@@ -54,6 +55,9 @@
 			>
 				<span class="font-bold">{submission.title}</span>
 			</a>
+			{#if submission.link_flair_text}
+				<Flair {submission} />
+			{/if}
 			<span class="text-gray-700 dark:text-gray-400 text-sm">({submission.domain})</span>
 		</p>
 
