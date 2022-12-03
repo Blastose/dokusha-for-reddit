@@ -4,7 +4,7 @@ import reddit from '$lib/reddit';
 import type Snoowrap from 'snoowrap';
 import type { Timespan } from 'snoowrap/dist/objects/Subreddit';
 
-export const load: PageServerLoad = async ({ params, url }) => {
+export const load: PageServerLoad = async ({ params, url, setHeaders }) => {
 	const times = ['all', 'day', 'hour', 'month', 'week', 'year'];
 	let time = url.searchParams.get('t');
 
@@ -33,6 +33,9 @@ export const load: PageServerLoad = async ({ params, url }) => {
 	}
 
 	if (posts) {
+		setHeaders({
+			'cache-control': 'public, max-age=60'
+		});
 		return {
 			posts: JSON.parse(JSON.stringify(posts)) as Snoowrap.Submission[]
 		};
