@@ -27,7 +27,7 @@
 					? 'bg-gray-300 dark:bg-orange-800'
 					: 'bg-gray-100 dark:bg-[#252525] hover:bg-gray-300 dark:hover:bg-[#ffffff1c]'}"
 				href={listing === 'hot' ? `/r/${subreddit}` : `/r/${subreddit}/${listing}`}
-				data-sveltekit-prefetch
+				data-sveltekit-preload-data
 			>
 				{listing}
 			</a>
@@ -44,7 +44,7 @@
 						<a
 							class="p-2 hover:bg-gray-300 dark:hover:bg-[#ffffff1c] duration-150"
 							href="/r/{subreddit}/{currentListing}?t={time}"
-							data-sveltekit-prefetch
+							data-sveltekit-preload-data
 						>
 							{formatTimeFilter(time)}
 						</a>
