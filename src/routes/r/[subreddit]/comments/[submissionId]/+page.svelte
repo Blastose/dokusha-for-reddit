@@ -17,7 +17,7 @@
 					{#if data.submission.is_self}
 						{data.submission.title}
 					{:else}
-						<a href={data.submission.url} data-sveltekit-prefetch>
+						<a href={data.submission.url} data-sveltekit-preload-data>
 							{data.submission.title}
 						</a>
 					{/if}

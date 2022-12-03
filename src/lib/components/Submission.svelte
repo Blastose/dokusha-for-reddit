@@ -51,7 +51,7 @@
 				href={submission.is_self
 					? `/r/${submission.subreddit}/comments/${submission.id}`
 					: submission.url}
-				data-sveltekit-prefetch
+				data-sveltekit-preload-data
 			>
 				<span class="font-bold">{submission.title}</span>
 			</a>
@@ -103,7 +103,7 @@
 					<a
 						class="flex py-1 px-2"
 						href={`/r/${submission.subreddit}/comments/${submission.id}`}
-						data-sveltekit-prefetch
+						data-sveltekit-preload-data
 					>
 						<div class="flex gap-1">
 							<svg style="width:20px;height:20px" viewBox="0 0 24 24">
