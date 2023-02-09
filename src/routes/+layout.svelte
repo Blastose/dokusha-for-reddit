@@ -3,7 +3,24 @@
 	import Header from '$lib/components/Header.svelte';
 	import { browser } from '$app/environment';
 	import { theme } from '$lib/stores/theme';
+	import NProgress from 'nprogress';
+	import 'nprogress/nprogress.css';
+	import { navigating } from '$app/stores';
 
+	NProgress.configure({
+		trickleSpeed: 150,
+		showSpinner: false,
+		minimum: 0.16
+	});
+
+	$: {
+		if ($navigating) {
+			NProgress.start();
+		}
+		if (!$navigating) {
+			NProgress.done();
+		}
+	}
 	$: {
 		if (browser) {
 			if ($theme === 'dark') {
