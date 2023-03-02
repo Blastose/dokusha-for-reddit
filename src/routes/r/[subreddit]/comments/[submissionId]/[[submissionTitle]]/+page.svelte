@@ -8,12 +8,17 @@
 	export let data: PageData;
 
 	// We can ts-ignore the following lines since we know that when the page is ssr'd
-	// the promise for submission is resolved and .title/.subreddit exist
+	// the promise for submission is resolved
+	// Unfortunately, there is no type hints for data.streamed
 	// @ts-ignore
 	const title = `${$submissionStore?.title ?? data.streamed.submission.title}: ${
 		// @ts-ignore
 		$submissionStore?.subreddit ?? data.streamed.submission.subreddit
 	}`;
+
+	const submissionId =
+		// @ts-ignore
+		`${$submissionStore?.id ?? data.streamed.submission.id}`;
 
 	function purify(text: string) {
 		return DOMPurify.sanitize(marked.parse(text));
@@ -55,7 +60,22 @@
 				<p class="text-lg font-semibold">Comments</p>
 				<div class="flex flex-col gap-6">
 					{#each value.comments as comment}
-						<Comment {comment} />
+						{#if comment.type === 'comment'}
+							<Comment {comment} {submissionId} />
+						{:else}
+							<Comment
+								{comment}
+								{submissionId}
+								updateReplies={(moreId, children) => {
+									// This needs to be in an anonymous function since we need
+									// value.comments to be reactive and update it
+									const moreIndex = value.comments.findIndex((value) => value.id === moreId);
+									value.comments.splice(moreIndex, 1);
+
+									value.comments = value.comments.concat(children);
+								}}
+							/>
+						{/if}
 					{/each}
 				</div>
 			</div>
@@ -77,7 +97,20 @@
 				<p class="text-lg font-semibold">Comments</p>
 				<div class="flex flex-col gap-6">
 					{#each value.comments as comment}
-						<Comment {comment} />
+						{#if comment.type === 'comment'}
+							<Comment {comment} {submissionId} />
+						{:else}
+							<Comment
+								{comment}
+								{submissionId}
+								updateReplies={(moreId, children) => {
+									const moreIndex = value.comments.findIndex((value) => value.id === moreId);
+									value.comments.splice(moreIndex, 1);
+
+									value.comments = value.comments.concat(children);
+								}}
+							/>
+						{/if}
 					{/each}
 				</div>
 			</div>
