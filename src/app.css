@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* https://coolors.co/031926-468189-77aca2-9dbebb-f4e9cd */
+
 html {
 	color: rgb(29, 29, 29);
 }
@@ -10,7 +12,6 @@ html {
 	color-scheme: dark;
 	background: #212224;
 	scrollbar-color: #ffffff50 transparent;
-	transition-duration: 0.15s;
 	color: #e2e2e2;
 }
 

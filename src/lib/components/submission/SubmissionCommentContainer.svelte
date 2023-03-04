@@ -8,8 +8,8 @@
 
 <div class="flex flex-col gap-2">
 	<p class="text-lg font-semibold">Comments</p>
-	<div class="flex flex-col gap-6">
-		{#each comments as comment}
+	<div class="flex flex-col gap-8">
+		{#each comments as comment, index}
 			{#if comment.type === 'comment'}
 				<Comment {comment} {submissionId} />
 			{:else}
@@ -26,6 +26,16 @@
 					}}
 				/>
 			{/if}
+			{#if index !== comments.length - 1}
+				<hr />
+			{/if}
 		{/each}
 	</div>
 </div>
+
+<style>
+	hr {
+		align-self: center;
+		width: 66%;
+	}
+</style>

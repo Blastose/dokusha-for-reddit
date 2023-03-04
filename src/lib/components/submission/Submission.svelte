@@ -1,11 +1,9 @@
 <script lang="ts">
-	import type { Submission } from 'jsrwrap';
-	import Comment from '$lib/components/comment/Comment.svelte';
 	import SubmissionCommentContainer from '$lib/components/submission/SubmissionCommentContainer.svelte';
+	import SubmissionBody from '$lib/components/submission/SubmissionBody.svelte';
 	import { submissionStore } from '$lib/stores/submissionStore';
-	import { purify } from '$lib/utils/purify';
-
-	type SubmissionReturnType = Awaited<ReturnType<Submission['fetch']>>;
+	import type { SubmissionReturnType } from '$lib/types/types';
+	import { onMount } from 'svelte';
 
 	export let submission: SubmissionReturnType | Promise<SubmissionReturnType>;
 
@@ -21,17 +19,19 @@
 	const submissionId =
 		// @ts-ignore
 		`${$submissionStore?.id ?? submission.id}`;
+
+	onMount(async () => {
+		if (!$submissionStore) {
+			submissionStore.set(await submission);
+		}
+	});
 </script>
 
 <svelte:head><title>{title}</title></svelte:head>
 
-<main class="container mx-auto px-4 py-2 flex flex-col gap-4">
+<section class="flex flex-col gap-4">
 	{#if $submissionStore}
-		<p class="font-bold text-xl">{$submissionStore.title}</p>
-
-		<div>
-			{@html purify($submissionStore.selftext)}
-		</div>
+		<SubmissionBody submission={$submissionStore} />
 
 		{#await submission}
 			<div class="animate-pulse">
@@ -52,8 +52,6 @@
 				</div>
 			</div>
 		{:then value}
-			<div class="h-2 w-full bg-black" />
-
 			<SubmissionCommentContainer comments={value.comments} {submissionId} />
 		{/await}
 	{:else}
@@ -61,15 +59,9 @@
 			<p>Loading...</p>
 			<p>Loading...</p>
 		{:then value}
-			<p class="font-bold text-xl">{value.title}</p>
-
-			<div>
-				{@html purify(value.selftext)}
-			</div>
-
-			<div class="h-2 w-full bg-black" />
+			<SubmissionBody submission={value} />
 
 			<SubmissionCommentContainer comments={value.comments} {submissionId} />
 		{/await}
 	{/if}
-</main>
+</section>

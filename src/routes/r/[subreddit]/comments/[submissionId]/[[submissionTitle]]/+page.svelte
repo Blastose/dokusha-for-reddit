@@ -5,4 +5,6 @@
 	export let data: PageData;
 </script>
 
-<Submission submission={data.streamed.submission} />
+<main class="container mx-auto px-4 pt-2 pb-24 ">
+	<Submission submission={data.streamed.submission} />
+</main>
