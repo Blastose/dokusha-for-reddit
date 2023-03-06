@@ -6,9 +6,10 @@
 
 html {
 	color: rgb(29, 29, 29);
+	background-color: #e2e2e2;
 }
 
-._dark {
+.dark {
 	color-scheme: dark;
 	background: #212224;
 	scrollbar-color: #ffffff50 transparent;
