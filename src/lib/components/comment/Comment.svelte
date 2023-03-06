@@ -52,7 +52,7 @@
 		<button
 			class="flex justify-center group h-full"
 			on:click={toggleCommentVisibility}
-			aria-label={commentHidden ? 'Show comment' : 'Hide comment'}
+			aria-label={commentHidden ? 'expand comment' : 'hide comment'}
 		>
 			<span class="block duration-[400ms] bg-gray-400 group-hover:bg-gray-800 w-[2px] h-full" />
 		</button>
@@ -68,6 +68,9 @@
 						title={new Date(comment.created * 1000).toString()}
 						class="text-gray-500 font-semibold">{relativeTime(comment.created_utc)}</span
 					>
+					{#if commentHidden}
+						<button aria-label="expand comment" on:click={toggleCommentVisibility}>[+]</button>
+					{/if}
 				</p>
 
 				<div class:hidden={commentHidden}>
