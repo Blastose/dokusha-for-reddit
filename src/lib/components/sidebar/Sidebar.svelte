@@ -1,0 +1,25 @@
+<script lang="ts">
+	import { drawerStore } from '$lib/stores/drawerStore';
+	import { afterNavigate } from '$app/navigation';
+
+	afterNavigate(() => {
+		drawerStore.set(false);
+	});
+</script>
+
+<div class="flex flex-col gap-2 p-6">
+	<p class="font-bold text-lg">Saved Subreddits</p>
+
+	<a href="/r/programming">Programming</a>
+	<a href="/r/genshin_impact">Genshin</a>
+	<a href="/r/learnprogramming">Learn Programming</a>
+</div>
+
+<style>
+	a {
+		text-align: left;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+</style>
