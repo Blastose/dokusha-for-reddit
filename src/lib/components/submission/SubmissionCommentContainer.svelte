@@ -38,4 +38,8 @@
 		align-self: center;
 		width: 66%;
 	}
+
+	:global(.dark) hr {
+		border-color: rgba(88, 88, 88, 0.452);
+	}
 </style>

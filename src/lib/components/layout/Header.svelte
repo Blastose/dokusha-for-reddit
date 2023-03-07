@@ -22,7 +22,7 @@
 </script>
 
 <header
-	class="header flex px-6 py-4 gap-4 justify-between items-center border-b border-[#4b4b4b15] dark:border-[#ffffff1a]"
+	class="header flex px-4 py-4 gap-4 justify-between items-center border-b border-[#4b4b4b15] dark:border-[#ffffff1a]"
 >
 	<div class="flex gap-2">
 		<button
@@ -43,11 +43,12 @@
 <style>
 	.header {
 		position: sticky;
-		background-color: rgb(111, 158, 111);
+		z-index: 1;
+		background-color: rgb(255, 255, 255);
 		top: 0;
 	}
 
 	:global(.dark) .header {
-		background-color: rgb(37, 39, 37);
+		background-color: #212324;
 	}
 </style>

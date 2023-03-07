@@ -1,10 +1,12 @@
 <script lang="ts">
 	import type { CommentFull, Submission } from 'jsrwrap';
-	import Icon from '$lib/components/icon/Icon.svelte';
-	import relativeTime from '$lib/utils/relativeTime';
 	import { replaceHtml } from '$lib/utils/replaceHtml';
 	import { marked } from 'marked';
 	import DOMPurify from 'isomorphic-dompurify';
+	import CommentBar from './CommentBar.svelte';
+	import CommentInfo from './CommentInfo.svelte';
+	import CommentBody from './CommentBody.svelte';
+	import CommentActions from './CommentActions.svelte';
 
 	export let comment: CommentFull;
 	export let submissionId: string;
@@ -39,7 +41,7 @@
 	}
 
 	$: commentBody = comment.type === 'comment' ? comment.body : '';
-	$: commentHTML = DOMPurify.sanitize(marked.parse(replaceHtml(commentBody)));
+	$: commentHtml = DOMPurify.sanitize(marked.parse(replaceHtml(commentBody)));
 
 	let loadingMoreReplies = false;
 	let commentHidden = comment.type === 'comment' ? comment.collapsed : false;
@@ -48,56 +50,17 @@
 </script>
 
 {#if comment.type === 'comment'}
-	<div class="grid grid-cols-[22px,_1fr]">
-		<button
-			class="flex justify-center group h-full"
-			on:click={toggleCommentVisibility}
-			aria-label={commentHidden ? 'expand comment' : 'hide comment'}
-		>
-			<span class="block duration-[400ms] bg-gray-400 group-hover:bg-gray-800 w-[2px] h-full" />
-		</button>
+	<div class="comment-container">
+		<CommentBar {commentHidden} {toggleCommentVisibility} />
 
 		<div class="flex flex-col gap-2">
 			<div>
-				<p
-					class="{comment.is_submitter ? 'text-blue-500' : 'text-rose-600'} text-sm font-bold"
-					class:italic={commentHidden}
-				>
-					{comment.author} |
-					<span
-						title={new Date(comment.created * 1000).toString()}
-						class="text-gray-500 font-semibold">{relativeTime(comment.created_utc)}</span
-					>
-					{#if commentHidden}
-						<button aria-label="expand comment" on:click={toggleCommentVisibility}>[+]</button>
-					{/if}
-				</p>
+				<CommentInfo {comment} {commentHidden} {toggleCommentVisibility} />
 
 				<div class:hidden={commentHidden}>
-					<div class="reddit-md max-w-4xl">
-						{@html commentHTML}
-					</div>
+					<CommentBody {commentHtml} />
 
-					<div class="flex gap-2">
-						<div class="flex gap-1">
-							<button class="fill-gray-400"
-								><Icon height="24" width="24" name="arrowUpOutline" /></button
-							>
-							<p class="font-mono font-bold text-green-700">
-								{comment.score_hidden ? '•' : comment.score}
-							</p>
-							<button class="fill-gray-400"
-								><Icon height="24" width="24" name="arrowDownOutline" /></button
-							>
-						</div>
-
-						<button
-							class="text-sm text-gray-500 font-semibold"
-							class:hidden={comment.replies.length <= 0}
-							on:click={toggleChildCommentsVisibility}
-							>{childCommentsHidden ? 'show child comments' : 'hide child comments'}</button
-						>
-					</div>
+					<CommentActions {comment} {childCommentsHidden} {toggleChildCommentsVisibility} />
 				</div>
 			</div>
 
@@ -112,10 +75,10 @@
 	</div>
 {:else if comment.type === 'more'}
 	{#if comment.id === '_'}
-		<div class="text-blue-400">Continue this thread</div>
+		<div class="load-more-comments">Continue this thread</div>
 	{:else}
 		<button
-			class="text-blue-400 text-left"
+			class="load-more-comments text-left"
 			disabled={loadingMoreReplies}
 			on:click={async () => {
 				loadingMoreReplies = true;
@@ -124,3 +87,19 @@
 		>
 	{/if}
 {/if}
+
+<style>
+	.comment-container {
+		display: grid;
+		grid-template-columns: 22px 1fr;
+	}
+
+	.load-more-comments {
+		color: #0079d3;
+		width: fit-content;
+	}
+
+	:global(.dark) .load-more-comments {
+		color: #5aade0;
+	}
+</style>

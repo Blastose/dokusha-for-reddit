@@ -22,9 +22,9 @@
 
 <style>
 	.sidebar {
-		z-index: 2;
+		z-index: 100;
 		position: fixed;
-		background-color: #e2e2e2;
+		background-color: #ffffff;
 		overflow-x: auto;
 		width: 16rem;
 		height: 100vh;
@@ -35,7 +35,7 @@
 	}
 
 	.overlay {
-		z-index: 1;
+		z-index: 99;
 		width: 100%;
 		height: 100vh;
 		position: fixed;

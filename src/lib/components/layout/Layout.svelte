@@ -12,6 +12,3 @@
 		<slot />
 	</div>
 </div>
-
-<style>
-</style>

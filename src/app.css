@@ -5,15 +5,23 @@
 /* https://coolors.co/031926-468189-77aca2-9dbebb-f4e9cd */
 
 html {
-	color: rgb(29, 29, 29);
-	background-color: #e2e2e2;
+	color: #3a3a3a;
+	background-color: #ffffff;
 }
 
 .dark {
 	color-scheme: dark;
-	background: #212224;
+	background-color: #212324;
 	scrollbar-color: #ffffff50 transparent;
-	color: #e2e2e2;
+	color: #e4e3df;
+}
+
+.skeleton {
+	background-color: rgb(189, 189, 201);
+}
+
+.dark .skeleton {
+	background-color: rgb(106, 106, 121);
 }
 
 /* Style Reddit MD which mostly uses default css values
@@ -25,14 +33,16 @@ html {
 
 .reddit-md a {
 	color: #0079d3;
+	fill: #0079d3;
 }
 
 .reddit-md a:hover {
 	text-decoration: underline;
 }
 
-._dark .reddit-md a {
+.dark .reddit-md a {
 	color: #5aade0;
+	fill: #5aade0;
 }
 
 .reddit-md strong {
@@ -89,7 +99,7 @@ strike {
 	margin-left: 0.5rem;
 }
 
-._dark .reddit-md blockquote {
+.dark .reddit-md blockquote {
 	color: rgb(190, 190, 190);
 }
 
@@ -100,7 +110,7 @@ strike {
 	color: transparent;
 }
 
-._dark .reddit-md .md-spoiler-text {
+.dark .reddit-md .md-spoiler-text {
 	background: rgb(190, 190, 190);
 }
 
@@ -114,7 +124,7 @@ strike {
 	line-height: 1.25rem;
 }
 
-._dark .reddit-md pre {
+.dark .reddit-md pre {
 	background-color: rgb(66, 66, 66);
 }
 
@@ -126,7 +136,19 @@ strike {
 	color: black;
 }
 
-._dark .reddit-md .md-spoiler-text.revealed {
+.dark .reddit-md .md-spoiler-text.revealed {
 	color: #e2e2e2;
 	background: rgba(121, 121, 121, 0.315);
+}
+
+.reddit-md code:not(pre code) {
+	border: solid 1px #d3d3d3;
+	padding: 0rem 0.25rem;
+	border-radius: 0.125rem;
+	background-color: #f0f1f5;
+}
+
+.dark .reddit-md code:not(pre code) {
+	border: solid 1px #5a5a5f;
+	background-color: #3f4242;
 }

@@ -13,6 +13,10 @@
 	<a href="/r/programming">Programming</a>
 	<a href="/r/genshin_impact">Genshin</a>
 	<a href="/r/learnprogramming">Learn Programming</a>
+	<a href="/r/node">Node</a>
+	<a href="/r/deno">Deno</a>
+	<a href="/r/leagueoflegends">League of Legends</a>
+	<a href="/r/askreddit">Askreddit</a>
 </div>
 
 <style>
