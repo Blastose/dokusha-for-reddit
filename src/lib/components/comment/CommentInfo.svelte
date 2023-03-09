@@ -19,7 +19,7 @@
 	<p class="time">|</p>
 
 	<p class="time">
-		<span title={new Date(comment.created * 1000).toString()}
+		<span title={new Date(comment.created_utc * 1000).toString()}
 			>{relativeTime(comment.created_utc)}</span
 		>
 		{#if typeof comment.edited === 'number'}

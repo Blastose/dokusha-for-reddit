@@ -21,7 +21,7 @@
 			<p class="time">|</p>
 
 			<p class="time">
-				<span title={new Date(submission.created * 1000).toString()}
+				<span title={new Date(submission.created_utc * 1000).toString()}
 					>{relativeTime(submission.created_utc)}</span
 				>
 				{#if typeof submission.edited === 'number'}
