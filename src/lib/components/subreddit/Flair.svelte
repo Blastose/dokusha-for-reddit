@@ -18,21 +18,30 @@
 	{#if post.link_flair_type === 'richtext'}
 		{#each post.link_flair_richtext as richtext}
 			{#if richtext.e === 'text'}
-				{richtext.t}
+				<span class="rich-text">{richtext.t}</span>
 			{:else if richtext.e === 'emoji'}
-				<img class="h-5" src={richtext.u} alt="" />
+				<img class="flair-image h-4" src={richtext.u} alt="" />
 			{/if}
 		{/each}
 	{:else if post.link_flair_type === 'text'}
-		{post.link_flair_text}
+		<span>{post.link_flair_text}</span>
 	{/if}
 </div>
 
 <style>
 	.flair {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
 		padding: 0rem 0.375rem;
 		border-radius: 0.25rem;
 		font-weight: 600;
+	}
+
+	img {
+		display: inline-block;
+	}
+
+	:global(.flair-image + .rich-text) {
+		margin-left: 0.375rem;
 	}
 </style>

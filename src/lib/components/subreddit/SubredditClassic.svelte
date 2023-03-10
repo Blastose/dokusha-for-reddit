@@ -3,8 +3,8 @@
 	import Icon from '$lib/components/icon/Icon.svelte';
 	import { submissionStore } from '$lib/stores/submissionStore';
 	import relativeTime from '$lib/utils/relativeTime';
-	import Flair from './Flair.svelte';
 	import Thumbnail from './Thumbnail.svelte';
+	import PostTitle from './PostTitle.svelte';
 
 	export let post: SubmissionData;
 
@@ -40,17 +40,7 @@
 	<Thumbnail hasThumbnail={postHasThumbnail} {post} />
 
 	<div class="title">
-		{#if post.link_flair_text}
-			<Flair {post} />
-		{/if}
-		<a href={post.permalink} class="title-text font-bold" on:click={setSubmissionStore}
-			>{post.title}</a
-		>{#if post.spoiler}
-			<p class="post-tags spoiler">Spoiler</p>
-		{/if}
-		{#if post.over_18}
-			<p class="post-tags nsfw">NSFW</p>
-		{/if}
+		<PostTitle {post} />
 	</div>
 
 	<div class="post-info text-sm font-semibold">
