@@ -2,9 +2,9 @@
 	import type { SubmissionData } from 'jsrwrap';
 	import Icon from '$lib/components/icon/Icon.svelte';
 	import { submissionStore } from '$lib/stores/submissionStore';
-	import relativeTime from '$lib/utils/relativeTime';
 	import Thumbnail from './Thumbnail.svelte';
 	import PostTitle from './PostTitle.svelte';
+	import PostInfo from './PostInfo.svelte';
 
 	export let post: SubmissionData;
 
@@ -44,20 +44,7 @@
 	</div>
 
 	<div class="post-info text-sm font-semibold">
-		<p>
-			Posted by {post.author}
-			<span title={new Date(post.created_utc * 1000).toString()}
-				>{relativeTime(post.created_utc)}</span
-			>{#if typeof post.edited === 'number'}
-				<span title={new Date(post.edited * 1000).toString()}
-					>* (edited {relativeTime(post.edited)})</span
-				>
-			{/if}{#if post.stickied}<span aria-label="stickied" class="pin"
-					><Icon class="inline rotate-45" height="24" width="24" name="pin" /></span
-				>{/if}{#if post.locked}<span aria-label="locked" class="lock"
-					><Icon class="inline" height="24" width="24" name="lock" /></span
-				>{/if}
-		</p>
+		<PostInfo {post} />
 	</div>
 
 	<div class="actions text-sm font-semibold">
@@ -76,55 +63,6 @@
 </div>
 
 <style>
-	.lock,
-	.pin {
-		display: inline-block;
-		margin: 0 0.25rem;
-	}
-
-	.pin {
-		fill: #55a756;
-	}
-
-	:global(.dark) .pin {
-		fill: #75d377;
-	}
-
-	.lock {
-		fill: #e7c129;
-	}
-
-	.post-tags {
-		display: inline-block;
-		margin: 0 0.25rem;
-		padding: 0rem 0.375rem;
-		border-radius: 0.125rem;
-		font-size: 0.875rem;
-		line-height: 1.25rem;
-		font-weight: 600;
-		border: 1px solid;
-	}
-
-	.spoiler {
-		color: #717677;
-	}
-
-	:global(.dark) .spoiler {
-		color: #878b8c;
-	}
-
-	.nsfw {
-		color: rgb(255, 88, 91);
-	}
-
-	:global(.dark) .nsfw {
-		color: rgb(255, 88, 91);
-	}
-
-	.title-text {
-		line-height: 1.25rem;
-	}
-
 	.classic-container {
 		display: grid;
 		border-radius: 0.375rem;
