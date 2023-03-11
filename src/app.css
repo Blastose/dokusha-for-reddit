@@ -2,16 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* https://coolors.co/031926-468189-77aca2-9dbebb-f4e9cd */
+
 html {
-	color: rgb(29, 29, 29);
+	color: #3a3a3a;
+	fill: #3a3a3a;
+	background-color: #ffffff;
 }
 
-._dark {
+.dark {
 	color-scheme: dark;
-	background: #212224;
+	background-color: #212324;
 	scrollbar-color: #ffffff50 transparent;
-	transition-duration: 0.15s;
-	color: #e2e2e2;
+	color: #e4e3df;
+	fill: #e4e3df;
+}
+
+.text-dark-mode {
+	color: #e4e3df;
+}
+
+.text-light-mode {
+	color: #3a3a3a;
+}
+
+.skeleton {
+	background-color: rgb(189, 189, 201);
+}
+
+.dark .skeleton {
+	background-color: rgb(106, 106, 121);
 }
 
 /* Style Reddit MD which mostly uses default css values
@@ -23,14 +43,16 @@ html {
 
 .reddit-md a {
 	color: #0079d3;
+	fill: #0079d3;
 }
 
 .reddit-md a:hover {
 	text-decoration: underline;
 }
 
-._dark .reddit-md a {
+.dark .reddit-md a {
 	color: #5aade0;
+	fill: #5aade0;
 }
 
 .reddit-md strong {
@@ -73,11 +95,15 @@ strike {
 
 .reddit-md ul {
 	list-style-type: disc;
-	margin-top: 1em;
-	margin-bottom: 1em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
 	margin-left: 0;
 	margin-right: 0;
 	padding-left: 20px;
+}
+
+.reddit-md li > ul {
+	list-style-type: circle;
 }
 
 .reddit-md blockquote {
@@ -87,7 +113,7 @@ strike {
 	margin-left: 0.5rem;
 }
 
-._dark .reddit-md blockquote {
+.dark .reddit-md blockquote {
 	color: rgb(190, 190, 190);
 }
 
@@ -98,21 +124,21 @@ strike {
 	color: transparent;
 }
 
-._dark .reddit-md .md-spoiler-text {
+.dark .reddit-md .md-spoiler-text {
 	background: rgb(190, 190, 190);
 }
 
 .reddit-md pre {
 	overflow-x: auto;
-	background-color: rgb(221, 221, 221);
-	border-radius: 0.5rem;
+	background-color: #e5e8f3;
+	border-radius: 0.25rem;
 	padding: 0.25rem 0.5rem;
 	margin: 0.25rem 0rem;
 	font-size: 0.875rem;
 	line-height: 1.25rem;
 }
 
-._dark .reddit-md pre {
+.dark .reddit-md pre {
 	background-color: rgb(66, 66, 66);
 }
 
@@ -124,7 +150,19 @@ strike {
 	color: black;
 }
 
-._dark .reddit-md .md-spoiler-text.revealed {
+.dark .reddit-md .md-spoiler-text.revealed {
 	color: #e2e2e2;
 	background: rgba(121, 121, 121, 0.315);
+}
+
+.reddit-md code:not(pre code) {
+	border: solid 1px #d3d3d3;
+	padding: 0rem 0.25rem;
+	border-radius: 0.125rem;
+	background-color: #f0f1f5;
+}
+
+.dark .reddit-md code:not(pre code) {
+	border: solid 1px #5a5a5f;
+	background-color: #3f4242;
 }

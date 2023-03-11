@@ -1,15 +1,12 @@
 <script lang="ts">
-	import Subreddit from '$lib/components/Subreddit.svelte';
 	import type { PageData } from './$types';
+	import Subreddit from '$lib/components/subreddit/Subreddit.svelte';
 
 	export let data: PageData;
-	let subreddit = data.posts[0]?.subreddit as unknown as string;
 </script>
 
-<svelte:head>
-	<title>{subreddit}</title>
-</svelte:head>
+<svelte:head><title>{data.about.title}</title></svelte:head>
 
-<main class="w-full sm:max-w-5xl mx-auto px-4">
-	<Subreddit {subreddit} submissions={data.posts} />
+<main>
+	<Subreddit about={data.about} posts={data.posts} />
 </main>

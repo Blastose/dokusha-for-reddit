@@ -1,0 +1,63 @@
+<script lang="ts">
+	import Icon from '../icon/Icon.svelte';
+	import type { Comment } from 'jsrwrap';
+
+	export let comment: Comment;
+	export let childCommentsHidden: boolean;
+	export let toggleChildCommentsVisibility: () => void;
+</script>
+
+<div class="actions-container">
+	<div class="votes-container">
+		<button aria-label="upvote">
+			<Icon height="24" width="24" name="arrowUpOutline" />
+		</button>
+
+		<p class="score font-mono">
+			{comment.score_hidden ? '•' : comment.score}
+		</p>
+
+		<button aria-label="downvote">
+			<Icon height="24" width="24" name="arrowDownOutline" />
+		</button>
+	</div>
+
+	<button
+		class="text-sm font-semibold"
+		class:hidden={comment.replies.length <= 0}
+		on:click={toggleChildCommentsVisibility}
+		>{childCommentsHidden ? 'show child comments' : 'hide child comments'}</button
+	>
+</div>
+
+<style>
+	.actions-container {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+
+		color: #717677;
+		fill: #717677;
+	}
+
+	:global(.dark) .actions-container {
+		color: #878b8c;
+		fill: #878b8c;
+	}
+
+	.votes-container {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+
+	.score {
+		font-weight: 700;
+		color: #7e8485;
+	}
+
+	:global(.dark) .score {
+		color: #a1a5a7;
+	}
+</style>

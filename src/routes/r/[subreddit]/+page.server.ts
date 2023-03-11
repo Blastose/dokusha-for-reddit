@@ -1,19 +1,15 @@
-import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import type Snoowrap from 'snoowrap';
-import reddit from '$lib/reddit';
+import { jsrwrap } from '$lib/server/reddit';
 
-export const load: PageServerLoad = async ({ params, setHeaders }) => {
-	const posts = await reddit.getSubreddit(`${params.subreddit}`).getHot();
+export const load = (async ({ params, setHeaders }) => {
+	const subreddit = params.subreddit;
 
-	if (posts) {
-		setHeaders({
-			'cache-control': 'public, max-age=60'
-		});
-		return {
-			posts: JSON.parse(JSON.stringify(posts)) as Snoowrap.Submission[]
-		};
-	}
+	const jsrWrapsubreddit = jsrwrap.getSubreddit(subreddit);
 
-	throw error(404, 'Not found');
-};
+	const about = await jsrWrapsubreddit.getAbout();
+	const posts = await jsrWrapsubreddit.getSubmissions({ sort: 'hot', params: {} });
+
+	setHeaders({ 'cache-control': 'public, max-age=60' });
+
+	return { posts, about };
+}) satisfies PageServerLoad;
