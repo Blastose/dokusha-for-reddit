@@ -9,8 +9,8 @@
 	const iconDimension = '18';
 </script>
 
-<p>
-	Posted by <span>{post.author}</span>
+<div>
+	<span>Posted by <span>{post.author}</span></span>
 	<UserFlair author={post} />
 	<span title={new Date(post.created_utc * 1000).toString()}>{relativeTime(post.created_utc)}</span>
 	{#if typeof post.edited === 'number'}
@@ -49,9 +49,13 @@
 			><Icon class="inline" height={iconDimension} width={iconDimension} name="lock" /></span
 		>
 	{/if}
-</p>
+</div>
 
 <style>
+	div > :global(*) {
+		vertical-align: middle;
+	}
+
 	.moderator,
 	.admin,
 	.archived,

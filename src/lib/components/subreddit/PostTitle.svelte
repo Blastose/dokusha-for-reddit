@@ -22,6 +22,10 @@
 </div>
 
 <style>
+	div > :global(*) {
+		vertical-align: text-top;
+	}
+
 	.title-text {
 		line-height: 1.25rem;
 	}
