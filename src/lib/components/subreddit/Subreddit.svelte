@@ -50,7 +50,7 @@
 
 	<div class="container mx-auto px-4 pt-4 pb-16 flex flex-col gap-4">
 		<button class="outline outline-1 rounded-sm px-2 py-1 w-fit" on:click={toggleView}>
-			Switch view - Curr: {$subredditViewStore}
+			Switch view - Current view: {$subredditViewStore}
 		</button>
 
 		<div class="flex flex-col gap-2">
@@ -59,8 +59,8 @@
 					<SubredditCard {post} />
 				{:else}
 					<SubredditClassic {post} />
+					<hr />
 				{/if}
-				<hr />
 			{/each}
 		</div>
 	</div>

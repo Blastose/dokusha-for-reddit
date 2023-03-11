@@ -112,11 +112,11 @@
 
 	.post-info {
 		grid-area: post-info;
-		color: #717677;
+		color: #4e4d55;
 	}
 
 	:global(.dark) .post-info {
-		color: #878b8c;
+		color: #d8d9dd;
 	}
 
 	.actions {

@@ -9,7 +9,7 @@
 
 <div class="actions-container">
 	<div class="votes-container">
-		<button>
+		<button aria-label="upvote">
 			<Icon height="24" width="24" name="arrowUpOutline" />
 		</button>
 
@@ -17,7 +17,7 @@
 			{comment.score_hidden ? '•' : comment.score}
 		</p>
 
-		<button>
+		<button aria-label="downvote">
 			<Icon height="24" width="24" name="arrowDownOutline" />
 		</button>
 	</div>
