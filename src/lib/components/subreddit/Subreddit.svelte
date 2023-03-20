@@ -21,7 +21,7 @@
 	}
 
 	$: bannerUrl = about.banner_background_image || about.banner_img;
-	$: icon = about.community_icon;
+	$: icon = about.community_icon || about.icon_img;
 </script>
 
 <section class="flex flex-col gap-4">
@@ -53,13 +53,12 @@
 			Switch view - Current view: {$subredditViewStore}
 		</button>
 
-		<div class="flex flex-col gap-2">
+		<div class="flex flex-col gap-3">
 			{#each posts as post}
 				{#if $subredditViewStore === 'card'}
 					<SubredditCard {post} />
 				{:else}
 					<SubredditClassic {post} />
-					<hr />
 				{/if}
 			{/each}
 		</div>
@@ -67,15 +66,6 @@
 </section>
 
 <style>
-	hr {
-		align-self: center;
-		width: 95%;
-	}
-
-	:global(.dark) hr {
-		border-color: rgba(88, 88, 88, 0.452);
-	}
-
 	.banner-text {
 		display: flex;
 		flex-direction: column;

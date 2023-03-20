@@ -67,7 +67,8 @@
 		display: grid;
 		border-radius: 0.375rem;
 		transition: box-shadow 150ms;
-		padding: 0.25rem 1rem;
+		padding: 0.75rem 1rem;
+		background-color: #edeef6;
 
 		grid-template-columns: 2rem 1fr;
 		grid-template-rows: min-content min-content min-content;
@@ -78,6 +79,10 @@
 			'score actions';
 
 		column-gap: 1rem;
+	}
+
+	:global(.dark) .classic-container {
+		background-color: #2d2e2e;
 	}
 
 	.classic-container.thumbnail {
