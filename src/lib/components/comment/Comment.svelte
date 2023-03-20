@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { CommentFull, Submission } from 'jsrwrap';
-	import { purify } from '$lib/utils/purify';
+	import { markdownToHtml } from '$lib/utils/markdownToHtml';
 	import CommentBar from './CommentBar.svelte';
 	import CommentInfo from './CommentInfo.svelte';
 	import CommentBody from './CommentBody.svelte';
@@ -39,7 +39,7 @@
 	}
 
 	$: commentBody = comment.type === 'comment' ? comment.body : '';
-	$: commentHtml = purify(commentBody);
+	$: commentHtml = markdownToHtml(commentBody);
 
 	let loadingMoreReplies = false;
 	let commentHidden = comment.type === 'comment' ? comment.collapsed : false;

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { SubmissionData } from 'jsrwrap';
-	import { purify } from '$lib/utils/purify';
-	import { replaceHtml } from '$lib/utils/replaceHtml';
+	import { markdownToHtml } from '$lib/utils/markdownToHtml';
 	import relativeTime from '$lib/utils/relativeTime';
 	import Icon from '../icon/Icon.svelte';
 
@@ -47,7 +46,7 @@
 	</div>
 
 	<div class="reddit-md max-w-4xl">
-		{@html purify(replaceHtml(submission.selftext))}
+		{@html markdownToHtml(submission.selftext)}
 	</div>
 
 	<div>

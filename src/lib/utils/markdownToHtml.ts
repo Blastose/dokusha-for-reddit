@@ -1,5 +1,5 @@
 import { converter } from 'reddit-md-to-html';
 
-export function purify(text: string) {
+export function markdownToHtml(text: string) {
 	return converter(text);
 }
