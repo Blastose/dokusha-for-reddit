@@ -80,13 +80,52 @@ strike {
 	margin-bottom: 0.67em;
 }
 
+.reddit-md h2 {
+	font-size: large;
+	font-weight: bold;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+}
+
+.reddit-md h3 {
+	font-size: 1.17em;
+	font-weight: bold;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+}
+
+.reddit-md h4 {
+	font-size: 1rem;
+	font-weight: bold;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+}
+
+.reddit-md h5 {
+	font-size: 0.83em;
+	font-weight: bold;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+}
+
+.reddit-md h6 {
+	font-size: 0.67em;
+	font-weight: bold;
+	margin-top: 0.67em;
+	margin-bottom: 0.67em;
+}
+
 .reddit-md hr {
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 	margin-left: auto;
 	margin-right: auto;
 	border-style: inset;
-	border-width: 1px;
+	border-color: rgba(97, 97, 97, 0.096);
+}
+
+.dark .reddit-md hr {
+	border-color: rgba(88, 88, 88, 0.658);
 }
 
 .reddit-md li {
@@ -117,14 +156,14 @@ strike {
 	color: rgb(190, 190, 190);
 }
 
-.reddit-md .md-spoiler-text {
+.reddit-md .spoiler {
 	background: #4f4f4f;
 	border-radius: 2px;
 	cursor: pointer;
 	color: transparent;
 }
 
-.dark .reddit-md .md-spoiler-text {
+.dark .reddit-md .spoiler {
 	background: rgb(190, 190, 190);
 }
 
@@ -142,7 +181,7 @@ strike {
 	background-color: rgb(66, 66, 66);
 }
 
-.reddit-md .md-spoiler-text.revealed {
+.reddit-md .spoiler.revealed {
 	transition-duration: 450ms;
 	background: rgba(79, 79, 79, 0.1);
 	border-radius: 2px;
@@ -150,7 +189,7 @@ strike {
 	color: black;
 }
 
-.dark .reddit-md .md-spoiler-text.revealed {
+.dark .reddit-md .spoiler.revealed {
 	color: #e2e2e2;
 	background: rgba(121, 121, 121, 0.315);
 }

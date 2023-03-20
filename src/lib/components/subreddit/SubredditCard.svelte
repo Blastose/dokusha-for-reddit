@@ -2,7 +2,7 @@
 	import type { SubmissionData } from 'jsrwrap';
 	import PostInfo from './PostInfo.svelte';
 	import PostTitle from './PostTitle.svelte';
-	import { purify } from '$lib/utils/purify';
+	import { markdownToHtml } from '$lib/utils/markdownToHtml';
 	import { submissionStore } from '$lib/stores/submissionStore';
 	import Icon from '$lib/components/icon/Icon.svelte';
 	import CardImage from './CardImage.svelte';
@@ -31,7 +31,7 @@
 	{#if post.is_self && !post.spoiler}
 		<div class="selftext">
 			<div class="card-selftext reddit-md">
-				{@html purify(post.selftext)}
+				{@html markdownToHtml(post.selftext)}
 			</div>
 		</div>
 	{/if}
