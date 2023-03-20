@@ -1,8 +1,6 @@
 <script lang="ts">
 	import type { CommentFull, Submission } from 'jsrwrap';
-	import { replaceHtml } from '$lib/utils/replaceHtml';
-	import { marked } from 'marked';
-	import DOMPurify from 'isomorphic-dompurify';
+	import { purify } from '$lib/utils/purify';
 	import CommentBar from './CommentBar.svelte';
 	import CommentInfo from './CommentInfo.svelte';
 	import CommentBody from './CommentBody.svelte';
@@ -41,7 +39,7 @@
 	}
 
 	$: commentBody = comment.type === 'comment' ? comment.body : '';
-	$: commentHtml = DOMPurify.sanitize(marked.parse(replaceHtml(commentBody)));
+	$: commentHtml = purify(commentBody);
 
 	let loadingMoreReplies = false;
 	let commentHidden = comment.type === 'comment' ? comment.collapsed : false;

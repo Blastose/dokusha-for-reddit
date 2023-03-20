@@ -1,6 +1,5 @@
-import { marked } from 'marked';
-import DOMPurify from 'isomorphic-dompurify';
+import { converter } from 'reddit-md-to-html';
 
 export function purify(text: string) {
-	return DOMPurify.sanitize(marked.parse(text));
+	return converter(text);
 }
