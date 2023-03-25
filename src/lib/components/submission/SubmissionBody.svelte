@@ -1,4 +1,5 @@
 <script lang="ts">
+	import RedditHtml from '$lib/components/reddit-html/RedditHtml.svelte';
 	import type { SubmissionData } from 'jsrwrap';
 	import { markdownToHtml } from '$lib/utils/markdownToHtml';
 	import relativeTime from '$lib/utils/relativeTime';
@@ -45,9 +46,7 @@
 		{/if}
 	</div>
 
-	<div class="reddit-md max-w-4xl">
-		{@html markdownToHtml(submission.selftext)}
-	</div>
+	<RedditHtml rawHTML={markdownToHtml(submission.selftext)} />
 
 	<div>
 		<p class="flex gap-1">
