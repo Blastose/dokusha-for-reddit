@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { SubmissionData } from 'jsrwrap';
+	import RedditHtml from '$lib/components/reddit-html/RedditHtml.svelte';
 	import PostInfo from './PostInfo.svelte';
 	import PostTitle from './PostTitle.svelte';
 	import { markdownToHtml } from '$lib/utils/markdownToHtml';
@@ -30,8 +31,8 @@
 
 	{#if post.is_self && !post.spoiler}
 		<div class="selftext">
-			<div class="card-selftext reddit-md">
-				{@html markdownToHtml(post.selftext)}
+			<div class="card-selftext">
+				<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />
 			</div>
 		</div>
 	{/if}

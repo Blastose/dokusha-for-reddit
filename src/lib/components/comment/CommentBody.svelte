@@ -1,11 +1,10 @@
 <script lang="ts">
 	export let commentHtml: string;
+	import RedditHtml from '$lib/components/reddit-html/RedditHtml.svelte';
 </script>
 
 <div class="comment-body-container">
-	<div class="reddit-md max-w-4xl">
-		{@html commentHtml}
-	</div>
+	<RedditHtml rawHTML={commentHtml} />
 </div>
 
 <style>
