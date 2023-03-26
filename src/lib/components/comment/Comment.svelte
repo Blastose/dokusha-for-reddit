@@ -39,7 +39,8 @@
 	}
 
 	$: commentBody = comment.type === 'comment' ? comment.body : '';
-	$: commentHtml = markdownToHtml(commentBody);
+	$: commentMediaMetadata = comment.type === 'comment' ? comment.media_metadata : undefined;
+	$: commentHtml = markdownToHtml(commentBody, { media_metadata: commentMediaMetadata });
 
 	let loadingMoreReplies = false;
 	let commentHidden = comment.type === 'comment' ? comment.collapsed : false;
