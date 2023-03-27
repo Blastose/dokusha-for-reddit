@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Comment from '$lib/components/comment/Comment.svelte';
-	import type { CommentFull } from 'jsrwrap';
+	import type { CommentFull } from 'jsrwrap/types';
 
 	export let comments: CommentFull[];
 	export let submissionId: string;

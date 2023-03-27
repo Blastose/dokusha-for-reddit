@@ -1,6 +1,6 @@
 <script lang="ts">
 	import RedditHtml from '$lib/components/reddit-html/RedditHtml.svelte';
-	import type { SubmissionData } from 'jsrwrap';
+	import type { SubmissionData } from 'jsrwrap/types';
 	import { markdownToHtml } from '$lib/utils/markdownToHtml';
 	import relativeTime from '$lib/utils/relativeTime';
 	import Icon from '../icon/Icon.svelte';

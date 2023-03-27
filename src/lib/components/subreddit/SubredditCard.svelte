@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SubmissionData } from 'jsrwrap';
+	import type { SubmissionData } from 'jsrwrap/types';
 	import RedditHtml from '$lib/components/reddit-html/RedditHtml.svelte';
 	import PostInfo from './PostInfo.svelte';
 	import PostTitle from './PostTitle.svelte';

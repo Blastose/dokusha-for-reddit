@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SubmissionData } from 'jsrwrap';
+	import type { SubmissionData } from 'jsrwrap/types';
 
 	export let post: SubmissionData;
 </script>
@@ -19,10 +19,18 @@
 		</div>
 	{/if}
 {:else if post.is_gallery && post.media_metadata}
-	{@const galleryFirst = post.media_metadata[post.gallery_data?.items[0].media_id ?? ''].s}
-	<div class="preview-image">
-		<img width={galleryFirst.x} height={galleryFirst.y} src={galleryFirst.u} alt="" />
-	</div>
+	{@const galleryFirst = post.media_metadata[post.gallery_data?.items[0].media_id ?? '']}
+	{#if galleryFirst.e === 'Image'}
+		{@const galleryFirstImage = galleryFirst.s}
+		<div class="preview-image">
+			<img
+				width={galleryFirstImage.x}
+				height={galleryFirstImage.y}
+				src={galleryFirstImage.u}
+				alt=""
+			/>
+		</div>
+	{/if}
 {/if}
 
 <style>

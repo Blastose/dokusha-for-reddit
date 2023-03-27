@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '../icon/Icon.svelte';
-	import type { Comment } from 'jsrwrap';
+	import type { Comment } from 'jsrwrap/types';
 
 	export let comment: Comment;
 	export let childCommentsHidden: boolean;

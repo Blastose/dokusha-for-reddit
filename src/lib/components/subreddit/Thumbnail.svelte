@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Icon from '$lib/components/icon/Icon.svelte';
-	import type { SubmissionData } from 'jsrwrap';
+	import type { SubmissionData } from 'jsrwrap/types';
 
 	export let hasThumbnail: boolean;
 	export let post: SubmissionData;
