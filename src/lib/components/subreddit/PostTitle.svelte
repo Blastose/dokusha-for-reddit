@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SubmissionData } from 'jsrwrap';
+	import type { SubmissionData } from 'jsrwrap/types';
 	import Flair from './Flair.svelte';
 	import PostTag from './PostTag.svelte';
 	import { submissionStore } from '$lib/stores/submissionStore';

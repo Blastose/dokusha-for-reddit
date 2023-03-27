@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Comment } from 'jsrwrap';
+	import type { Comment } from 'jsrwrap/types';
 	import relativeTime from '$lib/utils/relativeTime';
 
 	export let comment: Comment;

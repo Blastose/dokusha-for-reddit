@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { CommentFull, Submission } from 'jsrwrap';
+	import type { Submission } from 'jsrwrap';
+	import type { CommentFull } from 'jsrwrap/types';
 	import { markdownToHtml } from '$lib/utils/markdownToHtml';
 	import CommentBar from './CommentBar.svelte';
 	import CommentInfo from './CommentInfo.svelte';

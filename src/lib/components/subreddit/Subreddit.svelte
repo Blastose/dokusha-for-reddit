@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SubmissionData, SubredditData } from 'jsrwrap';
+	import type { SubmissionData, SubredditData } from 'jsrwrap/types';
 	import { submissionStore } from '$lib/stores/submissionStore';
 	import { subredditViewStore } from '$lib/stores/subredditViewStore';
 	import SubredditCard from './SubredditCard.svelte';

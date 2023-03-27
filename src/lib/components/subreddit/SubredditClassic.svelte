@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SubmissionData } from 'jsrwrap';
+	import type { SubmissionData } from 'jsrwrap/types';
 	import Icon from '$lib/components/icon/Icon.svelte';
 	import { submissionStore } from '$lib/stores/submissionStore';
 	import Thumbnail from './Thumbnail.svelte';

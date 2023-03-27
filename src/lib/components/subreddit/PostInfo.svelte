@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SubmissionData } from 'jsrwrap';
+	import type { SubmissionData } from 'jsrwrap/types';
 	import relativeTime from '$lib/utils/relativeTime';
 	import Icon from '$lib/components/icon/Icon.svelte';
 	import UserFlair from './UserFlair.svelte';

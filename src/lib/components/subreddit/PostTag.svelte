@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SubmissionData } from 'jsrwrap';
+	import type { SubmissionData } from 'jsrwrap/types';
 	export let post: SubmissionData;
 </script>
 
