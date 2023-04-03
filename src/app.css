@@ -183,6 +183,33 @@ strike {
 	background: rgb(190, 190, 190);
 }
 
+.reddit-md a[href='/spoiler'],
+.reddit-md a[href='/s'] {
+	text-decoration: none;
+	color: white;
+	background: #434449;
+	padding: 0 0 0 0.25rem;
+	cursor: text;
+}
+
+.dark .reddit-md a[href='/spoiler'],
+.dark .reddit-md a[href='/s'] {
+	color: white;
+}
+
+.reddit-md a[href='/spoiler']::after,
+.reddit-md a[href='/s']::after {
+	content: attr(title);
+	background: #434449;
+	color: #434449;
+	padding: 0 0.25rem;
+}
+
+.reddit-md a[href='/spoiler']:hover::after,
+.reddit-md a[href='/s']:hover::after {
+	color: white;
+}
+
 .reddit-md pre {
 	overflow-x: auto;
 	background-color: #eef1f7;
