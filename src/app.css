@@ -41,7 +41,8 @@ html {
 	word-wrap: break-word;
 }
 
-.reddit-md a {
+.reddit-md :not(.spoiler) > a,
+.reddit-md .spoiler.revealed a {
 	color: #0079d3;
 	fill: #0079d3;
 }
@@ -50,7 +51,16 @@ html {
 	text-decoration: underline;
 }
 
-.dark .reddit-md a {
+.reddit-md .spoiler > a {
+	pointer-events: none;
+}
+
+.reddit-md .spoiler.revealed > a {
+	pointer-events: auto;
+}
+
+.dark .reddit-md :not(.spoiler) > a,
+.dark .reddit-md .spoiler.revealed a {
 	color: #5aade0;
 	fill: #5aade0;
 }
@@ -217,17 +227,17 @@ strike {
 }
 
 .reddit-md table {
+	display: block;
 	overflow-x: auto;
+	margin: 1rem 0;
 }
 
-.reddit-md table,
 .reddit-md th,
 .reddit-md td {
 	border: 1px solid #e5e3da;
 	padding: 4px 9px;
 }
 
-.dark .reddit-md table,
 .dark .reddit-md th,
 .dark .reddit-md td {
 	border: 1px solid #505153;
