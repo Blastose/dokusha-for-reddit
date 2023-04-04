@@ -41,6 +41,7 @@ html {
 	word-wrap: break-word;
 }
 
+.reddit-md > a,
 .reddit-md :not(.spoiler) > a,
 .reddit-md .spoiler.revealed a {
 	color: #0079d3;
@@ -59,6 +60,7 @@ html {
 	pointer-events: auto;
 }
 
+.dark .reddit-md > a,
 .dark .reddit-md :not(.spoiler) > a,
 .dark .reddit-md .spoiler.revealed a {
 	color: #5aade0;
