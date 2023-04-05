@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Comment } from 'jsrwrap/types';
 	import relativeTime from '$lib/utils/relativeTime';
+	import UserFlair from '$lib/components/subreddit/UserFlair.svelte';
 
 	export let comment: Comment;
 	export let commentHidden: boolean;
@@ -12,8 +13,16 @@
 		{comment.author}
 	</p>
 
-	{#if comment.is_submitter}
+	<UserFlair author={comment} />
+
+	{#if comment.distinguished === 'moderator'}
+		<span class="mod author">MOD</span>
+	{:else if comment.is_submitter}
 		<span class="submitter author">OP</span>
+	{/if}
+
+	{#if comment.stickied}
+		<span class="text-sm font-semibold mod">*stickied comment*</span>
 	{/if}
 
 	<p class="time">|</p>
@@ -66,8 +75,17 @@
 		color: #878b8c;
 	}
 
-	.author.submitter {
+	.submitter,
+	:global(.dark) .submitter {
 		color: rgb(99, 145, 214);
+	}
+
+	.mod {
+		color: #3a853c;
+	}
+
+	:global(.dark) .mod {
+		color: #57a858;
 	}
 
 	.expand-button:hover {

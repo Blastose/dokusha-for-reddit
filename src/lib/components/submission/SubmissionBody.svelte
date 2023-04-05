@@ -1,5 +1,9 @@
 <script lang="ts">
 	import RedditHtml from '$lib/components/reddit-html/RedditHtml.svelte';
+	import UserFlair from '$lib/components/subreddit/UserFlair.svelte';
+	import Flair from '$lib/components/subreddit/Flair.svelte';
+	import PostTag from '$lib/components/subreddit/PostTag.svelte';
+	import PostInfo from '$lib/components/subreddit/PostInfo.svelte';
 	import type { SubmissionData } from 'jsrwrap/types';
 	import { markdownToHtml } from '$lib/utils/markdownToHtml';
 	import relativeTime from '$lib/utils/relativeTime';
@@ -10,13 +14,22 @@
 
 <div class="flex flex-col gap-4">
 	<div>
-		<p class="font-bold text-xl">{submission.title}</p>
+		<div>
+			{#if submission.link_flair_text}
+				<Flair linkFlair={submission} />
+			{/if}
+			<p class="font-bold text-xl">{submission.title}</p>
+			<PostTag postTag={submission} />
+		</div>
 		<a href="/r/{submission.subreddit}" class="text-sm font-bold">r/{submission.subreddit}</a>
+		<PostInfo post={submission} />
 
 		<div class="flex items-center gap-2">
 			<p class="author text-lg">
 				{submission.author}
 			</p>
+
+			<UserFlair author={submission} />
 
 			<p class="time">|</p>
 
