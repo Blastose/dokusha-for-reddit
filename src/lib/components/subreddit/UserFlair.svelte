@@ -16,7 +16,7 @@
 	export let author: AuthorFlair;
 </script>
 
-{#if author.author_flair_richtext.length > 0 || author.author_flair_text}
+{#if (author.author_flair_richtext && author.author_flair_richtext.length > 0) || author.author_flair_text}
 	<div class="flair-container">
 		{#if author.author_flair_type === 'text' && author.author_flair_text}
 			<p class="text-xs font-bold text-black dark:text-white">{author.author_flair_text}</p>

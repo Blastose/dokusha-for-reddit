@@ -13,12 +13,12 @@
 
 <div>
 	{#if post.link_flair_text}
-		<Flair {post} />
+		<Flair linkFlair={post} />
 	{/if}
 	<a href={post.permalink} class="title-text font-bold" on:click={setSubmissionStore}>
 		{post.title}
 	</a>
-	<PostTag {post} />
+	<PostTag postTag={post} />
 </div>
 
 <style>
