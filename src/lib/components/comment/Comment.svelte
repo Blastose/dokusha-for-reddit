@@ -39,6 +39,14 @@
 		childCommentsHidden = !childCommentsHidden;
 	}
 
+	function toggleSourceVisibility() {
+		sourceHidden = !sourceHidden;
+	}
+
+	function countNewLinesInSource(source: string) {
+		return (source.match(/\n/g) || []).length;
+	}
+
 	$: commentBody = comment.type === 'comment' ? comment.body : '';
 	$: commentMediaMetadata = comment.type === 'comment' ? comment.media_metadata : undefined;
 	$: commentHtml = markdownToHtml(commentBody, { media_metadata: commentMediaMetadata });
@@ -47,6 +55,8 @@
 	let commentHidden = comment.type === 'comment' ? comment.collapsed : false;
 
 	let childCommentsHidden = false;
+
+	let sourceHidden = true;
 </script>
 
 {#if comment.type === 'comment'}
@@ -60,7 +70,24 @@
 				<div class:hidden={commentHidden}>
 					<CommentBody {commentHtml} />
 
-					<CommentActions {comment} {childCommentsHidden} {toggleChildCommentsVisibility} />
+					<div class:hidden={sourceHidden}>
+						<textarea
+							disabled
+							name=""
+							id=""
+							cols="60"
+							rows={countNewLinesInSource(comment.body) + 2}
+							value={comment.body}
+						/>
+					</div>
+
+					<CommentActions
+						{comment}
+						{childCommentsHidden}
+						{toggleChildCommentsVisibility}
+						{sourceHidden}
+						{toggleSourceVisibility}
+					/>
 				</div>
 			</div>
 
@@ -101,5 +128,20 @@
 
 	:global(.dark) .load-more-comments {
 		color: #5aade0;
+	}
+
+	textarea {
+		resize: both;
+		padding: 0.5rem;
+		border-radius: 0.375rem;
+		background-color: rgb(238, 242, 248);
+	}
+
+	:global(.dark) textarea {
+		background-color: rgb(41, 41, 43);
+	}
+
+	textarea:focus {
+		outline: none;
 	}
 </style>
