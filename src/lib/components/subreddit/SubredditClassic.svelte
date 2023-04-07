@@ -6,6 +6,8 @@
 	import PostTitle from './PostTitle.svelte';
 	import PostInfo from './PostInfo.svelte';
 	import CommentBox from './CommentBox.svelte';
+	import RedditHtml from '$lib/components/reddit-html/RedditHtml.svelte';
+	import { markdownToHtml } from '$lib/utils/markdownToHtml';
 
 	export let post: SubmissionData;
 
@@ -21,6 +23,12 @@
 
 	const nonThumbnailSrcs = ['self', 'spoiler', 'default', 'nsfw', 'image', ''];
 	$: postHasThumbnail = !nonThumbnailSrcs.includes(post.thumbnail);
+
+	let showSelfText = false;
+
+	function toggleSelfText() {
+		showSelfText = !showSelfText;
+	}
 </script>
 
 <div class={`classic-container ${post.thumbnail !== '' ? 'thumbnail' : ''}`}>
@@ -49,12 +57,22 @@
 	</div>
 
 	<div class="actions text-sm font-semibold">
-		<button aria-label="expand post">
-			<Icon class="rotate-90" height="24" width="24" name="arrowExpand" />
+		<button class="expand-btn" aria-label="expand post" on:click={toggleSelfText}>
+			{#if !showSelfText}
+				<Icon class="rotate-90" height="24" width="24" name="arrowExpand" />
+			{:else}
+				<Icon class="rotate-90" height="24" width="24" name="arrowCollapse" />
+			{/if}
 		</button>
 
 		<CommentBox {post} {setSubmissionStore} />
 	</div>
+
+	{#if showSelfText && post.is_self && post.selftext}
+		<div class="selftext">
+			<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -71,7 +89,8 @@
 		grid-template-areas:
 			'score title'
 			'score post-info'
-			'score actions';
+			'score actions'
+			'score selftext';
 
 		column-gap: 1rem;
 	}
@@ -87,7 +106,8 @@
 		grid-template-areas:
 			'score thumbnail title'
 			'score thumbnail post-info'
-			'score thumbnail actions';
+			'score thumbnail actions'
+			'score thumbnail selftext';
 
 		column-gap: 0.5rem;
 	}
@@ -123,7 +143,25 @@
 		grid-area: actions;
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: 0.25rem;
 		margin-top: 0.25rem;
+	}
+
+	.selftext {
+		grid-area: selftext;
+	}
+
+	.expand-btn {
+		padding: 0.125rem;
+		border-radius: 0.375rem;
+		transition-duration: 300ms;
+	}
+
+	.expand-btn:hover {
+		background-color: rgba(198, 198, 211, 0.459);
+	}
+
+	:global(.dark) .expand-btn:hover {
+		background-color: rgba(146, 146, 155, 0.212);
 	}
 </style>
