@@ -53,4 +53,8 @@
 		background-size: cover;
 		vertical-align: text-bottom;
 	}
+
+	span {
+		vertical-align: text-bottom;
+	}
 </style>
