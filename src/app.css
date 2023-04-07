@@ -41,7 +41,9 @@ html {
 	word-wrap: break-word;
 }
 
-.reddit-md a {
+.reddit-md > a,
+.reddit-md :not(.spoiler) > a,
+.reddit-md .spoiler.revealed a {
 	color: #0079d3;
 	fill: #0079d3;
 }
@@ -50,7 +52,17 @@ html {
 	text-decoration: underline;
 }
 
-.dark .reddit-md a {
+.reddit-md .spoiler > a {
+	pointer-events: none;
+}
+
+.reddit-md .spoiler.revealed > a {
+	pointer-events: auto;
+}
+
+.dark .reddit-md > a,
+.dark .reddit-md :not(.spoiler) > a,
+.dark .reddit-md .spoiler.revealed a {
 	color: #5aade0;
 	fill: #5aade0;
 }
@@ -130,16 +142,13 @@ strike {
 
 .reddit-md li {
 	display: list-item;
+	margin: 0.5rem 1rem;
 }
 
 .reddit-md ol,
 .reddit-md ul {
 	list-style-type: disc;
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-	margin-left: 0;
-	margin-right: 0;
-	padding-left: 20px;
+	margin: 0.25rem 0 0.25rem 0.5rem;
 }
 
 .reddit-md li > ul {
@@ -148,6 +157,10 @@ strike {
 
 .reddit-md ol {
 	list-style-type: decimal;
+}
+
+.reddit-md li > ol {
+	list-style-type: lower-alpha;
 }
 
 .reddit-md blockquote {
@@ -170,6 +183,33 @@ strike {
 
 .dark .reddit-md .spoiler {
 	background: rgb(190, 190, 190);
+}
+
+.reddit-md a[href='/spoiler'],
+.reddit-md a[href='/s'] {
+	text-decoration: none;
+	color: white;
+	background: #434449;
+	padding: 0 0 0 0.25rem;
+	cursor: text;
+}
+
+.dark .reddit-md a[href='/spoiler'],
+.dark .reddit-md a[href='/s'] {
+	color: white;
+}
+
+.reddit-md a[href='/spoiler']::after,
+.reddit-md a[href='/s']::after {
+	content: attr(title);
+	background: #434449;
+	color: #434449;
+	padding: 0 0.25rem;
+}
+
+.reddit-md a[href='/spoiler']:hover::after,
+.reddit-md a[href='/s']:hover::after {
+	color: white;
 }
 
 .reddit-md pre {
@@ -217,17 +257,17 @@ strike {
 }
 
 .reddit-md table {
+	display: block;
 	overflow-x: auto;
+	margin: 1rem 0;
 }
 
-.reddit-md table,
 .reddit-md th,
 .reddit-md td {
 	border: 1px solid #e5e3da;
 	padding: 4px 9px;
 }
 
-.dark .reddit-md table,
 .dark .reddit-md th,
 .dark .reddit-md td {
 	border: 1px solid #505153;

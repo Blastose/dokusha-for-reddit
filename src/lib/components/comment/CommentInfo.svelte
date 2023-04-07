@@ -1,33 +1,34 @@
 <script lang="ts">
 	import type { Comment } from 'jsrwrap/types';
 	import relativeTime from '$lib/utils/relativeTime';
+	import UserFlair from '$lib/components/subreddit/UserFlair.svelte';
 
 	export let comment: Comment;
 	export let commentHidden: boolean;
 	export let toggleCommentVisibility: () => void;
 </script>
 
-<div class="info-container" class:italic={commentHidden}>
-	<p class="author">
-		{comment.author}
-	</p>
-
-	{#if comment.is_submitter}
+<div class:italic={commentHidden}>
+	<span class="author">{comment.author}</span>
+	<UserFlair author={comment} />
+	{#if comment.distinguished === 'moderator'}
+		<span class="mod author">MOD</span>
+	{:else if comment.is_submitter}
 		<span class="submitter author">OP</span>
 	{/if}
 
-	<p class="time">|</p>
+	{#if comment.stickied}
+		<span class="text-sm align-middle font-semibold mod">*stickied comment*</span>
+	{/if}
 
-	<p class="time">
-		<span title={new Date(comment.created_utc * 1000).toString()}
-			>{relativeTime(comment.created_utc)}</span
+	<span class="time" title={new Date(comment.created_utc * 1000).toString()}
+		>{relativeTime(comment.created_utc)}</span
+	>
+	{#if typeof comment.edited === 'number'}
+		<span class="time" title={new Date(comment.edited * 1000).toString()}
+			>* (edited {relativeTime(comment.edited)})</span
 		>
-		{#if typeof comment.edited === 'number'}
-			<span title={new Date(comment.edited * 1000).toString()}
-				>* (edited {relativeTime(comment.edited)})</span
-			>
-		{/if}
-	</p>
+	{/if}
 
 	{#if commentHidden}
 		<button class="expand-button" aria-label="expand comment" on:click={toggleCommentVisibility}
@@ -37,37 +38,41 @@
 </div>
 
 <style>
-	.info-container {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
 	.author {
 		font-size: 0.875rem;
 		line-height: 1.25rem;
 		font-weight: 700;
-		color: #a8681f;
+		color: #444075;
+		vertical-align: middle;
 	}
 
 	:global(.dark) .author {
-		color: #c2ab8c;
+		color: #aeaedd;
 	}
 
 	.time {
-		font-size: 0.875rem;
-		line-height: 1.25rem;
+		font-size: 0.75rem;
+		line-height: 1rem;
 		font-weight: 600;
 		color: #717677;
+		vertical-align: middle;
 	}
 
 	:global(.dark) .time {
 		color: #878b8c;
 	}
 
-	.author.submitter {
+	.submitter,
+	:global(.dark) .submitter {
 		color: rgb(99, 145, 214);
+	}
+
+	.mod {
+		color: #3a853c;
+	}
+
+	:global(.dark) .mod {
+		color: #57a858;
 	}
 
 	.expand-button:hover {

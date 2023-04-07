@@ -1,30 +1,39 @@
 <script lang="ts">
 	import type { SubmissionData } from 'jsrwrap/types';
 
-	export let post: SubmissionData;
+	type LinkFlair = Pick<
+		SubmissionData,
+		| 'link_flair_background_color'
+		| 'link_flair_text_color'
+		| 'link_flair_type'
+		| 'link_flair_richtext'
+		| 'link_flair_text'
+	>;
+
+	export let linkFlair: LinkFlair;
 
 	$: styleTag = `background-color: ${
-		post.link_flair_background_color || 'rgb(168, 220, 232);color: black'
+		linkFlair.link_flair_background_color || 'rgb(168, 220, 232);color: black'
 	};`;
 </script>
 
 <div
 	class="flair text-sm"
-	class:text-black={post.link_flair_text_color === 'dark'}
-	class:text-white={post.link_flair_text_color === 'light'}
+	class:text-black={linkFlair.link_flair_text_color === 'dark'}
+	class:text-white={linkFlair.link_flair_text_color === 'light'}
 	style={styleTag}
-	style:color={post.link_flair_text_color ? '' : 'black'}
+	style:color={linkFlair.link_flair_text_color ? '' : 'black'}
 >
-	{#if post.link_flair_type === 'richtext'}
-		{#each post.link_flair_richtext as richtext}
+	{#if linkFlair.link_flair_type === 'richtext'}
+		{#each linkFlair.link_flair_richtext as richtext}
 			{#if richtext.e === 'text'}
 				<span class="rich-text">{richtext.t}</span>
 			{:else if richtext.e === 'emoji'}
 				<img class="flair-image h-4" src={richtext.u} alt="" />
 			{/if}
 		{/each}
-	{:else if post.link_flair_type === 'text'}
-		<span>{post.link_flair_text}</span>
+	{:else if linkFlair.link_flair_type === 'text'}
+		<span>{linkFlair.link_flair_text}</span>
 	{/if}
 </div>
 

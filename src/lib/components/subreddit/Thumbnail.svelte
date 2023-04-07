@@ -13,9 +13,13 @@
 {:else if post.thumbnail !== ''}
 	<div class="thumbnail">
 		{#if post.thumbnail === 'self'}
-			<Icon height="24" width="24" name="selftext" />
+			<div class="thumbnail-svg">
+				<Icon height="24" width="24" name="selftext" />
+			</div>
 		{:else if post.thumbnail === 'default'}
-			<Icon height="24" width="24" name="linkVariant" />
+			<div class="thumbnail-svg">
+				<Icon height="24" width="24" name="linkVariant" />
+			</div>
 		{:else}
 			<p class="thumbnail-background">{post.thumbnail}</p>
 		{/if}
@@ -33,6 +37,12 @@
 	}
 
 	.thumbnail {
+		display: flex;
+	}
+
+	.thumbnail-svg {
+		height: 70px;
+		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;

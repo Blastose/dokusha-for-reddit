@@ -1,12 +1,15 @@
 <script lang="ts">
 	import type { SubmissionData } from 'jsrwrap/types';
-	export let post: SubmissionData;
+
+	type PostTag = Pick<SubmissionData, 'spoiler' | 'over_18'>;
+
+	export let postTag: PostTag;
 </script>
 
-{#if post.spoiler}
+{#if postTag.spoiler}
 	<p class="post-tags spoiler">Spoiler</p>
 {/if}
-{#if post.over_18}
+{#if postTag.over_18}
 	<p class="post-tags nsfw">NSFW</p>
 {/if}
 
