@@ -15,10 +15,18 @@
 	{#if post.link_flair_text}
 		<Flair linkFlair={post} />
 	{/if}
-	<a href={post.permalink} class="title-text font-bold" on:click={setSubmissionStore}>
+	<a
+		href={post.permalink}
+		class="title-text font-bold"
+		class:stickied={post.stickied}
+		on:click={setSubmissionStore}
+	>
 		{post.title}
 	</a>
 	<PostTag postTag={post} />
+	<span class="title-text text-sm font-semibold domain">
+		({post.domain})
+	</span>
 </div>
 
 <style>
@@ -28,5 +36,21 @@
 
 	.title-text {
 		line-height: 1.25rem;
+	}
+
+	.domain {
+		color: #717677;
+	}
+
+	:global(.dark) .domain {
+		color: #878b8c;
+	}
+
+	.stickied {
+		color: #3d8a3e;
+	}
+
+	:global(.dark) .stickied {
+		color: #6cce6e;
 	}
 </style>

@@ -57,11 +57,11 @@
 		font-size: 0.875rem;
 		line-height: 1.25rem;
 		font-weight: 700;
-		color: #a8681f;
+		color: #444075;
 	}
 
 	:global(.dark) .author {
-		color: #c2ab8c;
+		color: #aeaedd;
 	}
 
 	.time {

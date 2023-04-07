@@ -22,7 +22,7 @@
 </script>
 
 <div class="card-container">
-	<div>
+	<div class="text-sm font-semibold">
 		<PostInfo {post} />
 	</div>
 	<div class="text-lg">
@@ -55,7 +55,7 @@
 		</div>
 
 		<a
-			class="text-sm outline outline-1 focus-visible:outline-2 rounded-sm px-2 py-1 flex gap-1 items-center w-fit"
+			class="text-sm font-semibold outline outline-1 focus-visible:outline-2 rounded-sm px-2 py-1 flex gap-1 items-center w-fit"
 			href={post.permalink}
 			on:click={setSubmissionStore}
 		>

@@ -31,7 +31,7 @@
 	}
 
 	.bar-button:hover .line {
-		background-color: #62ada6;
+		background-color: #6157be;
 	}
 
 	:global(.dark) .bar-button:hover .line {

@@ -9,9 +9,10 @@
 	const iconDimension = '18';
 </script>
 
-<div>
-	<span>Posted by <span>{post.author}</span></span>
+<div class="info-container">
+	<span>Posted by <span class="author">{post.author}</span></span>
 	<UserFlair author={post} />
+
 	<span title={new Date(post.created_utc * 1000).toString()}>{relativeTime(post.created_utc)}</span>
 	{#if typeof post.edited === 'number'}
 		<span title={new Date(post.edited * 1000).toString()}
@@ -52,6 +53,23 @@
 </div>
 
 <style>
+	.info-container {
+		color: #717677;
+	}
+
+	:global(.dark) .info-container {
+		color: #878b8c;
+	}
+
+	.author {
+		font-weight: 700;
+		color: #444075;
+	}
+
+	:global(.dark) .author {
+		color: #aeaedd;
+	}
+
 	div > :global(*) {
 		vertical-align: middle;
 	}
