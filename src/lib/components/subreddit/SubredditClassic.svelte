@@ -5,6 +5,7 @@
 	import Thumbnail from './Thumbnail.svelte';
 	import PostTitle from './PostTitle.svelte';
 	import PostInfo from './PostInfo.svelte';
+	import CommentBox from './CommentBox.svelte';
 
 	export let post: SubmissionData;
 
@@ -52,13 +53,7 @@
 			<Icon class="rotate-90" height="24" width="24" name="arrowExpand" />
 		</button>
 
-		<a
-			class="outline outline-1 focus-visible:outline-2 rounded-sm px-2 py-1 flex gap-1 items-center w-fit"
-			href={post.permalink}
-			on:click={setSubmissionStore}
-		>
-			<Icon height="20" width="20" name="comment" /><span>{post.num_comments} comments</span>
-		</a>
+		<CommentBox {post} {setSubmissionStore} />
 	</div>
 </div>
 
@@ -129,6 +124,6 @@
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-		margin-top: 0.5rem;
+		margin-top: 0.25rem;
 	}
 </style>

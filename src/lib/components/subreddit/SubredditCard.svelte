@@ -7,6 +7,7 @@
 	import { submissionStore } from '$lib/stores/submissionStore';
 	import Icon from '$lib/components/icon/Icon.svelte';
 	import CardImage from './CardImage.svelte';
+	import CommentBox from './CommentBox.svelte';
 
 	const formatter = Intl.NumberFormat('en', { notation: 'compact' });
 
@@ -54,13 +55,7 @@
 			</button>
 		</div>
 
-		<a
-			class="text-sm font-semibold outline outline-1 focus-visible:outline-2 rounded-sm px-2 py-1 flex gap-1 items-center w-fit"
-			href={post.permalink}
-			on:click={setSubmissionStore}
-		>
-			<Icon height="20" width="20" name="comment" /><span>{post.num_comments} comments</span>
-		</a>
+		<CommentBox {post} {setSubmissionStore} />
 	</div>
 </div>
 
@@ -109,7 +104,7 @@
 	.actions {
 		display: flex;
 		align-items: center;
-		gap: 1rem;
+		gap: 0.75rem;
 		flex-wrap: wrap;
 	}
 </style>
