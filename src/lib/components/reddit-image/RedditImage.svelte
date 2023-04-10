@@ -1,11 +1,18 @@
 <script lang="ts">
+	import type { SubmissionData } from 'jsrwrap/types';
+	import { getRedditImageUrlPreview } from '$lib/utils/redditImagePreview';
+
+	export let post: SubmissionData;
 	export let imageUrl: string =
+		getRedditImageUrlPreview(post) ??
 		'https://preview.redd.it/evz1esrtpisa1.jpg?auto=webp&v=enabled&s=9c6788efa1cb29167a79ac06ce13b7b3cc40345b';
 
-	export let width = 279;
-	export let height = 495;
+	export let width = 512;
+	console.log(post);
 
 	function resize(node: HTMLElement) {
+		console.log(window.innerWidth);
+
 		let pointerStartX: number;
 		let pointerCurrentX: number;
 
@@ -71,7 +78,9 @@
 				const { width, height } = node.getBoundingClientRect();
 
 				const dist = Math.sqrt(moveX * moveX + moveY * moveY * 0.5) * Math.sign(moveX);
-				node.style.width = `${width + dist}px`;
+				const newWidth = Math.max(width + dist, 16);
+				node.style.width = `${newWidth}px`;
+
 				pointerStartX = pointerCurrentX;
 				pointerStartY = pointerCurrentY;
 			} else {
@@ -101,7 +110,7 @@
 
 <div class="w-0 mt-2">
 	<div class="resize" use:resize style="width: {width}px">
-		<img src={imageUrl} alt="" />
+		<img src={imageUrl} alt="" referrerpolicy="no-referrer" draggable="false" />
 	</div>
 </div>
 
@@ -115,6 +124,6 @@
 	}
 
 	img {
-		pointer-events: none;
+		user-select: none;
 	}
 </style>

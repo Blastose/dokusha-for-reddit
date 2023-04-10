@@ -9,6 +9,7 @@
 	import RedditHtml from '$lib/components/reddit-html/RedditHtml.svelte';
 	import { markdownToHtml } from '$lib/utils/markdownToHtml';
 	import RedditImage from '../reddit-image/RedditImage.svelte';
+	import RedditGallery from '../reddit-image/RedditGallery.svelte';
 
 	export let post: SubmissionData;
 
@@ -74,7 +75,16 @@
 			<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />
 		</div>
 	{:else if expandPost && post.thumbnail}
-		<RedditImage />
+		{#if !post.is_gallery && !post.is_video}
+			<div class="selftext">
+				<RedditImage {post} />
+				{#if post.selftext}
+					<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />
+				{/if}
+			</div>
+		{:else if post.is_gallery}
+			<RedditGallery {post} />
+		{/if}
 	{/if}
 </div>
 
