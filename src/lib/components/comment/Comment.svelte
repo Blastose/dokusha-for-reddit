@@ -75,7 +75,6 @@
 							disabled
 							name=""
 							id=""
-							cols="60"
 							rows={countNewLinesInSource(comment.body) + 2}
 							value={comment.body}
 						/>
@@ -135,10 +134,11 @@
 		padding: 0.5rem;
 		border-radius: 0.375rem;
 		background-color: rgb(238, 242, 248);
+		width: 100%;
 	}
 
 	:global(.dark) textarea {
-		background-color: rgb(41, 41, 43);
+		background-color: rgb(54, 54, 58);
 	}
 
 	textarea:focus {
