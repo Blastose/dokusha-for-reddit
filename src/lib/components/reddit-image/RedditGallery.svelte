@@ -24,15 +24,27 @@
 	}
 </script>
 
-<div>
-	<span>{currentImageIndex + 1}/{totalImagesInGallery}</span>
+<div class="flex flex-col gap-1">
+	<span class="text-xs current-post">{currentImageIndex + 1}/{totalImagesInGallery}</span>
 
-	<div>
-		<button on:click={decrementCurrentImageIndex}>Left</button>
-		<button on:click={incrementCurrentImageIndex}>Right</button>
+	<div class="flex items-center">
+		<button
+			class="chevron-button"
+			on:click={decrementCurrentImageIndex}
+			aria-label="gallery image previous"
+		>
+			<Icon height="24" width="24" name="chevronLeft" />
+		</button>
+		<button
+			class="chevron-button"
+			on:click={incrementCurrentImageIndex}
+			aria-label="gallery image next"
+		>
+			<Icon height="24" width="24" name="chevronRight" />
+		</button>
 	</div>
 
-	<RedditImage {post} imageUrl={currentImage} />
+	<RedditImage imageUrl={currentImage} />
 	{#if galleryData[currentImageIndex].caption}
 		<div class="reddit-md">
 			<p>{galleryData[currentImageIndex].caption}</p>
@@ -46,3 +58,30 @@
 		</div>
 	{/if}
 </div>
+
+<style>
+	.current-post {
+		background-color: rgb(59, 60, 68);
+		width: fit-content;
+		padding: 0.125rem 0.5rem;
+		border-radius: 1rem;
+		color: white;
+	}
+
+	:global(.dark) .current-post {
+		background-color: rgb(88, 87, 94);
+	}
+
+	.chevron-button {
+		transition-duration: 300ms;
+		border-radius: 9999px;
+	}
+
+	.chevron-button:hover {
+		background-color: rgb(200, 200, 211);
+	}
+
+	:global(.dark) .chevron-button:hover {
+		background-color: rgb(98, 98, 105);
+	}
+</style>
