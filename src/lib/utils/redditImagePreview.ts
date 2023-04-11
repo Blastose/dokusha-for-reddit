@@ -21,7 +21,13 @@ export function getGalleryData(
 
 	if (!post.media_metadata) return null;
 
-	const res: { url: string; width: number; height: number }[] = [];
+	const res: {
+		url: string;
+		width: number;
+		height: number;
+		outboundUrl?: string;
+		caption?: string;
+	}[] = [];
 
 	for (const item of post.gallery_data.items) {
 		const galleryItem = post.media_metadata[item.media_id];
@@ -45,8 +51,19 @@ export function getGalleryData(
 	return res;
 }
 
-export function getVideoData(post: SubmissionData): string | null {
+export function getRedditVideoData(
+	post: SubmissionData
+): { videoUrl: string; audioUrl: string } | null {
 	if (!post.is_video || !post.media || !post.media.reddit_video) return null;
 
-	return post.media.reddit_video.fallback_url;
+	if (post.post_hint !== 'hosted:video') return null;
+
+	const videoUrl = post.media.reddit_video.fallback_url.replace('?source=fallback', '');
+
+	const audioUrl = videoUrl.replace(/DASH_\d+\.mp4/, 'DASH_audio.mp4');
+
+	return {
+		videoUrl,
+		audioUrl
+	};
 }

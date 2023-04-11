@@ -10,6 +10,8 @@
 	import { markdownToHtml } from '$lib/utils/markdownToHtml';
 	import RedditImage from '../reddit-image/RedditImage.svelte';
 	import RedditGallery from '../reddit-image/RedditGallery.svelte';
+	import RedditVideo from '../reddit-image/RedditVideo.svelte';
+	import { getRedditImageUrlPreview } from '$lib/utils/redditImagePreview';
 
 	export let post: SubmissionData;
 
@@ -30,6 +32,7 @@
 
 	function toggleExpand() {
 		expandPost = !expandPost;
+		console.log(post);
 	}
 </script>
 
@@ -75,16 +78,22 @@
 			<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />
 		</div>
 	{:else if expandPost && post.thumbnail}
-		{#if !post.is_gallery && !post.is_video}
-			<div class="selftext">
-				<RedditImage {post} />
+		<div class="selftext">
+			{#if !post.is_gallery && !post.is_video && post.post_hint === 'image'}
+				<RedditImage imageUrl={getRedditImageUrlPreview(post) ?? ''} />
+
 				{#if post.selftext}
 					<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />
 				{/if}
-			</div>
-		{:else if post.is_gallery}
-			<RedditGallery {post} />
-		{/if}
+			{:else if post.is_gallery}
+				<RedditGallery {post} />
+				{#if post.selftext}
+					<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />
+				{/if}
+			{:else if post.is_video || post.url.match(/https?:\/\/v.redd.it\/.*/)}
+				<RedditVideo {post} />
+			{/if}
+		</div>
 	{/if}
 </div>
 
@@ -163,6 +172,7 @@
 	.selftext {
 		grid-area: selftext;
 		max-width: 100%;
+		margin-top: 0.5rem;
 	}
 
 	.expand-btn {
