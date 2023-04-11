@@ -20,7 +20,7 @@
 	<div class="flair-container">
 		{#if author.author_flair_type === 'text' && author.author_flair_text}
 			<p class="text-xs font-bold">{author.author_flair_text}</p>
-		{:else if author.author_flair_type === 'richtext'}
+		{:else if author.author_flair_type === 'richtext' && author.author_flair_richtext}
 			{#each author.author_flair_richtext as richtext}
 				{#if richtext.e === 'text' && richtext.t}
 					<span class="text-xs font-bold">{richtext.t}</span>

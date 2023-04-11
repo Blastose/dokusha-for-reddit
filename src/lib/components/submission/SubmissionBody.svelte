@@ -6,6 +6,10 @@
 	import type { SubmissionData } from 'jsrwrap/types';
 	import { markdownToHtml } from '$lib/utils/markdownToHtml';
 	import Icon from '../icon/Icon.svelte';
+	import RedditImage from '../reddit-image/RedditImage.svelte';
+	import RedditGallery from '../reddit-image/RedditGallery.svelte';
+	import RedditVideo from '../reddit-image/RedditVideo.svelte';
+	import { getRedditImageUrlPreview } from '$lib/utils/redditImagePreview';
 
 	export let submission: SubmissionData;
 </script>
@@ -47,6 +51,17 @@
 						name="externalLink"
 					/></a
 				>
+			</div>
+		{/if}
+		{#if submission.thumbnail}
+			<div class="mt-2">
+				{#if !submission.is_gallery && !submission.is_video && submission.post_hint === 'image'}
+					<RedditImage imageUrl={getRedditImageUrlPreview(submission) ?? ''} />
+				{:else if submission.is_gallery}
+					<RedditGallery post={submission} />
+				{:else if submission.is_video}
+					<RedditVideo post={submission} />
+				{/if}
 			</div>
 		{/if}
 	</div>

@@ -30,7 +30,7 @@
 		<PostTitle {post} />
 	</div>
 
-	{#if post.is_self && !post.spoiler}
+	{#if post.is_self && post.selftext && !post.spoiler}
 		<div class="selftext">
 			<div class="card-selftext">
 				<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />

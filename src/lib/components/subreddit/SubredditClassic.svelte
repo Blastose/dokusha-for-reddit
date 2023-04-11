@@ -6,6 +6,12 @@
 	import PostTitle from './PostTitle.svelte';
 	import PostInfo from './PostInfo.svelte';
 	import CommentBox from './CommentBox.svelte';
+	import RedditHtml from '$lib/components/reddit-html/RedditHtml.svelte';
+	import { markdownToHtml } from '$lib/utils/markdownToHtml';
+	import RedditImage from '../reddit-image/RedditImage.svelte';
+	import RedditGallery from '../reddit-image/RedditGallery.svelte';
+	import RedditVideo from '../reddit-image/RedditVideo.svelte';
+	import { getRedditImageUrlPreview } from '$lib/utils/redditImagePreview';
 
 	export let post: SubmissionData;
 
@@ -21,6 +27,12 @@
 
 	const nonThumbnailSrcs = ['self', 'spoiler', 'default', 'nsfw', 'image', ''];
 	$: postHasThumbnail = !nonThumbnailSrcs.includes(post.thumbnail);
+
+	let expandPost = false;
+
+	function toggleExpand() {
+		expandPost = !expandPost;
+	}
 </script>
 
 <div class={`classic-container ${post.thumbnail !== '' ? 'thumbnail' : ''}`}>
@@ -49,12 +61,39 @@
 	</div>
 
 	<div class="actions text-sm font-semibold">
-		<button aria-label="expand post">
-			<Icon class="rotate-90" height="24" width="24" name="arrowExpand" />
+		<button class="expand-btn" aria-label="expand post" on:click={toggleExpand}>
+			{#if !expandPost}
+				<Icon class="rotate-90" height="24" width="24" name="arrowExpand" />
+			{:else}
+				<Icon class="rotate-90" height="24" width="24" name="arrowCollapse" />
+			{/if}
 		</button>
 
 		<CommentBox {post} {setSubmissionStore} />
 	</div>
+
+	{#if expandPost && post.is_self && post.selftext}
+		<div class="selftext">
+			<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />
+		</div>
+	{:else if expandPost && post.thumbnail}
+		<div class="selftext">
+			{#if !post.is_gallery && !post.is_video && post.post_hint === 'image'}
+				<RedditImage imageUrl={getRedditImageUrlPreview(post) ?? ''} />
+
+				{#if post.selftext}
+					<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />
+				{/if}
+			{:else if post.is_gallery}
+				<RedditGallery {post} />
+				{#if post.selftext}
+					<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />
+				{/if}
+			{:else if post.is_video || post.url.match(/https?:\/\/v.redd.it\/.*/)}
+				<RedditVideo {post} />
+			{/if}
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -66,12 +105,13 @@
 		background-color: #edeef6;
 
 		grid-template-columns: 2rem 1fr;
-		grid-template-rows: min-content min-content min-content;
+		grid-template-rows: min-content min-content min-content min-content;
 
 		grid-template-areas:
 			'score title'
 			'score post-info'
-			'score actions';
+			'score actions'
+			'score selftext';
 
 		column-gap: 1rem;
 	}
@@ -82,12 +122,13 @@
 
 	.classic-container.thumbnail {
 		grid-template-columns: 2rem 70px 1fr;
-		grid-template-rows: min-content min-content min-content;
+		grid-template-rows: min-content min-content min-content min-content;
 
 		grid-template-areas:
 			'score thumbnail title'
 			'score thumbnail post-info'
-			'score thumbnail actions';
+			'score thumbnail actions'
+			'score thumbnail selftext';
 
 		column-gap: 0.5rem;
 	}
@@ -123,7 +164,27 @@
 		grid-area: actions;
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: 0.25rem;
 		margin-top: 0.25rem;
+	}
+
+	.selftext {
+		grid-area: selftext;
+		max-width: 100%;
+		margin-top: 0.5rem;
+	}
+
+	.expand-btn {
+		padding: 0.125rem;
+		border-radius: 0.375rem;
+		transition-duration: 300ms;
+	}
+
+	.expand-btn:hover {
+		background-color: rgba(198, 198, 211, 0.459);
+	}
+
+	:global(.dark) .expand-btn:hover {
+		background-color: rgba(146, 146, 155, 0.212);
 	}
 </style>
