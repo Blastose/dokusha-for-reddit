@@ -32,7 +32,6 @@
 
 	function toggleExpand() {
 		expandPost = !expandPost;
-		console.log(post);
 	}
 </script>
 

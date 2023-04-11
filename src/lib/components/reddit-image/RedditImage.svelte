@@ -5,8 +5,6 @@
 	export let width = 512;
 
 	function resize(node: HTMLElement) {
-		console.log(window.innerWidth);
-
 		let pointerStartX: number;
 		let pointerCurrentX: number;
 
