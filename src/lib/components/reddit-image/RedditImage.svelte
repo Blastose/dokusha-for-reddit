@@ -1,14 +1,8 @@
 <script lang="ts">
-	import type { SubmissionData } from 'jsrwrap/types';
-	import { getRedditImageUrlPreview } from '$lib/utils/redditImagePreview';
-
-	export let post: SubmissionData;
 	export let imageUrl: string =
-		getRedditImageUrlPreview(post) ??
 		'https://preview.redd.it/evz1esrtpisa1.jpg?auto=webp&v=enabled&s=9c6788efa1cb29167a79ac06ce13b7b3cc40345b';
 
 	export let width = 512;
-	console.log(post);
 
 	function resize(node: HTMLElement) {
 		console.log(window.innerWidth);
@@ -108,7 +102,7 @@
 	}
 </script>
 
-<div class="w-0 mt-2">
+<div class="w-0">
 	<div class="resize" use:resize style="width: {width}px">
 		<img src={imageUrl} alt="" referrerpolicy="no-referrer" draggable="false" />
 	</div>
