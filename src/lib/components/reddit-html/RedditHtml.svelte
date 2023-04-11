@@ -3,7 +3,7 @@
 	export let fixedSize = true;
 
 	const addRevealedClass = (event: Event) => {
-		const element = event.target as HTMLSpanElement;
+		const element = event.currentTarget as HTMLSpanElement;
 		element.classList.add('revealed');
 	};
 
