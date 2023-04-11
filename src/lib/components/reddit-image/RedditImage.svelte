@@ -67,11 +67,12 @@
 				const moveX = (e.x - pointerStartX) / factor;
 				const moveY = (e.y - pointerStartY) / factor;
 
-				const { width, height } = node.getBoundingClientRect();
+				const { width } = node.getBoundingClientRect();
 
 				const dist = Math.sqrt(moveX * moveX + moveY * moveY * 0.5) * Math.sign(moveX);
 				const newWidth = Math.max(width + dist, 16);
 				node.style.width = `${newWidth}px`;
+				node.style.height = `${newWidth / imgRatio}px`;
 
 				pointerStartX = pointerCurrentX;
 				pointerStartY = pointerCurrentY;
@@ -98,11 +99,24 @@
 			}
 		};
 	}
+
+	let imgNode: HTMLImageElement;
+	let imgRatio: number;
 </script>
 
 <div class="w-0">
 	<div class="resize" use:resize style="width: {width}px">
-		<img src={imageUrl} alt="" referrerpolicy="no-referrer" draggable="false" />
+		<img
+			use:resize
+			src={imageUrl}
+			alt=""
+			referrerpolicy="no-referrer"
+			draggable="false"
+			bind:this={imgNode}
+			on:load={() => {
+				imgRatio = imgNode.width / imgNode.height;
+			}}
+		/>
 	</div>
 </div>
 
