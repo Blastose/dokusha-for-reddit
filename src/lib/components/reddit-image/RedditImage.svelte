@@ -5,11 +5,11 @@
 	export let width = 512;
 
 	function resize(node: HTMLElement, type: 'resizeOnly' | 'both') {
-		let pointerStartX: number;
-		let pointerCurrentX: number;
+		let mouseStartX: number;
+		let mouseCurrentX: number;
 
-		let pointerStartY: number;
-		let pointerCurrentY: number;
+		let mouseStartY: number;
+		let mouseCurrentY: number;
 
 		let shiftKeyPressed = false;
 		let styleX = 0;
@@ -29,9 +29,9 @@
 			}
 		};
 
-		const pointerStart = (e: PointerEvent) => {
-			pointerStartX = e.x;
-			pointerStartY = e.y;
+		const mouseDown = (e: MouseEvent) => {
+			mouseStartX = e.x;
+			mouseStartY = e.y;
 			const transformRegex = /translate\((?:(-?\d+)px, +(-?\d+)px)\)/;
 			let matched = node.style.transform.match(transformRegex);
 			if (!matched) {
@@ -44,28 +44,28 @@
 			moving = true;
 		};
 
-		const pointerEnd = (e: PointerEvent) => {
+		const mouseUp = (e: MouseEvent) => {
 			if (moving) {
-				pointerStartX = e.x;
-				pointerStartY = e.y;
+				mouseStartX = e.x;
+				mouseStartY = e.y;
 				moving = false;
 
 				if (shiftKeyPressed) {
-					pointerStartX = pointerCurrentX;
-					pointerStartY = pointerCurrentY;
+					mouseStartX = mouseCurrentX;
+					mouseStartY = mouseCurrentY;
 				}
 			}
 		};
 
-		const pointerMove = (e: PointerEvent) => {
+		const mouseMove = (e: MouseEvent) => {
 			if (!moving) return;
 
 			if (!shiftKeyPressed) {
-				pointerCurrentX = e.x;
-				pointerCurrentY = e.y;
+				mouseCurrentX = e.x;
+				mouseCurrentY = e.y;
 				const factor = 1;
-				const moveX = (e.x - pointerStartX) / factor;
-				const moveY = (e.y - pointerStartY) / factor;
+				const moveX = (e.x - mouseStartX) / factor;
+				const moveY = (e.y - mouseStartY) / factor;
 
 				const { width } = node.getBoundingClientRect();
 
@@ -74,31 +74,31 @@
 				node.style.width = `${newWidth}px`;
 				node.style.height = `${newWidth / imgRatio}px`;
 
-				pointerStartX = pointerCurrentX;
-				pointerStartY = pointerCurrentY;
+				mouseStartX = mouseCurrentX;
+				mouseStartY = mouseCurrentY;
 			} else {
 				if (type !== 'both') {
 					return;
 				}
-				pointerCurrentX = e.x;
-				pointerCurrentY = e.y;
-				const moveX = e.x - pointerStartX;
-				const moveY = e.y - pointerStartY;
+				mouseCurrentX = e.x;
+				mouseCurrentY = e.y;
+				const moveX = e.x - mouseStartX;
+				const moveY = e.y - mouseStartY;
 				node.style.transform = `translate(${styleX + moveX}px, ${styleY + moveY}px)`;
 			}
 		};
-		node.addEventListener('pointerdown', pointerStart);
+		node.addEventListener('mousedown', mouseDown);
 		window.addEventListener('keydown', handleShiftKeyPressed);
 		window.addEventListener('keyup', handleShiftKeyReleased);
-		window.addEventListener('pointerup', pointerEnd);
-		window.addEventListener('pointermove', pointerMove);
+		window.addEventListener('mouseup', mouseUp);
+		window.addEventListener('mousemove', mouseMove);
 		return {
 			destroy() {
-				node.removeEventListener('pointerdown', pointerStart);
+				node.removeEventListener('mousedown', mouseDown);
 				window.removeEventListener('keydown', handleShiftKeyPressed);
 				window.removeEventListener('keyup', handleShiftKeyReleased);
-				window.removeEventListener('pointerup', pointerEnd);
-				window.removeEventListener('pointermove', pointerMove);
+				window.removeEventListener('mouseup', mouseUp);
+				window.removeEventListener('mousemove', mouseMove);
 			}
 		};
 	}
