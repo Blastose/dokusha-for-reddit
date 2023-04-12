@@ -16,6 +16,7 @@
 		display: flex;
 		justify-content: center;
 		height: 100%;
+		-webkit-tap-highlight-color: transparent;
 	}
 
 	.line {
