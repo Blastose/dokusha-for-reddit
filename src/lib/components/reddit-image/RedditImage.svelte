@@ -4,7 +4,7 @@
 
 	export let width = 512;
 
-	function resize(node: HTMLElement) {
+	function resize(node: HTMLElement, type: 'resizeOnly' | 'both') {
 		let pointerStartX: number;
 		let pointerCurrentX: number;
 
@@ -77,6 +77,9 @@
 				pointerStartX = pointerCurrentX;
 				pointerStartY = pointerCurrentY;
 			} else {
+				if (type !== 'both') {
+					return;
+				}
 				pointerCurrentX = e.x;
 				pointerCurrentY = e.y;
 				const moveX = e.x - pointerStartX;
@@ -105,9 +108,9 @@
 </script>
 
 <div class="w-0">
-	<div class="resize" use:resize style="width: {width}px">
+	<div class="resize" use:resize={'both'} style="width: {width}px">
 		<img
-			use:resize
+			use:resize={'resizeOnly'}
 			src={imageUrl}
 			alt=""
 			referrerpolicy="no-referrer"
