@@ -8,7 +8,7 @@ export const load = async ({ params, setHeaders, url }) => {
 	const sort = params.sort as 'top' | 'new' | 'controversial' | 'rising';
 
 	let t = url.searchParams.get('t') as Time | null;
-	t = t ?? 'hour';
+	t = t ?? 'day';
 
 	const jsrWrapsubreddit = jsrwrap.getSubreddit(subreddit);
 
