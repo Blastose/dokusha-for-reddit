@@ -33,7 +33,7 @@
 			{/if}
 		{/each}
 	{:else if linkFlair.link_flair_type === 'text'}
-		<span>{linkFlair.link_flair_text}</span>
+		<span class="flair-text">{linkFlair.link_flair_text}</span>
 	{/if}
 </div>
 
@@ -44,6 +44,10 @@
 		padding: 0rem 0.375rem;
 		border-radius: 0.25rem;
 		font-weight: 600;
+	}
+
+	.flair-text {
+		overflow-wrap: anywhere;
 	}
 
 	img {
