@@ -16,6 +16,8 @@
 		all: 'All Time'
 	};
 
+	// While we could use Object.keys of timeMap, Svelte does not support TS
+	// in its templates so we cannot use as keyof type and we get a TS error
 	const timeOptions: Time[] = [
 		{
 			display: 'Now',
