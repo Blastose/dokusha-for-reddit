@@ -51,6 +51,28 @@ export function getGalleryData(
 	return res;
 }
 
+export async function getImgurGalleryData(albumHash: string) {
+	const url = `https://api.imgur.com/3/album/${albumHash}/images`;
+	const imgurClientId = 'daa3c15492b75ef';
+	const res = await fetch(url, { headers: { Authorization: `Client-ID ${imgurClientId}` } });
+
+	const resJson = (await res.json()) as {
+		data: { id: string; type: string; link: string; width: number; height: number }[];
+	};
+
+	resJson.data.forEach((e) => {
+		console.log(e.link);
+	});
+
+	return resJson.data.map((e) => {
+		return {
+			url: e.link,
+			width: e.width,
+			height: e.height
+		};
+	});
+}
+
 export function getRedditVideoData(
 	post: SubmissionData
 ): { videoUrl: string; audioUrl: string } | null {
