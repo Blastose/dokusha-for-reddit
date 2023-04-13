@@ -1,16 +1,12 @@
 <script lang="ts">
 	import type { SubmissionData, SubredditData } from 'jsrwrap/types';
-	import { submissionStore } from '$lib/stores/submissionStore';
 	import { subredditViewStore } from '$lib/stores/subredditViewStore';
 	import SubredditCard from './SubredditCard.svelte';
 	import SubredditClassic from './SubredditClassic.svelte';
+	import SortPosts from '$lib/components/sort/SortPosts.svelte';
 
 	export let posts: SubmissionData[];
 	export let about: SubredditData;
-
-	function setSubmissionStore(submission: SubmissionData) {
-		submissionStore.set(submission);
-	}
 
 	function toggleView() {
 		if ($subredditViewStore === 'card') {
@@ -24,7 +20,7 @@
 	$: icon = about.community_icon || about.icon_img;
 </script>
 
-<section class="flex flex-col gap-4">
+<section class="flex flex-col">
 	<div
 		class:highlight={bannerUrl === ''}
 		class:banner-image={bannerUrl !== ''}
@@ -49,6 +45,8 @@
 	</div>
 
 	<div class="container mx-auto px-4 pt-4 pb-16 flex flex-col gap-4">
+		<SortPosts />
+
 		<button class="outline outline-1 rounded-sm px-2 py-1 w-fit" on:click={toggleView}>
 			Switch view - Current view: {$subredditViewStore}
 		</button>

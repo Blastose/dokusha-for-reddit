@@ -38,7 +38,7 @@ html {
    See https://www.w3schools.com/cssref/css_default_values.asp */
 
 .reddit-md {
-	word-wrap: break-word;
+	overflow-wrap: anywhere;
 }
 
 .reddit-md > a,

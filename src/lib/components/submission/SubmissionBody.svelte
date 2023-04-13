@@ -54,7 +54,7 @@
 			</div>
 		{/if}
 		{#if submission.thumbnail}
-			<div class="mt-2">
+			<div>
 				{#if !submission.is_gallery && !submission.is_video && submission.post_hint === 'image'}
 					<RedditImage imageUrl={getRedditImageUrlPreview(submission) ?? ''} />
 				{:else if submission.is_gallery}
