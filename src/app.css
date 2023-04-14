@@ -85,6 +85,11 @@ strike {
 	margin-bottom: 0.33em;
 }
 
+/* .reddit-md p + p {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+} */
+
 .reddit-md h1 {
 	font-size: larger;
 	font-weight: bold;
@@ -272,4 +277,24 @@ strike {
 .dark .reddit-md td {
 	border: 1px solid #505153;
 	padding: 4px 9px;
+}
+
+.reddit-md .reddit-image-container {
+	display: flex;
+	justify-content: center;
+	margin: 24px 0 0 0;
+}
+
+.reddit-md .reddit-image {
+	max-height: 1400px;
+}
+
+.reddit-md .image-caption {
+	text-align: center;
+	font-size: 0.8rem;
+	margin-bottom: 24px;
+}
+
+.reddit-md div > a > img {
+	margin: 8px 0;
 }

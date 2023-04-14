@@ -15,7 +15,7 @@ specifiers:
   postcss: ^8.4.21
   prettier: ^2.8.0
   prettier-plugin-svelte: ^2.8.1
-  reddit-md-to-html: ^0.1.33
+  reddit-md-to-html: ^0.1.40
   svelte: ^3.54.0
   svelte-check: ^3.0.1
   tailwindcss: ^3.2.7
@@ -25,7 +25,7 @@ specifiers:
   vitest: ^0.25.3
 
 dependencies:
-  reddit-md-to-html: 0.1.33
+  reddit-md-to-html: 0.1.40
 
 devDependencies:
   '@playwright/test': 1.31.0
@@ -1730,8 +1730,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /reddit-md-to-html/0.1.33:
-    resolution: {integrity: sha512-/gVKNqa3tBup6hTMzqL7LvE6WAUMOQSar7uII6+7dr58U5oRu+EhXulxfGKBcx2RxGbkorewM4drcfoN0sYoNw==}
+  /reddit-md-to-html/0.1.40:
+    resolution: {integrity: sha512-HRr0cQRALT7zGt5B6P3ROqABUn9O932+tm+d4MVVuavdAZyv8S0ZfVZSHjb1ZsRJARqSMx37WGgX3FJ8ifg07Q==}
     engines: {node: '>=14.16'}
     dependencies:
       simple-markdown: 0.7.3

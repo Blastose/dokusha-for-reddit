@@ -66,7 +66,9 @@
 		{/if}
 	</div>
 
-	<RedditHtml rawHTML={markdownToHtml(submission.selftext)} />
+	<RedditHtml
+		rawHTML={markdownToHtml(submission.selftext, { media_metadata: submission.media_metadata })}
+	/>
 
 	<div>
 		<p class="flex gap-4">

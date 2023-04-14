@@ -72,7 +72,7 @@
 				const dist = Math.sqrt(moveX * moveX + moveY * moveY * 0.5) * Math.sign(moveX);
 				const newWidth = Math.max(width + dist, 16);
 				node.style.width = `${newWidth}px`;
-				node.style.height = `${newWidth / imgRatio}px`;
+				// node.style.height = `${newWidth / imgRatio}px`;
 
 				mouseStartX = mouseCurrentX;
 				mouseStartY = mouseCurrentY;
