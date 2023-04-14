@@ -36,7 +36,7 @@
 	}
 
 	onMount(() => {
-		videoElement.play();
+		// videoElement.play();
 		audioElement.volume = 0.1;
 
 		setupEventListeners();
