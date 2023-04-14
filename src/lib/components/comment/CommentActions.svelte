@@ -34,6 +34,13 @@
 	<button class="text-sm font-semibold" on:click={toggleSourceVisibility}
 		>{sourceHidden ? 'show source' : 'hide source'}</button
 	>
+
+	<a
+		class="text-sm font-semibold"
+		href={`https://www.reddit.com${comment.permalink}`}
+		target="_blank"
+		rel="noreferrer">view in reddit</a
+	>
 </div>
 
 <style>
