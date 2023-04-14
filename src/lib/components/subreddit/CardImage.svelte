@@ -36,7 +36,12 @@
 <style>
 	.preview-image {
 		display: grid;
-		grid-template-columns: 512px;
 		justify-content: center;
+	}
+
+	@media (min-width: 600px) {
+		.preview-image > img {
+			max-width: 512px;
+		}
 	}
 </style>

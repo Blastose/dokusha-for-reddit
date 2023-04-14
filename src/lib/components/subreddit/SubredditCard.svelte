@@ -64,8 +64,8 @@
 		padding: 1rem;
 		border-radius: 0.375rem;
 		background-color: #edeef6;
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-auto-flow: row;
 		gap: 0.5rem;
 	}
 
