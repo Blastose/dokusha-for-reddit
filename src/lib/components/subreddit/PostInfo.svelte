@@ -20,15 +20,15 @@
 		>
 	{/if}
 
-	{#if post.distinguished === 'moderator'}<span aria-label="mod post" class="moderator"
+	{#if post.distinguished === 'moderator'}<span role="img" aria-label="mod post" class="moderator"
 			><Icon class="inline" height={iconDimension} width={iconDimension} name="shield" /></span
 		>
 	{/if}
-	{#if post.distinguished === 'admin'}<span aria-label="admin post" class="admin"
+	{#if post.distinguished === 'admin'}<span role="img" aria-label="admin post" class="admin"
 			><Icon class="inline" height={iconDimension} width={iconDimension} name="reddit" /></span
 		>
 	{/if}
-	{#if post.archived}<span aria-label="archived" class="archived"
+	{#if post.archived}<span role="img" aria-label="archived" class="archived"
 			><Icon
 				class="inline"
 				height={iconDimension}
@@ -37,7 +37,7 @@
 			/></span
 		>
 	{/if}
-	{#if post.stickied}<span aria-label="stickied" class="pin"
+	{#if post.stickied}<span role="img" aria-label="stickied" class="pin"
 			><Icon
 				class="inline rotate-45"
 				height={iconDimension}
@@ -46,7 +46,7 @@
 			/></span
 		>
 	{/if}
-	{#if post.locked}<span aria-label="locked" class="lock"
+	{#if post.locked}<span role="img" aria-label="locked" class="lock"
 			><Icon class="inline" height={iconDimension} width={iconDimension} name="lock" /></span
 		>
 	{/if}
