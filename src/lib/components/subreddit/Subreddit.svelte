@@ -3,7 +3,10 @@
 	import { subredditViewStore } from '$lib/stores/subredditViewStore';
 	import SubredditCard from './SubredditCard.svelte';
 	import SubredditClassic from './SubredditClassic.svelte';
+	import SubredditClassicSkeleton from './SubredditClassicSkeleton.svelte';
 	import SortPosts from '$lib/components/sort/SortPosts.svelte';
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 
 	export let posts: SubmissionData[];
 	export let about: SubredditData;
@@ -15,6 +18,35 @@
 			subredditViewStore.set('card');
 		}
 	}
+
+	let loadingElement: HTMLDivElement;
+	let morePosts = true;
+
+	onMount(() => {
+		let lastPostId = posts[posts.length - 1].id;
+
+		const interactionObserver = new IntersectionObserver(async (entries) => {
+			if (entries[0].intersectionRatio <= 0) return;
+
+			const subreddit = $page.params.subreddit ?? '';
+			const sort = $page.params.sort ?? 'hot';
+			const t = $page.url.searchParams.get('t') ?? 'day';
+			const res = await fetch(`/api/${subreddit}?sort=${sort}&after=t3_${lastPostId}&t=${t}`);
+			const newPosts = (await res.json()) as SubmissionData[];
+			if (!(newPosts.length > 0)) {
+				morePosts = false;
+				return;
+			}
+			lastPostId = newPosts[newPosts.length - 1].id;
+			posts = [...posts, ...newPosts];
+		});
+
+		interactionObserver.observe(loadingElement);
+
+		return () => {
+			interactionObserver.unobserve(loadingElement);
+		};
+	});
 
 	$: bannerUrl = about.banner_background_image || about.banner_img;
 	$: icon = about.community_icon || about.icon_img;
@@ -59,6 +91,12 @@
 					<SubredditClassic {post} />
 				{/if}
 			{/each}
+			<div>
+				<div id="more" bind:this={loadingElement} />
+				{#if morePosts && $subredditViewStore === 'classic'}
+					<SubredditClassicSkeleton />
+				{/if}
+			</div>
 		</div>
 	</div>
 </section>

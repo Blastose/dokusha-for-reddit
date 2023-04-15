@@ -20,7 +20,7 @@
 			{#if submission.link_flair_text}
 				<Flair linkFlair={submission} />
 			{/if}
-			<div>
+			<div class="max-w-4xl">
 				<span class="font-bold text-xl">{submission.title}</span>
 				<PostTag postTag={submission} />
 			</div>
