@@ -37,6 +37,8 @@
 					<p>Sorry, this post has been removed by the moderators of r/{submission.subreddit}.</p>
 				{:else if submission.removed_by_category === 'deleted'}
 					<p>Sorry, this post was deleted by the person who originally posted it.</p>
+				{:else if submission.removed_by_category === 'reddit'}
+					<p>Sorry, this post was removed by Reddit's spam filters.</p>
 				{/if}
 			</div>
 		{/if}
