@@ -5,7 +5,7 @@
 	import { themeStore } from '$lib/stores/themeStore';
 	import type { PageData } from './$types';
 	import { beforeNavigate } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { get } from 'svelte/store';
 	import { subredditStore, getSubredditStore } from '$lib/stores/subredditStore';
 
 	export let data: PageData;
@@ -35,16 +35,55 @@
 		// the posts from the store in the Subreddit.svelte component
 		console.log(navigation.to?.url.href);
 
+		// We want to clear cached posts when the user is on a subreddit page (/r/[subreddit])
+		// and navigates to a different subreddit page (/r/[subreddit])
+
+		console.log(navigation);
+
+		const navigatingFrom = navigation.from;
+		const navigatingTo = navigation.to;
+
+		if (!navigatingTo || !navigatingFrom) return;
+		console.log('hi');
+
+		// We want to delete all cached subreddits posts when we navigate to a different subreddit
+		if (navigation.type === 'link') {
+			// TODO better detection of if user is leaving the subreddit for a different subreddit
+			if (
+				navigatingTo.params?.subreddit.toLowerCase() !==
+				navigatingFrom.params?.subreddit.toLowerCase()
+			) {
+				const subredditStoreObject = get(subredditStore);
+				for (const key of Object.keys(subredditStoreObject)) {
+					delete subredditStoreObject[key];
+					console.log(`deleting cached: ${key}`);
+				}
+				return;
+			}
+		}
+
 		if (navigation.delta && navigation.delta >= 0) return;
 
-		const navigatingTo = navigation.to?.url.href.toLowerCase();
-		if (!navigatingTo) return;
-
+		const navigatingToHref = navigatingTo.url.href.toLowerCase();
 		// We only want to load posts from subreddit (TODO also user pages when that gets implemented) pages
-		if (!navigatingTo.match(/^\/r\/[A-z_0-9]+(?!\/comments\/)$/)) return;
+		if (
+			!navigatingToHref.match(
+				/^https?:\/\/[A-z0-9:.-]+\/r\/[A-z_0-9]+(?!\/comments\/)(?:\/[A-z?=&]+)?$/
+			)
+		)
+			return;
 		console.log('hi');
-		console.log(getSubredditStore(subredditStore, navigatingTo));
-		if (getSubredditStore(subredditStore, navigatingTo)) {
+		console.log(getSubredditStore(subredditStore, navigatingToHref));
+
+		const a = get(subredditStore);
+		console.log(a);
+		for (const b of Object.keys(a)) {
+			console.log(`cached: ${b}`);
+		}
+
+		const subredditStoreCurrentPath = getSubredditStore(subredditStore, navigatingToHref);
+
+		if (subredditStoreCurrentPath) {
 			console.log('hi2');
 			// TODO change cookie name value
 			document.cookie = 'name=oeschger; SameSite=None; Secure; path=/';

@@ -1,9 +1,7 @@
 import { writable, get } from 'svelte/store';
 import type { SubmissionData } from 'jsrwrap/types';
 
-type SubredditStore = {
-	[name: string]: SubmissionData[] | undefined;
-};
+type SubredditStore = Record<string, SubmissionData[] | undefined>;
 
 function createSubredditStore() {
 	const { subscribe, set, update } = writable<SubredditStore>({ a: [] });
