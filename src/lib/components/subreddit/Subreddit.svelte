@@ -1,12 +1,14 @@
 <script lang="ts">
 	import type { SubmissionData, SubredditData } from 'jsrwrap/types';
 	import { subredditViewStore } from '$lib/stores/subredditViewStore';
+	import { subredditStore } from '$lib/stores/subredditStore';
 	import SubredditCard from './SubredditCard.svelte';
 	import SubredditClassic from './SubredditClassic.svelte';
 	import SubredditClassicSkeleton from './SubredditClassicSkeleton.svelte';
 	import SortPosts from '$lib/components/sort/SortPosts.svelte';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import SubredditCardSkeleton from './SubredditCardSkeleton.svelte';
 
 	export let posts: SubmissionData[];
 	export let about: SubredditData;
@@ -23,7 +25,11 @@
 	let morePosts = true;
 
 	onMount(() => {
-		let lastPostId = posts[posts.length - 1].id;
+		let lastPostId = '';
+		if (posts.length > 0) {
+			subredditStore.setSubredditPosts($page.url.href.toLowerCase(), posts);
+			lastPostId = posts[posts.length - 1].id;
+		}
 
 		const interactionObserver = new IntersectionObserver(async (entries) => {
 			if (entries[0].intersectionRatio <= 0) return;
@@ -39,6 +45,7 @@
 			}
 			lastPostId = newPosts[newPosts.length - 1].id;
 			posts = [...posts, ...newPosts];
+			subredditStore.setSubredditPosts($page.url.href.toLowerCase(), posts);
 		});
 
 		interactionObserver.observe(loadingElement);
@@ -95,6 +102,8 @@
 				<div id="more" bind:this={loadingElement} />
 				{#if morePosts && $subredditViewStore === 'classic'}
 					<SubredditClassicSkeleton />
+				{:else if morePosts && $subredditViewStore === 'card'}
+					<SubredditCardSkeleton />
 				{/if}
 			</div>
 		</div>
@@ -126,7 +135,11 @@
 	}
 
 	.highlight:not(.banner-image) {
-		background: rgb(59, 110, 85);
+		background: rgb(88, 97, 158);
+	}
+
+	:global(.dark) .highlight:not(.banner-image) {
+		background: rgb(67, 75, 124);
 	}
 
 	.blur-image {
