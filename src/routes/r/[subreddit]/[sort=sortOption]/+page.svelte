@@ -5,7 +5,7 @@
 
 	export let data;
 
-	$: posts = getSubredditStore(subredditStore, $page.url.href) ?? data.posts;
+	$: posts = getSubredditStore(subredditStore, $page.url.href.toLowerCase()) ?? data.posts;
 </script>
 
 <svelte:head><title>{data.about.title}</title></svelte:head>

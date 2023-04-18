@@ -34,6 +34,8 @@
 		// we set a cookie to let the server know not to fetch posts again (TODO also store about data and skip any fetch calls?) and load
 		// the posts from the store in the Subreddit.svelte component
 		console.log(navigation.to?.url.href);
+		document.cookie =
+			'name=oeschger; SameSite=None; Secure; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
 
 		// We want to clear cached posts when the user is on a subreddit page (/r/[subreddit])
 		// and navigates to a different subreddit page (/r/[subreddit])

@@ -23,14 +23,18 @@
 
 	let loadingElement: HTMLDivElement;
 	let morePosts = true;
-
-	onMount(() => {
-		let lastPostId = '';
+	let lastPostId = '';
+	$: {
+		$page;
+		morePosts = true;
+		lastPostId = '';
 		if (posts.length > 0) {
 			subredditStore.setSubredditPosts($page.url.href.toLowerCase(), posts);
 			lastPostId = posts[posts.length - 1].id;
 		}
+	}
 
+	onMount(() => {
 		const interactionObserver = new IntersectionObserver(async (entries) => {
 			if (entries[0].intersectionRatio <= 0) return;
 
