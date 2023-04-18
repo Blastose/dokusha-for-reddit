@@ -5,6 +5,7 @@ import type { SubmissionData, SubredditData } from 'jsrwrap/types';
 export const load = (async ({ cookies, params, setHeaders }) => {
 	// TODO move this into its own function since the logic is shared
 	// by /r/[subredit]/[sort] routes
+	// or maybe move it this and the [sort] routes into a layout group
 
 	const subreddit = params.subreddit;
 
@@ -13,9 +14,6 @@ export const load = (async ({ cookies, params, setHeaders }) => {
 	const about = await jsrWrapsubreddit.getAbout();
 
 	setHeaders({ 'cache-control': 'public, max-age=60' });
-
-	console.log('server');
-	console.log(cookies.get('name'));
 
 	if (cookies.get('name') === 'skip') {
 		cookies.set('name', '', {
