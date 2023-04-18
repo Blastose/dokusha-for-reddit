@@ -17,7 +17,7 @@ export const load = (async ({ cookies, params, setHeaders }) => {
 	console.log('server');
 	console.log(cookies.get('name'));
 
-	if (cookies.get('name') === 'oeschger') {
+	if (cookies.get('name') === 'skip') {
 		cookies.set('name', '', {
 			path: '/',
 			expires: new Date('Thu, 01 Jan 1970 00:00:00 GMT;'),

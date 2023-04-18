@@ -15,7 +15,7 @@ export const load = async ({ cookies, params, setHeaders, url }) => {
 
 	const about = await jsrWrapsubreddit.getAbout();
 
-	if (cookies.get('name') === 'oeschger') {
+	if (cookies.get('name') === 'skip') {
 		cookies.set('name', '', {
 			path: '/',
 			expires: new Date('Thu, 01 Jan 1970 00:00:00 GMT;'),
