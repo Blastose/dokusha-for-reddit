@@ -265,6 +265,7 @@ strike {
 	display: block;
 	overflow-x: auto;
 	margin: 1rem 0;
+	overflow-wrap: normal;
 }
 
 .reddit-md th,

@@ -42,7 +42,7 @@
 		</button>
 
 		<p class="score-number">
-			{formatNumber(post.score)}
+			{post.hide_score ? '•' : `${formatNumber(post.score)}`}
 		</p>
 
 		<button aria-label="downvote">

@@ -48,7 +48,7 @@
 		{#await submission}
 			<SubmissionBodySkeleton />
 			<hr />
-			{#each { length: 4 } as _}
+			{#each { length: 5 } as _}
 				<CommentSkeleton />
 			{/each}
 		{:then value}

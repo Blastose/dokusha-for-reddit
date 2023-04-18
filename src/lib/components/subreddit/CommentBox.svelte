@@ -6,7 +6,12 @@
 	export let setSubmissionStore: () => void;
 </script>
 
-<a class="text-sm font-bold comment-box" href={post.permalink} on:click={setSubmissionStore}>
+<a
+	class="text-sm font-bold comment-box"
+	href={post.permalink}
+	on:click={setSubmissionStore}
+	data-sveltekit-preload-data="hover"
+>
 	<Icon height="20" width="20" name="comment" /><span>{post.num_comments} comments</span>
 </a>
 

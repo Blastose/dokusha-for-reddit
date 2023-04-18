@@ -1,11 +1,15 @@
 <script lang="ts">
 	import Subreddit from '$lib/components/subreddit/Subreddit.svelte';
+	import { subredditStore, getSubredditStore } from '$lib/stores/subredditStore';
+	import { page } from '$app/stores';
 
 	export let data;
+
+	$: posts = getSubredditStore(subredditStore, $page.url.href.toLowerCase()) ?? data.posts;
 </script>
 
 <svelte:head><title>{data.about.title}</title></svelte:head>
 
 <main>
-	<Subreddit about={data.about} posts={data.posts} />
+	<Subreddit about={data.about} {posts} />
 </main>
