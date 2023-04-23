@@ -4,7 +4,7 @@ import { error } from '@sveltejs/kit';
 
 type Time = 'hour' | 'day' | 'week' | 'month' | 'year' | 'all';
 
-export const load = async ({ cookies, params, setHeaders, url }) => {
+export const load = async ({ cookies, params, setHeaders, url, isDataRequest }) => {
 	const subreddit = params.subreddit;
 	const sort = params.sort as 'top' | 'new' | 'controversial' | 'rising';
 
@@ -22,14 +22,17 @@ export const load = async ({ cookies, params, setHeaders, url }) => {
 			httpOnly: false,
 			sameSite: 'none'
 		});
-		return { posts: [], about } as unknown as { posts: SubmissionData[]; about: SubredditData };
+		return { streamed: { posts: [] }, about } as unknown as {
+			streamed: { posts: SubmissionData[] };
+			about: SubredditData;
+		};
 	}
 
-	const posts = await jsrWrapsubreddit.getSubmissions({ sort, params: { t } });
+	const posts = jsrWrapsubreddit.getSubmissions({ sort, params: { t } });
 
 	if (!posts) throw error(500);
 
 	setHeaders({ 'cache-control': 'public, max-age=60' });
 
-	return { posts, about };
+	return { streamed: { posts: isDataRequest ? posts : await posts }, about };
 };

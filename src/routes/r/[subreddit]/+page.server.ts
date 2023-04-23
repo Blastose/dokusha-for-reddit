@@ -2,7 +2,7 @@ import type { PageServerLoad } from './$types';
 import { jsrwrap } from '$lib/server/reddit';
 import type { SubmissionData, SubredditData } from 'jsrwrap/types';
 
-export const load = (async ({ cookies, params, setHeaders }) => {
+export const load = (async ({ cookies, params, setHeaders, isDataRequest }) => {
 	// TODO move this into its own function since the logic is shared
 	// by /r/[subredit]/[sort] routes
 	// or maybe move it this and the [sort] routes into a layout group
@@ -22,9 +22,12 @@ export const load = (async ({ cookies, params, setHeaders }) => {
 			httpOnly: false,
 			sameSite: 'none'
 		});
-		return { posts: [], about } as unknown as { posts: SubmissionData[]; about: SubredditData };
+		return { streamed: { posts: [] }, about } as unknown as {
+			streamed: { posts: SubmissionData[] };
+			about: SubredditData;
+		};
 	}
 
-	const posts = await jsrWrapsubreddit.getSubmissions({ sort: 'hot', params: {} });
-	return { posts, about };
+	const posts = jsrWrapsubreddit.getSubmissions({ sort: 'hot', params: {} });
+	return { streamed: { posts: isDataRequest ? posts : await posts }, about };
 }) satisfies PageServerLoad;

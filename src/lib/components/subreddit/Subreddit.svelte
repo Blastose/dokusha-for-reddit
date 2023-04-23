@@ -10,7 +10,7 @@
 	import { onMount } from 'svelte';
 	import SubredditCardSkeleton from './SubredditCardSkeleton.svelte';
 
-	export let posts: SubmissionData[];
+	export let posts: Promise<SubmissionData[]> | SubmissionData[];
 	export let about: SubredditData;
 
 	function toggleView() {
@@ -25,29 +25,47 @@
 	let morePosts = true;
 	let lastPostId = '';
 	$: {
+		// This reactive statement is needed so the variables related to the post are updated
+		// when the page's searchparams change.
+		// We need a reactive statement because changing the searchparams do not unmount/remount the page,
+		// none of the statements in the onMount function run
 		$page;
-		morePosts = true;
-		lastPostId = '';
-		if (posts.length > 0) {
-			subredditStore.setSubredditPosts($page.url.href.toLowerCase(), posts);
-			lastPostId = posts[posts.length - 1].id;
-		}
+		(async () => {
+			morePosts = true;
+			lastPostId = '';
+			const postsAwaited = await posts;
+			if (postsAwaited.length > 0) {
+				subredditStore.setSubredditPosts($page.url.href.toLowerCase(), postsAwaited);
+				lastPostId = postsAwaited[postsAwaited.length - 1].id;
+			}
+		})();
 	}
 
-	onMount(() => {
+	onMount(async () => {
+		posts = await posts;
+		lastPostId = posts[posts.length - 1].id;
+
 		const interactionObserver = new IntersectionObserver(async (entries) => {
 			if (entries[0].intersectionRatio <= 0) return;
 
 			const subreddit = $page.params.subreddit ?? '';
 			const sort = $page.params.sort ?? 'hot';
 			const t = $page.url.searchParams.get('t') ?? 'day';
-			const res = await fetch(`/api/${subreddit}?sort=${sort}&after=t3_${lastPostId}&t=${t}`);
+			let count = (posts as SubmissionData[]).length;
+			if (sort === 'hot' || !sort) {
+				// If the sort is hot or the default (which is also hot), then we needed to subtract the two stickied posts
+				count = count - 2;
+			}
+			const res = await fetch(
+				`/api/${subreddit}?sort=${sort}&after=t3_${lastPostId}&t=${t}&count=${count}`
+			);
 			const newPosts = (await res.json()) as SubmissionData[];
 			if (!(newPosts.length > 0)) {
 				morePosts = false;
 				return;
 			}
 			lastPostId = newPosts[newPosts.length - 1].id;
+			posts = await posts;
 			posts = [...posts, ...newPosts];
 			subredditStore.setSubredditPosts($page.url.href.toLowerCase(), posts);
 		});
@@ -95,18 +113,28 @@
 		</button>
 
 		<div class="flex flex-col gap-3">
-			{#each posts as post}
-				{#if $subredditViewStore === 'card'}
-					<SubredditCard {post} />
-				{:else}
-					<SubredditClassic {post} />
-				{/if}
-			{/each}
+			{#await posts}
+				{#each { length: 25 } as _}
+					{#if morePosts && $subredditViewStore === 'classic'}
+						<SubredditClassicSkeleton />
+					{:else if morePosts && $subredditViewStore === 'card'}
+						<SubredditCardSkeleton />
+					{/if}
+				{/each}
+			{:then awaitedPosts}
+				{#each awaitedPosts as post}
+					{#if $subredditViewStore === 'card'}
+						<SubredditCard {post} />
+					{:else}
+						<SubredditClassic {post} />
+					{/if}
+				{/each}
+			{/await}
 			<div>
-				<div id="more" bind:this={loadingElement} />
-				{#if morePosts && $subredditViewStore === 'classic'}
+				<div id="more" bind:this={loadingElement} class={morePosts && lastPostId ? '' : 'hidden'} />
+				{#if morePosts && lastPostId && $subredditViewStore === 'classic'}
 					<SubredditClassicSkeleton />
-				{:else if morePosts && $subredditViewStore === 'card'}
+				{:else if morePosts && lastPostId && $subredditViewStore === 'card'}
 					<SubredditCardSkeleton />
 				{/if}
 			</div>
