@@ -10,8 +10,9 @@
 
 <div class="sort-posts-container">
 	{#each sortOptions as sortOption}
+		{@const sortOptionLink = sortOption === 'hot' ? '' : sortOption}
 		<div class="text-sm font-bold sort-post">
-			<a class:current={sortOption === currentSort} href="/r/{currentSubreddit}/{sortOption}"
+			<a class:current={sortOption === currentSort} href="/r/{currentSubreddit}/{sortOptionLink}"
 				>{sortOption}</a
 			>
 		</div>

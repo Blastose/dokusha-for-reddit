@@ -21,7 +21,7 @@
 				<Flair linkFlair={submission} />
 			{/if}
 			<div class="max-w-4xl">
-				<span class="font-bold text-xl">{submission.title}</span>
+				<span class="font-bold text-2xl">{submission.title}</span>
 				<PostTag postTag={submission} />
 			</div>
 		</div>

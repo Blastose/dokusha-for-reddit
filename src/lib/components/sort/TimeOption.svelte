@@ -56,7 +56,7 @@
 
 <div class="text-sm font-bold dropdown">
 	<button class="current-time"
-		>{timeMap[currentTimeSort]}<Icon height="24" width="24" name="chevronDown" /></button
+		>{timeMap[currentTimeSort]}<Icon height="20" width="20" name="chevronDown" /></button
 	>
 	<div class="dropdown-items">
 		{#each timeOptions as timeOption}

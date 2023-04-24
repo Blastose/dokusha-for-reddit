@@ -3,12 +3,9 @@
 	import Layout from '$lib/components/layout/Layout.svelte';
 	import { onMount } from 'svelte';
 	import { themeStore } from '$lib/stores/themeStore';
-	import type { PageData } from './$types';
 	import { beforeNavigate } from '$app/navigation';
 	import { get } from 'svelte/store';
 	import { subredditStore, getSubredditStore } from '$lib/stores/subredditStore';
-
-	export let data: PageData;
 
 	onMount(() => {
 		if (!('theme' in localStorage)) {
@@ -95,6 +92,6 @@
 	</script>
 </svelte:head>
 
-<Layout pathname={data.pathname}>
+<Layout>
 	<slot />
 </Layout>
