@@ -7,7 +7,7 @@
 	});
 </script>
 
-<div class="flex flex-col gap-2 p-6">
+<div class="flex flex-col gap-2 px-6 py-4">
 	<p class="font-bold text-lg">Saved Subreddits</p>
 
 	<a href="/r/programming">Programming</a>

@@ -1,10 +1,24 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import Sidebar from '$lib/components/sidebar/Sidebar.svelte';
 	import { drawerStore } from '$lib/stores/drawerStore';
 	import { fade, fly } from 'svelte/transition';
+
+	let screenWidth = false;
+	$: {
+		$drawerStore;
+		if (browser && !screenWidth) {
+			const windowQuery = window.matchMedia('(min-width: 1024px)');
+			screenWidth = windowQuery.matches;
+			if (windowQuery.matches) {
+				console.log('poggers');
+			}
+		}
+		console.log(screenWidth);
+	}
 </script>
 
-{#if $drawerStore}
+{#if $drawerStore && !screenWidth}
 	<div class="sidebar" in:fly={{ x: -256, opacity: 0.75, duration: 300 }} out:fly={{ x: -256 }}>
 		<Sidebar />
 	</div>

@@ -41,10 +41,7 @@
 
 <style>
 	.header {
-		position: sticky;
-		z-index: 1;
 		background-color: rgb(255, 255, 255);
-		top: 0;
 	}
 
 	:global(.dark) .header {
