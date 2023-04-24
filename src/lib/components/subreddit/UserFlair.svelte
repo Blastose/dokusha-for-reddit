@@ -34,8 +34,10 @@
 
 <style>
 	.flair-container {
+		display: inline-flex;
+		align-items: center;
 		color: rgb(91, 90, 95);
-		vertical-align: middle;
+		vertical-align: text-bottom;
 	}
 
 	:global(.dark) .flair-container {
@@ -50,6 +52,5 @@
 		display: inline-block;
 		background-repeat: no-repeat;
 		background-size: cover;
-		vertical-align: middle;
 	}
 </style>
