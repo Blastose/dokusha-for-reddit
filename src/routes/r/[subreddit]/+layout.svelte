@@ -25,7 +25,7 @@
 	});
 
 	let flyDirection = 1;
-	$: flyXOffset = 20;
+	$: flyXOffset = 30;
 
 	$: about = data.about;
 	$: bannerUrl = about.banner_background_image || about.banner_img;

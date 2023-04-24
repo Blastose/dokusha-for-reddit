@@ -3,16 +3,18 @@
 	import Drawer from './Drawer.svelte';
 	import Header from './Header.svelte';
 	import { drawerStore } from '$lib/stores/drawerStore';
+	import { sidebarStore } from '$lib/stores/sidebarStore';
 </script>
 
 <Drawer />
 
-<div class="layout-container" class:hide-sidebar={$drawerStore}>
+<div class="layout-container">
 	<div class="header">
 		<Header />
 	</div>
+	<div class="filler" />
 
-	<div class="sidebar" class:hide-sidebar={$drawerStore}>
+	<div class="sidebar" class:hide-sidebar={!$sidebarStore} class:show-drawer={$drawerStore}>
 		<Sidebar />
 	</div>
 
@@ -25,10 +27,10 @@
 	.layout-container {
 		display: grid;
 		grid-template-areas:
-			'header'
-			'content';
+			'filler header header'
+			'filler sidebar content';
 		grid-template-rows: min-content 1fr;
-		grid-template-columns: 1fr;
+		grid-template-columns: 0px min-content 1fr;
 	}
 
 	.header {
@@ -40,11 +42,25 @@
 	}
 
 	.sidebar {
-		display: none;
+		grid-area: sidebar;
+		margin-left: -16rem;
+		transition-duration: 150ms;
+		transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+		margin-top: -65px;
 	}
 
-	:global(.dark) .sidebar {
-		background-color: #28292b;
+	.sidebar.hide-sidebar {
+		margin-left: -16rem;
+	}
+
+	.sidebar.show-drawer {
+		margin-left: 0;
+	}
+
+	@media (min-width: 1024px) {
+		.sidebar {
+			margin-left: 0;
+		}
 	}
 
 	.content-container {
@@ -52,37 +68,8 @@
 		overflow: hidden;
 	}
 
-	@media (min-width: 1024px) {
-		.layout-container {
-			grid-template-areas:
-				'header header'
-				'sidebar content';
-			grid-template-rows: min-content 1fr;
-			grid-template-columns: 16rem 1fr;
-		}
-
-		.layout-container.hide-sidebar {
-			grid-template-areas:
-				'header'
-				'content';
-			grid-template-rows: min-content 1fr;
-			grid-template-columns: 1fr;
-		}
-
-		.sidebar {
-			display: block;
-			grid-area: sidebar;
-			width: 16rem;
-			height: 100vh;
-			position: fixed;
-			z-index: 1;
-			top: 65px;
-			overflow-x: auto;
-			background-color: #f0f4fc;
-		}
-
-		.sidebar.hide-sidebar {
-			display: none;
-		}
+	.filler {
+		grid-area: filler;
+		height: 100vh;
 	}
 </style>
