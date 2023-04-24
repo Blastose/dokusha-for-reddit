@@ -13,8 +13,6 @@ export const load = async ({ cookies, params, setHeaders, url, isDataRequest }) 
 
 	const jsrWrapsubreddit = jsrwrap.getSubreddit(subreddit);
 
-	const about = await jsrWrapsubreddit.getAbout();
-
 	if (cookies.get('name') === 'skip') {
 		cookies.set('name', '', {
 			path: '/',
@@ -22,7 +20,7 @@ export const load = async ({ cookies, params, setHeaders, url, isDataRequest }) 
 			httpOnly: false,
 			sameSite: 'none'
 		});
-		return { streamed: { posts: [] }, about } as unknown as {
+		return { streamed: { posts: [] } } as unknown as {
 			streamed: { posts: SubmissionData[] };
 			about: SubredditData;
 		};
@@ -34,5 +32,5 @@ export const load = async ({ cookies, params, setHeaders, url, isDataRequest }) 
 
 	setHeaders({ 'cache-control': 'public, max-age=60' });
 
-	return { streamed: { posts: isDataRequest ? posts : await posts }, about };
+	return { streamed: { posts: isDataRequest ? posts : await posts } };
 };

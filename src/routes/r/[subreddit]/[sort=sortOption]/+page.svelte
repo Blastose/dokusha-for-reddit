@@ -8,8 +8,8 @@
 	$: posts = getSubredditStore(subredditStore, $page.url.href.toLowerCase()) ?? data.streamed.posts;
 </script>
 
-<svelte:head><title>{data.about.title}</title></svelte:head>
+<svelte:head><title>{data.about?.title}</title></svelte:head>
 
 <main>
-	<Subreddit about={data.about} {posts} />
+	<Subreddit {posts} />
 </main>

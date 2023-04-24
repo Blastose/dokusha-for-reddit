@@ -11,6 +11,6 @@
 	});
 </script>
 
-<main class="container mx-auto px-4 pt-4 pb-24 ">
+<main class="container mx-auto">
 	<Submission submission={data.streamed.submission} />
 </main>

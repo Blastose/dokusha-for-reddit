@@ -11,8 +11,6 @@ export const load = (async ({ cookies, params, setHeaders, isDataRequest }) => {
 
 	const jsrWrapsubreddit = jsrwrap.getSubreddit(subreddit);
 
-	const about = await jsrWrapsubreddit.getAbout();
-
 	setHeaders({ 'cache-control': 'public, max-age=60' });
 
 	if (cookies.get('name') === 'skip') {
@@ -22,12 +20,12 @@ export const load = (async ({ cookies, params, setHeaders, isDataRequest }) => {
 			httpOnly: false,
 			sameSite: 'none'
 		});
-		return { streamed: { posts: [] }, about } as unknown as {
+		return { streamed: { posts: [] } } as unknown as {
 			streamed: { posts: SubmissionData[] };
 			about: SubredditData;
 		};
 	}
 
 	const posts = jsrWrapsubreddit.getSubmissions({ sort: 'hot', params: {} });
-	return { streamed: { posts: isDataRequest ? posts : await posts }, about };
+	return { streamed: { posts: isDataRequest ? posts : await posts } };
 }) satisfies PageServerLoad;
