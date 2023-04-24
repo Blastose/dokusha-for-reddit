@@ -38,6 +38,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"reddit-md-to-html": "^0.1.45"
+		"reddit-md-to-html": "^0.1.47"
 	}
 }
