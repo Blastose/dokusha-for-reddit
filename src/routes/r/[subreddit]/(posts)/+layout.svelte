@@ -14,3 +14,5 @@
 <main>
 	<Subreddit {posts} />
 </main>
+
+<slot />
