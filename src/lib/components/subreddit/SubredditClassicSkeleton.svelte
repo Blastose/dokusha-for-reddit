@@ -20,17 +20,17 @@
 	</div>
 
 	<div class="animate-pulse">
-		<div class="h-6 w-[50%] skeleton rounded" />
+		<div class="h-6 w-full md:w-[50%] skeleton rounded" />
 	</div>
 
 	<div class="animate-pulse flex gap-2">
-		<div class="h-6 w-[33%] skeleton rounded" />
+		<div class="h-6 w-[50%] md:w-[33%] skeleton rounded" />
 	</div>
 
 	<div class="animate-pulse flex gap-2">
-		<div class="h-6 w-[4%] skeleton rounded" />
-		<div class="h-6 w-[10%] skeleton rounded" />
-		<div class="h-6 w-[4%] skeleton rounded" />
+		<div class="h-6 w-[10%] md:w-[4%] skeleton rounded" />
+		<div class="h-6 w-[20%] md:w-[10%] skeleton rounded" />
+		<div class="h-6 w-[10%] md:w-[4%] skeleton rounded" />
 	</div>
 </div>
 
