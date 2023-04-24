@@ -36,7 +36,6 @@
 
 	<div class="flex gap-2">
 		<button on:click={toggleTheme}>Theme</button>
-		<p>Login</p>
 	</div>
 </header>
 
