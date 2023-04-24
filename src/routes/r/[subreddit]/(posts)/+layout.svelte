@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { LayoutData } from './$types';
 	import Subreddit from '$lib/components/subreddit/Subreddit.svelte';
 	import { subredditStore, getSubredditStore } from '$lib/stores/subredditStore';
 	import { page } from '$app/stores';
 
-	export let data: PageData;
+	export let data: LayoutData;
 
 	$: posts = getSubredditStore(subredditStore, $page.url.href.toLowerCase()) ?? data.streamed.posts;
 </script>
