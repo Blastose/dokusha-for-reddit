@@ -52,6 +52,11 @@
 		transition-duration: 450ms;
 		transition-timing-function: cubic-bezier(0.17, 0.67, 0.23, 1.02);
 		margin-top: -65px;
+		scrollbar-color: #bec4d160 rgb(230, 233, 245);
+	}
+
+	:global(.dark) .sidebar {
+		scrollbar-color: #ffffff50 transparent;
 	}
 
 	.sidebar.hide-sidebar {
