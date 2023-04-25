@@ -14,7 +14,12 @@
 	</div>
 	<div class="filler" />
 
-	<div class="sidebar" class:hide-sidebar={!$sidebarStore} class:show-drawer={$drawerStore}>
+	<div
+		class="sidebar"
+		class:hide-sidebar={!$sidebarStore}
+		class:show-drawer={$drawerStore}
+		aria-hidden={!($sidebarStore || $drawerStore)}
+	>
 		<Sidebar />
 	</div>
 
