@@ -49,8 +49,8 @@
 	.sidebar {
 		grid-area: sidebar;
 		margin-left: -16rem;
-		transition-duration: 150ms;
-		transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+		transition-duration: 450ms;
+		transition-timing-function: cubic-bezier(0.17, 0.67, 0.23, 1.02);
 		margin-top: -65px;
 	}
 
