@@ -41,9 +41,7 @@ html {
 	overflow-wrap: anywhere;
 }
 
-.reddit-md > a,
-.reddit-md :not(.spoiler) > a,
-.reddit-md .spoiler.revealed a {
+.reddit-md a {
 	color: #0079d3;
 	fill: #0079d3;
 }
@@ -60,9 +58,7 @@ html {
 	pointer-events: auto;
 }
 
-.dark .reddit-md > a,
-.dark .reddit-md :not(.spoiler) > a,
-.dark .reddit-md .spoiler.revealed a {
+.dark .reddit-md a {
 	color: #5aade0;
 	fill: #5aade0;
 }
@@ -184,6 +180,10 @@ strike {
 	border-radius: 2px;
 	cursor: pointer;
 	color: transparent;
+}
+
+.reddit-md .spoiler:not(.revealed) > * {
+	opacity: 0;
 }
 
 .dark .reddit-md .spoiler {

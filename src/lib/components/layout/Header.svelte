@@ -3,6 +3,7 @@
 	import { themeStore } from '$lib/stores/themeStore';
 	import Icon from '../icon/Icon.svelte';
 	import { browser } from '$app/environment';
+	import { sidebarStore } from '$lib/stores/sidebarStore';
 
 	function toggleTheme() {
 		if ($themeStore === 'dark') {
@@ -19,17 +20,22 @@
 			}
 		}
 	}
+
+	function openSidebar() {
+		if (window.matchMedia('(min-width: 1024px)').matches) {
+			sidebarStore.set(!$sidebarStore);
+		} else {
+			drawerStore.set(true);
+		}
+	}
 </script>
 
 <header
 	class="header flex px-4 py-4 gap-4 justify-between items-center border-b border-[#4b4b4b15] dark:border-[#ffffff1a]"
 >
 	<div class="flex gap-2">
-		<button
-			aria-label="open sidebar"
-			on:click={() => {
-				drawerStore.set(!$drawerStore);
-			}}><Icon height="24" width="24" name="menu" /></button
+		<button aria-label="open sidebar" on:click={openSidebar}
+			><Icon height="24" width="24" name="menu" /></button
 		>
 		<p class="font-bold text-2xl">Dokusha</p>
 	</div>
@@ -41,10 +47,7 @@
 
 <style>
 	.header {
-		position: sticky;
-		z-index: 1;
 		background-color: rgb(255, 255, 255);
-		top: 0;
 	}
 
 	:global(.dark) .header {

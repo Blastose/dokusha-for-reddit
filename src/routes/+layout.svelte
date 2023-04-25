@@ -6,6 +6,29 @@
 	import { beforeNavigate } from '$app/navigation';
 	import { get } from 'svelte/store';
 	import { subredditStore, getSubredditStore } from '$lib/stores/subredditStore';
+	import { largeScreenStore } from '$lib/stores/largeScreenStore';
+	import { drawerStore } from '$lib/stores/drawerStore';
+
+	const monitorScreenSize = (node: Window) => {
+		const windowQuery = node.matchMedia('(min-width: 1024px)');
+		const match = (e: MediaQueryListEvent) => {
+			if (e.matches) {
+				largeScreenStore.set(true);
+				drawerStore.set(false);
+			} else {
+				largeScreenStore.set(false);
+			}
+		};
+		if (!windowQuery.matches) {
+			largeScreenStore.set(false);
+		}
+		windowQuery.addEventListener('change', match);
+		return {
+			destroy() {
+				windowQuery.removeEventListener('change', match);
+			}
+		};
+	};
 
 	onMount(() => {
 		if (!('theme' in localStorage)) {
@@ -91,6 +114,8 @@
 		}
 	</script>
 </svelte:head>
+
+<svelte:window use:monitorScreenSize />
 
 <Layout>
 	<slot />

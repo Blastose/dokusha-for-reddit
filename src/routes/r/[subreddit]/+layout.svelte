@@ -25,7 +25,7 @@
 	});
 
 	let flyDirection = 1;
-	$: flyXOffset = 20;
+	$: flyXOffset = 30;
 
 	$: about = data.about;
 	$: bannerUrl = about.banner_background_image || about.banner_img;
@@ -63,11 +63,7 @@
 		</div>
 	{/key}
 
-	<div
-		class="container mx-auto px-4 {showSubredditOptions
-			? 'pt-4'
-			: 'pt-2'} pb-16 flex flex-col gap-4"
-	>
+	<div class="container content-container {showSubredditOptions ? 'pt-4' : 'pt-2'}">
 		{#if showSubredditOptions}
 			<SortPosts />
 
@@ -90,6 +86,28 @@
 		flex-direction: column;
 		align-self: flex-end;
 		padding: 1rem;
+	}
+
+	.content-container {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-left: auto;
+		margin-right: auto;
+		padding-bottom: 4rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	@media (min-width: 1024px) {
+		.banner-text {
+			padding: 1rem 4rem;
+		}
+
+		.content-container {
+			padding-left: 4rem;
+			padding-right: 4rem;
+		}
 	}
 
 	.icon-image {
