@@ -56,7 +56,7 @@
 	}
 
 	:global(.dark) .sidebar {
-		scrollbar-color: #ffffff50 transparent;
+		scrollbar-color: #ffffff1c transparent;
 	}
 
 	.sidebar.hide-sidebar {

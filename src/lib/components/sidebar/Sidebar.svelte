@@ -135,6 +135,7 @@
 		z-index: 3;
 		overflow-x: auto;
 		background-color: rgb(238, 241, 250);
+		scrollbar-width: thin;
 	}
 
 	:global(.dark) .sidebar {
