@@ -4,8 +4,8 @@
 	import { sidebarStore } from '$lib/stores/sidebarStore';
 	import { preferencesStore } from '$lib/stores/preferencesStore';
 	import { onMount } from 'svelte';
-	import SubredditItem from './SubredditItem.svelte';
 	import AddSubreddit from './AddSubreddit.svelte';
+	import SubredditItemList from './SubredditItemList.svelte';
 
 	afterNavigate(() => {
 		drawerStore.set(false);
@@ -78,15 +78,8 @@
 		<p class="font-bold text-lg">Saved Subreddits</p>
 
 		{#if savedSubreddits}
-			{#each savedSubreddits as savedSubreddit, i}
-				<SubredditItem
-					bind:dragging={drag}
-					arrayIndex={i}
-					displayName={savedSubreddit.displayedName}
-					subreddit={savedSubreddit.subreddit}
-					focusable={sidebarFocusable}
-				/>
-			{/each}
+			<SubredditItemList bind:drag focusable={sidebarFocusable} bind:savedSubreddits />
+
 			<a href="/r/programming" tabindex={sidebarFocusable ? 0 : -1}>Programming</a>
 			<a href="/r/genshin_impact" tabindex={sidebarFocusable ? 0 : -1}>Genshin</a>
 			<a href="/r/learnprogramming" tabindex={sidebarFocusable ? 0 : -1}>Learn Programming</a>

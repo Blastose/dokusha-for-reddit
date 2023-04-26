@@ -4,12 +4,17 @@
 	export let focusable: boolean;
 	export let arrayIndex: number;
 	export let dragging: boolean;
+	export let currentHover: HTMLAnchorElement;
+	export let currentHoverIndex: number;
+	export let currentDragIndex: number;
+	export let parentClientY: number;
 
 	function drag(node: HTMLAnchorElement) {
 		function dragStart(e: DragEvent) {
 			dragging = true;
-			console.log('b');
+			console.log('item drag start');
 			e.dataTransfer?.setData('arrayIndex', arrayIndex.toString());
+			currentDragIndex = arrayIndex;
 		}
 
 		function dragEnd() {
@@ -18,6 +23,23 @@
 
 		node.addEventListener('dragstart', dragStart);
 		node.addEventListener('dragend', dragEnd);
+
+		node.addEventListener('dragover', (e: DragEvent) => {
+			currentHover = e.currentTarget as HTMLAnchorElement;
+			const current = e.clientY - currentHover.getBoundingClientRect().top;
+			const half = currentHover.offsetHeight / 2;
+			if (current > half) {
+				currentHoverIndex = arrayIndex;
+			} else {
+				if (currentHoverIndex > 0) {
+					currentHoverIndex = arrayIndex - 1;
+				}
+			}
+			console.log(parentClientY);
+			console.log(e.clientY - currentHover.getBoundingClientRect().top);
+			console.log(currentHover.offsetHeight / 2);
+			console.log((currentHover.offsetTop + currentHover.offsetHeight) / 2);
+		});
 
 		return {
 			destroy() {
