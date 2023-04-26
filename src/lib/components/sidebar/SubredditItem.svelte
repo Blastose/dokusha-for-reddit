@@ -8,6 +8,7 @@
 	export let currentHoverIndex: number;
 	export let currentDragIndex: number;
 	export let parentClientY: number;
+	export let direction: boolean;
 
 	function drag(node: HTMLAnchorElement) {
 		function dragStart(e: DragEvent) {
@@ -15,6 +16,7 @@
 			console.log('item drag start');
 			e.dataTransfer?.setData('arrayIndex', arrayIndex.toString());
 			currentDragIndex = arrayIndex;
+			currentHoverIndex = arrayIndex;
 		}
 
 		function dragEnd() {
@@ -31,7 +33,7 @@
 			if (current > half) {
 				currentHoverIndex = arrayIndex;
 			} else {
-				if (currentHoverIndex > 0) {
+				if (currentHoverIndex > 0 || !direction) {
 					currentHoverIndex = arrayIndex - 1;
 				}
 			}

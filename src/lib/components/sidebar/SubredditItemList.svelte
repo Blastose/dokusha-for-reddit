@@ -10,27 +10,43 @@
 	let listItemHover: HTMLAnchorElement;
 	let listItemHoverIndex: number;
 	let listItemDragIndex: number;
+	let yStart: number;
+	let yCurrent: number;
+
+	let direction: boolean;
 
 	let divContainerClientY: number;
 
 	function poggers(node: HTMLDivElement) {
-		function a(e: DragEvent) {
+		function dragOver(e: DragEvent) {
 			console.log('div container drag over');
-			divContainerClientY = e.clientY;
+			yCurrent = e.clientY;
+			direction = yCurrent > yStart;
 		}
 		node.addEventListener('dragend', moveItem);
+		node.addEventListener('dragstart', (e) => {
+			yStart = e.clientY;
+		});
+		node.addEventListener('dragover', dragOver);
 
 		return {
 			destroy: () => {
-				node.removeEventListener('dragover', a);
+				node.removeEventListener('dragover', dragOver);
 				node.removeEventListener('dragend', moveItem);
 			}
 		};
 	}
 
 	function moveItem() {
+		let newIndex = listItemHoverIndex;
+		// direction false = up; true = down;
+		if (!direction) {
+			newIndex = newIndex + 1;
+		}
+		console.log(newIndex);
+
 		const movedItem = savedSubreddits.splice(listItemDragIndex, 1);
-		savedSubreddits.splice(listItemHoverIndex, 0, movedItem[0]);
+		savedSubreddits.splice(newIndex, 0, movedItem[0]);
 		savedSubreddits = savedSubreddits;
 		preferencesStore.update((prev) => {
 			prev.savedSubreddits = savedSubreddits;
@@ -43,19 +59,31 @@
 	$: console.log(`dragIndex: ${listItemDragIndex}`);
 </script>
 
-{listItemHoverIndex}
+<p>direction: {direction}</p>
+<p>hoverIndex: {listItemHoverIndex}</p>
+<p>yStart: {yStart}</p>
+<p>yCurr: {yCurrent}</p>
 <div bind:this={listContainer} use:poggers>
+	<div
+		class="h-[1px] w-full rounded-full duration-100"
+		class:bg-slate-400={drag && !direction && listItemHoverIndex === -1}
+	/>
 	{#each savedSubreddits as savedSubreddit, i}
 		<SubredditItem
 			bind:dragging={drag}
 			bind:currentHover={listItemHover}
 			bind:currentHoverIndex={listItemHoverIndex}
 			bind:currentDragIndex={listItemDragIndex}
+			{direction}
 			parentClientY={divContainerClientY}
 			arrayIndex={i}
 			displayName={savedSubreddit.displayedName}
 			subreddit={savedSubreddit.subreddit}
 			{focusable}
+		/>
+		<div
+			class="h-[1px] w-full rounded-full duration-100"
+			class:bg-slate-400={drag && listItemHoverIndex === i}
 		/>
 	{/each}
 </div>

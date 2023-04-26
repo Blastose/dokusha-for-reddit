@@ -80,7 +80,7 @@
 		{#if savedSubreddits}
 			<SubredditItemList bind:drag focusable={sidebarFocusable} bind:savedSubreddits />
 
-			<a href="/r/programming" tabindex={sidebarFocusable ? 0 : -1}>Programming</a>
+			<!-- <a href="/r/programming" tabindex={sidebarFocusable ? 0 : -1}>Programming</a>
 			<a href="/r/genshin_impact" tabindex={sidebarFocusable ? 0 : -1}>Genshin</a>
 			<a href="/r/learnprogramming" tabindex={sidebarFocusable ? 0 : -1}>Learn Programming</a>
 			<a href="/r/learnjavascript" tabindex={sidebarFocusable ? 0 : -1}>Learn Javascript</a>
@@ -94,7 +94,7 @@
 			<a href="/r/rust" tabindex={sidebarFocusable ? 0 : -1}>Rust</a>
 			<a href="/r/sveltejs" tabindex={sidebarFocusable ? 0 : -1}>Svelte</a>
 			<a href="/r/leagueoflegends" tabindex={sidebarFocusable ? 0 : -1}>League of Legends</a>
-			<a href="/r/askreddit" tabindex={sidebarFocusable ? 0 : -1}>Askreddit</a>
+			<a href="/r/askreddit" tabindex={sidebarFocusable ? 0 : -1}>Askreddit</a> -->
 		{:else}
 			<p>Loading...</p>
 		{/if}
