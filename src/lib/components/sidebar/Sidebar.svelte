@@ -11,16 +11,19 @@
 		drawerStore.set(false);
 	});
 
-	let poggers:
+	let savedSubreddits:
 		| {
 				subreddit: string;
 				displayedName: string;
 		  }[]
 		| undefined = undefined;
+
+	let drag: boolean;
+
 	onMount(() => {
 		console.log('sidebar');
 
-		poggers = $preferencesStore.savedSubreddits;
+		savedSubreddits = $preferencesStore.savedSubreddits;
 	});
 
 	function addToStore(subreddit: string, displayName: string) {
@@ -29,7 +32,7 @@
 			prev.savedSubreddits = [...prev.savedSubreddits, { displayedName: displayName, subreddit }];
 			return prev;
 		});
-		poggers = $preferencesStore.savedSubreddits;
+		savedSubreddits = $preferencesStore.savedSubreddits;
 	}
 
 	let showAdd = false;
@@ -37,21 +40,48 @@
 		showAdd = false;
 	}
 	$: sidebarFocusable = $sidebarStore || $drawerStore;
+
+	function onDrop(e: DragEvent) {
+		e.preventDefault();
+		console.log(e.dataTransfer);
+		const arrayIndexToRemove = e.dataTransfer?.getData('arrayIndex');
+		preferencesStore.update((prev) => {
+			prev.savedSubreddits.splice(Number(arrayIndexToRemove), 1);
+			return prev;
+		});
+		savedSubreddits = $preferencesStore.savedSubreddits;
+		drag = false;
+	}
 </script>
 
 <div class="px-6 py-4 sidebar">
 	<nav class="flex flex-col">
-		<button
-			on:click={() => {
-				showAdd = true;
-			}}>+</button
-		>
+		<div class="flex {drag ? 'justify-between' : 'justify-center'}">
+			<button
+				on:click={() => {
+					showAdd = true;
+				}}>+</button
+			>
+			{#if drag}
+				<div
+					on:drop={onDrop}
+					on:dragover={(e) => {
+						console.log('poggers');
+						e.preventDefault();
+					}}
+				>
+					Trash
+				</div>
+			{/if}
+		</div>
 		<AddSubreddit show={showAdd} hide={hideAdd} add={addToStore} />
 		<p class="font-bold text-lg">Saved Subreddits</p>
 
-		{#if poggers}
-			{#each poggers as savedSubreddit}
+		{#if savedSubreddits}
+			{#each savedSubreddits as savedSubreddit, i}
 				<SubredditItem
+					bind:dragging={drag}
+					arrayIndex={i}
 					displayName={savedSubreddit.displayedName}
 					subreddit={savedSubreddit.subreddit}
 					focusable={sidebarFocusable}

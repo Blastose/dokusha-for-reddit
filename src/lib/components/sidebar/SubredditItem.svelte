@@ -2,19 +2,34 @@
 	export let subreddit: string;
 	export let displayName: string;
 	export let focusable: boolean;
+	export let arrayIndex: number;
+	export let dragging: boolean;
 
-	let showContextMenu: boolean;
-
-	function hover(node: HTMLDivElement) {
-		function a() {
-			console.log('a');
+	function drag(node: HTMLAnchorElement) {
+		function dragStart(e: DragEvent) {
+			dragging = true;
+			console.log('b');
+			e.dataTransfer?.setData('arrayIndex', arrayIndex.toString());
 		}
-		node.addEventListener('mou', a);
+
+		function dragEnd() {
+			dragging = false;
+		}
+
+		node.addEventListener('dragstart', dragStart);
+		node.addEventListener('dragend', dragEnd);
+
+		return {
+			destroy() {
+				node.removeEventListener('dragstart', dragStart);
+				node.removeEventListener('dragend', dragEnd);
+			}
+		};
 	}
 </script>
 
-<div use:hover>
-	<a href="/r/{subreddit}" tabindex={focusable ? 0 : -1}>{displayName}</a>
+<div>
+	<a use:drag href="/r/{subreddit}" tabindex={focusable ? 0 : -1}>{displayName}</a>
 </div>
 
 <style>
