@@ -27,6 +27,7 @@
 		}}
 	>
 		<div class="flex flex-col gap-1">
+			<p class="font-bold">Add subreddit</p>
 			<label>
 				<span>Subreddit</span>
 				<input

@@ -5,6 +5,7 @@
 	export let savedSubreddits: { displayedName: string; subreddit: string }[];
 	export let focusable: boolean;
 	export let drag: boolean;
+	export let hoveringOverTrashIcon: boolean;
 
 	let listContainer: HTMLDivElement;
 	let listItemHover: HTMLAnchorElement;
@@ -38,6 +39,11 @@
 	}
 
 	function moveItem() {
+		if (hoveringOverTrashIcon) {
+			hoveringOverTrashIcon = false;
+			return;
+		}
+
 		let newIndex = listItemHoverIndex;
 		// direction false = up; true = down;
 		if (!direction) {
@@ -65,8 +71,8 @@
 <p>yCurr: {yCurrent}</p>
 <div bind:this={listContainer} use:poggers>
 	<div
-		class="h-[1px] w-full rounded-full duration-100"
-		class:bg-slate-400={drag && !direction && listItemHoverIndex === -1}
+		class="h-[1px] w-full rounded-full duration-75"
+		class:bg-slate-400={drag && !direction && listItemHoverIndex === -1 && !hoveringOverTrashIcon}
 	/>
 	{#each savedSubreddits as savedSubreddit, i}
 		<SubredditItem
@@ -82,8 +88,8 @@
 			{focusable}
 		/>
 		<div
-			class="h-[1px] w-full rounded-full duration-100"
-			class:bg-slate-400={drag && listItemHoverIndex === i}
+			class="h-[1px] w-full rounded-full duration-75"
+			class:bg-slate-400={drag && listItemHoverIndex === i && !hoveringOverTrashIcon}
 		/>
 	{/each}
 </div>
