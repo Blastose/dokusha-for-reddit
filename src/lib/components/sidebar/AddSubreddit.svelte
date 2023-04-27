@@ -14,8 +14,6 @@
 		bind:this={form}
 		on:submit={(e) => {
 			e.preventDefault();
-			console.log(subredditInput);
-			console.log(displayInput);
 			if (!subredditInput || !displayInput) {
 				return;
 			}

@@ -7,13 +7,11 @@
 	export let currentHover: HTMLAnchorElement;
 	export let currentHoverIndex: number;
 	export let currentDragIndex: number;
-	export let parentClientY: number;
 	export let direction: boolean;
 
 	function drag(node: HTMLAnchorElement) {
 		function dragStart(e: DragEvent) {
 			dragging = true;
-			console.log('item drag start');
 			e.dataTransfer?.setData('arrayIndex', arrayIndex.toString());
 			currentDragIndex = arrayIndex;
 			currentHoverIndex = arrayIndex;
@@ -37,10 +35,6 @@
 					currentHoverIndex = arrayIndex - 1;
 				}
 			}
-			console.log(parentClientY);
-			console.log(e.clientY - currentHover.getBoundingClientRect().top);
-			console.log(currentHover.offsetHeight / 2);
-			console.log((currentHover.offsetTop + currentHover.offsetHeight) / 2);
 		});
 
 		return {

@@ -13,14 +13,10 @@
 	let listItemDragIndex: number;
 	let yStart: number;
 	let yCurrent: number;
-
-	let direction: boolean;
-
-	let divContainerClientY: number;
+	let direction: boolean; // direction false = up; true = down;
 
 	function poggers(node: HTMLDivElement) {
 		function dragOver(e: DragEvent) {
-			console.log('div container drag over');
 			yCurrent = e.clientY;
 			direction = yCurrent > yStart;
 		}
@@ -45,11 +41,9 @@
 		}
 
 		let newIndex = listItemHoverIndex;
-		// direction false = up; true = down;
 		if (!direction) {
 			newIndex = newIndex + 1;
 		}
-		console.log(newIndex);
 
 		const movedItem = savedSubreddits.splice(listItemDragIndex, 1);
 		savedSubreddits.splice(newIndex, 0, movedItem[0]);
@@ -58,17 +52,9 @@
 			prev.savedSubreddits = savedSubreddits;
 			return prev;
 		});
-		console.log(savedSubreddits);
 	}
-
-	$: console.log(`hoverIndex: ${listItemHoverIndex}`);
-	$: console.log(`dragIndex: ${listItemDragIndex}`);
 </script>
 
-<p>direction: {direction}</p>
-<p>hoverIndex: {listItemHoverIndex}</p>
-<p>yStart: {yStart}</p>
-<p>yCurr: {yCurrent}</p>
 <div bind:this={listContainer} use:poggers>
 	<div
 		class="h-[1px] w-full rounded-full duration-75"
@@ -81,7 +67,6 @@
 			bind:currentHoverIndex={listItemHoverIndex}
 			bind:currentDragIndex={listItemDragIndex}
 			{direction}
-			parentClientY={divContainerClientY}
 			arrayIndex={i}
 			displayName={savedSubreddit.displayedName}
 			subreddit={savedSubreddit.subreddit}

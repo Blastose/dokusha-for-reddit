@@ -22,13 +22,10 @@
 	let drag: boolean;
 
 	onMount(() => {
-		console.log('sidebar');
-
 		savedSubreddits = $preferencesStore.savedSubreddits;
 	});
 
 	function addToStore(subreddit: string, displayName: string) {
-		console.log('poggers');
 		preferencesStore.update((prev) => {
 			prev.savedSubreddits = [...prev.savedSubreddits, { displayedName: displayName, subreddit }];
 			return prev;
@@ -44,7 +41,6 @@
 
 	function onDrop(e: DragEvent) {
 		e.preventDefault();
-		console.log(e.dataTransfer);
 		const arrayIndexToRemove = e.dataTransfer?.getData('arrayIndex');
 		preferencesStore.update((prev) => {
 			prev.savedSubreddits.splice(Number(arrayIndexToRemove), 1);
