@@ -7,7 +7,6 @@
 	export let drag: boolean;
 	export let hoveringOverTrashIcon: boolean;
 
-	let listContainer: HTMLDivElement;
 	let listItemHover: HTMLAnchorElement;
 	let listItemHoverIndex: number;
 	let listItemDragIndex: number;
@@ -15,47 +14,53 @@
 	let yCurrent: number;
 	let direction: boolean; // direction false = up; true = down;
 
-	function poggers(node: HTMLDivElement) {
+	function setupEventListeners(node: HTMLDivElement) {
 		function dragOver(e: DragEvent) {
 			yCurrent = e.clientY;
 			direction = yCurrent > yStart;
 		}
-		node.addEventListener('dragend', moveItem);
-		node.addEventListener('dragstart', (e) => {
+
+		function dragStart(e: DragEvent) {
 			yStart = e.clientY;
-		});
+		}
+
+		function reorderItem() {
+			if (hoveringOverTrashIcon) {
+				hoveringOverTrashIcon = false;
+				return;
+			}
+
+			let newIndex = listItemHoverIndex;
+			if (!direction) {
+				// When we are reordering so the item has a higher index, we need to
+				// increase the index to it goes to the right place
+				newIndex = newIndex + 1;
+			}
+
+			const movedItem = savedSubreddits.splice(listItemDragIndex, 1);
+			savedSubreddits.splice(newIndex, 0, movedItem[0]);
+			savedSubreddits = savedSubreddits;
+			preferencesStore.update((prev) => {
+				prev.savedSubreddits = savedSubreddits;
+				return prev;
+			});
+		}
+
+		node.addEventListener('dragend', reorderItem);
+		node.addEventListener('dragstart', dragStart);
 		node.addEventListener('dragover', dragOver);
 
 		return {
 			destroy: () => {
 				node.removeEventListener('dragover', dragOver);
-				node.removeEventListener('dragend', moveItem);
+				node.removeEventListener('dragstart', dragStart);
+				node.removeEventListener('dragend', reorderItem);
 			}
 		};
 	}
-
-	function moveItem() {
-		if (hoveringOverTrashIcon) {
-			hoveringOverTrashIcon = false;
-			return;
-		}
-
-		let newIndex = listItemHoverIndex;
-		if (!direction) {
-			newIndex = newIndex + 1;
-		}
-
-		const movedItem = savedSubreddits.splice(listItemDragIndex, 1);
-		savedSubreddits.splice(newIndex, 0, movedItem[0]);
-		savedSubreddits = savedSubreddits;
-		preferencesStore.update((prev) => {
-			prev.savedSubreddits = savedSubreddits;
-			return prev;
-		});
-	}
 </script>
 
-<div bind:this={listContainer} use:poggers>
+<div use:setupEventListeners>
 	<div
 		class="h-[1px] w-full rounded-full duration-75"
 		class:bg-slate-400={drag && !direction && listItemHoverIndex === -1 && !hoveringOverTrashIcon}

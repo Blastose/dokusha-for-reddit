@@ -6,6 +6,10 @@
 	let subredditInput: string;
 	let displayInput: string;
 	let form: HTMLFormElement;
+
+	function focus(node: HTMLInputElement) {
+		node.focus();
+	}
 </script>
 
 {#if show}
@@ -32,6 +36,7 @@
 					class="focus:ring-2 focus:ring-[#9b9fb9] focus:outline-none"
 					type="text"
 					placeholder="subreddit (no /r/)"
+					use:focus
 					bind:value={subredditInput}
 				/>
 			</label>

@@ -18,12 +18,9 @@
 				displayedName: string;
 		  }[]
 		| undefined = undefined;
-
 	let drag: boolean;
-
-	onMount(() => {
-		savedSubreddits = $preferencesStore.savedSubreddits;
-	});
+	let hoveringOverTrashIcon: boolean;
+	let showAdd = false;
 
 	function addToStore(subreddit: string, displayName: string) {
 		preferencesStore.update((prev) => {
@@ -33,11 +30,9 @@
 		savedSubreddits = $preferencesStore.savedSubreddits;
 	}
 
-	let showAdd = false;
 	function hideAdd() {
 		showAdd = false;
 	}
-	$: sidebarFocusable = $sidebarStore || $drawerStore;
 
 	function onDrop(e: DragEvent) {
 		e.preventDefault();
@@ -50,7 +45,11 @@
 		drag = false;
 	}
 
-	let hoveringOverTrashIcon: boolean;
+	$: sidebarFocusable = $sidebarStore || $drawerStore;
+
+	onMount(() => {
+		savedSubreddits = $preferencesStore.savedSubreddits;
+	});
 </script>
 
 <div class="px-6 py-4 sidebar">

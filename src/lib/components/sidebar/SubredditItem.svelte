@@ -21,10 +21,7 @@
 			dragging = false;
 		}
 
-		node.addEventListener('dragstart', dragStart);
-		node.addEventListener('dragend', dragEnd);
-
-		node.addEventListener('dragover', (e: DragEvent) => {
+		function dragOver(e: DragEvent) {
 			currentHover = e.currentTarget as HTMLAnchorElement;
 			const current = e.clientY - currentHover.getBoundingClientRect().top;
 			const half = currentHover.offsetHeight / 2;
@@ -35,12 +32,17 @@
 					currentHoverIndex = arrayIndex - 1;
 				}
 			}
-		});
+		}
+
+		node.addEventListener('dragstart', dragStart);
+		node.addEventListener('dragend', dragEnd);
+		node.addEventListener('dragover', dragOver);
 
 		return {
 			destroy() {
 				node.removeEventListener('dragstart', dragStart);
 				node.removeEventListener('dragend', dragEnd);
+				node.removeEventListener('dragover', dragOver);
 			}
 		};
 	}
