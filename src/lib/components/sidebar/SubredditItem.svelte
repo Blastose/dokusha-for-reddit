@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	export let subreddit: string;
 	export let displayName: string;
 	export let focusable: boolean;
@@ -46,10 +48,14 @@
 			}
 		};
 	}
+
+	$: current = $page.params.subreddit.toLowerCase() === subreddit.toLowerCase();
 </script>
 
 <div>
-	<a use:drag href="/r/{subreddit}" tabindex={focusable ? 0 : -1}>{displayName}</a>
+	<a class:highlight={current} use:drag href="/r/{subreddit}" tabindex={focusable ? 0 : -1}
+		>{displayName}</a
+	>
 </div>
 
 <style>
@@ -70,5 +76,16 @@
 
 	:global(.dark) a:hover {
 		background-color: rgb(48, 50, 53);
+	}
+
+	.highlight,
+	.highlight:hover {
+		color: white;
+		background-color: rgb(116, 124, 184);
+	}
+
+	:global(.dark) .highlight,
+	:global(.dark) .highlight:hover {
+		background-color: rgb(80, 86, 133);
 	}
 </style>
