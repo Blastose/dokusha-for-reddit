@@ -49,7 +49,7 @@
 		};
 	}
 
-	$: current = $page.params.subreddit.toLowerCase() === subreddit.toLowerCase();
+	$: current = $page.params.subreddit?.toLowerCase() === subreddit.toLowerCase();
 </script>
 
 <div>
