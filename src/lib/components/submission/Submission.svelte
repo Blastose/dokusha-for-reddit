@@ -6,6 +6,7 @@
 	import CommentSkeleton from '$lib/components/comment/CommentSkeleton.svelte';
 	import SubmissionBodySkeleton from './SubmissionBodySkeleton.svelte';
 	import { onMount } from 'svelte';
+	import type { Sort } from 'jsrwrap/types';
 
 	export let submission: SubmissionReturnType | Promise<SubmissionReturnType>;
 
@@ -21,6 +22,9 @@
 	const submissionId =
 		// @ts-ignore
 		`${$submissionStore?.id ?? submission.id}`;
+
+	// @ts-ignore
+	const suggestedSort = ($submissionStore?.suggested_sort ?? submission.suggested_sort) as Sort;
 
 	onMount(async () => {
 		if (!$submissionStore) {
@@ -42,7 +46,7 @@
 				<CommentSkeleton />
 			{/each}
 		{:then value}
-			<SubmissionCommentContainer comments={value.comments} {submissionId} />
+			<SubmissionCommentContainer comments={value.comments} {submissionId} {suggestedSort} />
 		{/await}
 	{:else}
 		{#await submission}
@@ -56,7 +60,7 @@
 
 			<hr />
 
-			<SubmissionCommentContainer comments={value.comments} {submissionId} />
+			<SubmissionCommentContainer comments={value.comments} {submissionId} {suggestedSort} />
 		{/await}
 	{/if}
 </section>

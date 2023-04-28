@@ -1,13 +1,16 @@
 <script lang="ts">
 	import Comment from '$lib/components/comment/Comment.svelte';
-	import type { CommentFull } from 'jsrwrap/types';
+	import SubmissionSort from './SubmissionSort.svelte';
+	import type { CommentFull, Sort } from 'jsrwrap/types';
 
 	export let comments: CommentFull[];
 	export let submissionId: string;
+	export let suggestedSort: Sort;
 </script>
 
 <div class="flex flex-col gap-2">
 	<p class="text-lg font-semibold">Comments</p>
+	<SubmissionSort {suggestedSort} />
 	<div class="flex flex-col gap-8">
 		{#each comments as comment, index}
 			{#if comment.type === 'comment'}
