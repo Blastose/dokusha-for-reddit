@@ -50,15 +50,15 @@
 		return timeUrl.toString();
 	}
 
-	function showSuggestedText() {
+	function showSuggestedText(paramSortParameter: Sort | undefined) {
 		// We want to show suggested text only if:
 		// 1. The url is `/` (no sort?) and the suggested_sort key is not confidence
 		// 2. The sort? param is equal to the suggested_sort key and the suggested_sort key is not confidence
 		if (suggestedSort !== 'confidence') {
-			if (!paramSort) {
+			if (!paramSortParameter) {
 				return true;
 			}
-			if (paramSort === suggestedSort) {
+			if (paramSortParameter === suggestedSort) {
 				return true;
 			}
 		}
@@ -69,7 +69,7 @@
 <div class="text-sm font-bold dropdown">
 	<button class="current-sort"
 		>Sort By: {sortMap[currentSort]}
-		{showSuggestedText() ? '(Suggested)' : ''}<Icon
+		{showSuggestedText(paramSort) ? '(Suggested)' : ''}<Icon
 			height="20"
 			width="20"
 			name="chevronDown"

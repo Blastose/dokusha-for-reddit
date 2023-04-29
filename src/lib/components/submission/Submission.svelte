@@ -4,6 +4,7 @@
 	import { submissionStore } from '$lib/stores/submissionStore';
 	import type { SubmissionReturnType } from '$lib/types/types';
 	import CommentSkeleton from '$lib/components/comment/CommentSkeleton.svelte';
+	import SubmissionSort from './SubmissionSort.svelte';
 	import SubmissionBodySkeleton from './SubmissionBodySkeleton.svelte';
 	import { onMount } from 'svelte';
 	import type { Sort } from 'jsrwrap/types';
@@ -23,8 +24,10 @@
 		// @ts-ignore
 		`${$submissionStore?.id ?? submission.id}`;
 
-	// @ts-ignore
-	const suggestedSort = ($submissionStore?.suggested_sort ?? submission.suggested_sort) as Sort;
+	const suggestedSort = ($submissionStore?.suggested_sort ??
+		// @ts-ignore
+		submission.suggested_sort ??
+		'confidence') as Sort;
 
 	onMount(async () => {
 		if (!$submissionStore) {
@@ -41,13 +44,17 @@
 
 		<hr />
 
-		{#await submission}
-			{#each { length: 5 } as _}
-				<CommentSkeleton />
-			{/each}
-		{:then value}
-			<SubmissionCommentContainer comments={value.comments} {submissionId} {suggestedSort} />
-		{/await}
+		<div class="flex flex-col gap-2">
+			<p class="text-lg font-semibold">Comments</p>
+			<SubmissionSort {suggestedSort} />
+			{#await submission}
+				{#each { length: 5 } as _}
+					<CommentSkeleton />
+				{/each}
+			{:then value}
+				<SubmissionCommentContainer comments={value.comments} {submissionId} {suggestedSort} />
+			{/await}
+		</div>
 	{:else}
 		{#await submission}
 			<SubmissionBodySkeleton />
@@ -60,7 +67,11 @@
 
 			<hr />
 
-			<SubmissionCommentContainer comments={value.comments} {submissionId} {suggestedSort} />
+			<div class="flex flex-col gap-2">
+				<p class="text-lg font-semibold">Comments</p>
+				<SubmissionSort {suggestedSort} />
+				<SubmissionCommentContainer comments={value.comments} {submissionId} {suggestedSort} />
+			</div>
 		{/await}
 	{/if}
 </section>
