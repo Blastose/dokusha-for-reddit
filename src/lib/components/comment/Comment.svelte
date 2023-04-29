@@ -23,12 +23,16 @@
 
 	async function getMoreChildren() {
 		if (comment.type === 'more' && comment.id !== '_') {
-			const sort = $page.url.searchParams.get('sort') ?? suggestedSort;
-			const res = await fetch(
-				`/api/morechildren?submissionId=${submissionId}&children=${comment.children.join(
-					','
-				)}&sort=${sort}`
-			);
+			const sort = $page.url.searchParams.get('sort') ?? suggestedSort ?? 'confidence';
+			const res = await fetch(`/api/morechildren`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					submissionId,
+					children: comment.children.join(','),
+					sort: sort
+				})
+			});
 
 			const children = (await res.json()) as Awaited<ReturnType<Submission['getMoreChildren']>>;
 
