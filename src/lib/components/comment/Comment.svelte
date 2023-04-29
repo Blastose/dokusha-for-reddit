@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { Submission } from 'jsrwrap';
-	import type { CommentFull } from 'jsrwrap/types';
+	import type { CommentFull, Sort } from 'jsrwrap/types';
 	import { markdownToHtml } from '$lib/utils/markdownToHtml';
+	import { page } from '$app/stores';
 	import CommentBar from './CommentBar.svelte';
 	import CommentInfo from './CommentInfo.svelte';
 	import CommentBody from './CommentBody.svelte';
@@ -9,6 +10,7 @@
 
 	export let comment: CommentFull;
 	export let submissionId: string;
+	export let suggestedSort: Sort;
 	export let updateReplies: ((moreId: string, children: CommentFull[]) => void) | null = null;
 
 	function addReplies(moreId: string, children: CommentFull[]) {
@@ -21,9 +23,16 @@
 
 	async function getMoreChildren() {
 		if (comment.type === 'more' && comment.id !== '_') {
-			const res = await fetch(
-				`/api/morechildren?submissionId=${submissionId}&children=${comment.children.join(',')}`
-			);
+			const sort = $page.url.searchParams.get('sort') ?? suggestedSort ?? 'confidence';
+			const res = await fetch(`/api/morechildren`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					submissionId,
+					children: comment.children.join(','),
+					sort: sort
+				})
+			});
 
 			const children = (await res.json()) as Awaited<ReturnType<Submission['getMoreChildren']>>;
 
@@ -66,7 +75,6 @@
 		<div class="flex flex-col gap-2">
 			<div>
 				<CommentInfo {comment} {commentHidden} {toggleCommentVisibility} />
-
 				<div class:hidden={commentHidden}>
 					<CommentBody {commentHtml} />
 

@@ -1,15 +1,19 @@
 import type { RequestHandler } from './$types';
 import { jsrwrap } from '$lib/server/reddit';
+import type { Sort } from 'jsrwrap/types';
 import { json } from '@sveltejs/kit';
 
-export const GET = (async ({ url }) => {
-	const submissionId = String(url.searchParams.get('submissionId'));
-	const children = String(url.searchParams.get('children'));
+export const POST = (async ({ request }) => {
+	const { submissionId, children, sort } = (await request.json()) as {
+		submissionId: string;
+		children: string;
+		sort: Sort;
+	};
 
 	const childrenData = await jsrwrap.getSubmission(submissionId).getMoreChildren({
 		children: children.split(','),
 		limit_children: false,
-		sort: 'confidence'
+		sort: sort ?? 'confidence'
 	});
 
 	return json(childrenData);
