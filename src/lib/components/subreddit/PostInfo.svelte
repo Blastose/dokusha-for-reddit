@@ -1,9 +1,8 @@
 <script lang="ts">
-	import type { SubmissionData } from 'jsrwrap/types';
-	import relativeTime from '$lib/utils/relativeTime';
+	import type { SubmissionData } from 'jsrwrap/types'; 
 	import Icon from '$lib/components/icon/Icon.svelte';
-	import UserFlair from './UserFlair.svelte';
-	import { nowStore } from '$lib/stores/nowStore';
+	import UserFlair from './UserFlair.svelte'; 
+	import RelativeTime from '$lib/components/time/RelativeTime.svelte';
 
 	export let post: SubmissionData;
 
@@ -14,14 +13,11 @@
 	<span>Posted by <span class="author">{post.author}</span></span>
 	<UserFlair author={post} />
 
-	<span title={new Date(post.created_utc * 1000).toString()}
-		>{relativeTime($nowStore, post.created_utc)}</span
-	>
-	{#if typeof post.edited === 'number'}
-		<span title={new Date(post.edited * 1000).toString()}
-			>* (edited {relativeTime($nowStore, post.edited)})</span
-		>
-	{/if}
+	<RelativeTime
+		postedTimeSeconds={post.created_utc}
+		editedTimeSeconds={post.edited}
+		fontSize="normal"
+	/>
 
 	{#if post.distinguished === 'moderator'}<span role="img" aria-label="mod post" class="moderator"
 			><Icon class="inline" height={iconDimension} width={iconDimension} name="shield" /></span

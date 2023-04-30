@@ -5,17 +5,17 @@ const unitsInSeconds = {
 	hour: 60 * 60 * 1,
 	minute: 60 * 1,
 	second: 1,
-	now: -9999
+	now: -15
 };
 
-const unitsInSecondsShort = {
-	'yr.': 365 * 24 * 60 * 60 * 1,
-	'mo.': (365 / 12) * 24 * 60 * 60 * 1,
-	day: 24 * 60 * 60 * 1,
-	'hr.': 60 * 60 * 1,
-	'min.': 60 * 1,
-	'sec.': 1
-};
+// const unitsInSecondsShort = {
+// 	'yr.': 365 * 24 * 60 * 60 * 1,
+// 	'mo.': (365 / 12) * 24 * 60 * 60 * 1,
+// 	day: 24 * 60 * 60 * 1,
+// 	'hr.': 60 * 60 * 1,
+// 	'min.': 60 * 1,
+// 	'sec.': 1
+// };
 
 const pluralize = (word: string, amount: number) => {
 	return amount > 1 ? `${word}s` : word;
