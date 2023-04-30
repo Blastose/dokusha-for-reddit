@@ -2,6 +2,7 @@
 	import type { SubmissionData } from 'jsrwrap/types';
 	import { subredditViewStore } from '$lib/stores/subredditViewStore';
 	import { subredditStore } from '$lib/stores/subredditStore';
+	import { browser } from '$app/environment';
 	import SubredditCard from './SubredditCard.svelte';
 	import SubredditClassic from './SubredditClassic.svelte';
 	import SubredditClassicSkeleton from './SubredditClassicSkeleton.svelte';
@@ -22,12 +23,14 @@
 		// none of the statements in the onMount function run
 		$page;
 		(async () => {
-			morePosts = true;
-			lastPostId = '';
-			const postsAwaited = await posts;
-			if (postsAwaited.length > 0) {
-				subredditStore.setSubredditPosts($page.url.href.toLowerCase(), postsAwaited);
-				lastPostId = postsAwaited[postsAwaited.length - 1].id;
+			if (browser) {
+				morePosts = true;
+				lastPostId = '';
+				const postsAwaited = await posts;
+				if (postsAwaited.length > 0) {
+					subredditStore.setSubredditPosts($page.url.href.toLowerCase(), postsAwaited);
+					lastPostId = postsAwaited[postsAwaited.length - 1].id;
+				}
 			}
 		})();
 	}
