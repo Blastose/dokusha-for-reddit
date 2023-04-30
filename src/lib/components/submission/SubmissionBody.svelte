@@ -25,7 +25,6 @@
 				<PostTag postTag={submission} />
 			</div>
 		</div>
-		<a href="/r/{submission.subreddit}" class="text-sm font-bold">r/{submission.subreddit}</a>
 
 		<div class="text-sm font-semibold">
 			<PostInfo post={submission} />
