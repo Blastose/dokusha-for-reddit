@@ -10,7 +10,7 @@
 	import { page } from '$app/stores';
 
 	export let submission: SubmissionReturnType | Promise<SubmissionReturnType>;
-	export let flyKey: string | null = null;
+	export let flyKey: string | null = 'skip';
 	export let isSingleComment = false;
 
 	$: submissionId =
