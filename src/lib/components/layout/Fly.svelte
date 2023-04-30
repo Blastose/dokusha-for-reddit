@@ -17,8 +17,12 @@
 	$: flyXOffset = 30;
 </script>
 
-{#key key}
-	<div in:fly={{ x: flyXOffset * flyDirection, duration: 250, easing: cubicOut }}>
-		<slot />
-	</div>
-{/key}
+{#if key}
+	{#key key}
+		<div in:fly={{ x: flyXOffset * flyDirection, duration: 250, easing: cubicOut }}>
+			<slot />
+		</div>
+	{/key}
+{:else}
+	<slot />
+{/if}
