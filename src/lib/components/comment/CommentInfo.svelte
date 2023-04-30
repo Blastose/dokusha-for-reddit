@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Comment } from 'jsrwrap/types';
-	import relativeTime from '$lib/utils/relativeTime';
 	import UserFlair from '$lib/components/subreddit/UserFlair.svelte';
+	import RelativeTime from '$lib/components/time/RelativeTime.svelte';
 
 	export let comment: Comment;
 	export let commentHidden: boolean;
@@ -21,14 +21,11 @@
 		<span class="text-sm align-middle font-semibold mod">*stickied comment*</span>
 	{/if}
 
-	<span class="time" title={new Date(comment.created_utc * 1000).toString()}
-		>{relativeTime(comment.created_utc)}</span
-	>
-	{#if typeof comment.edited === 'number'}
-		<span class="time" title={new Date(comment.edited * 1000).toString()}
-			>* (edited {relativeTime(comment.edited)})</span
-		>
-	{/if}
+	<RelativeTime
+		postedTimeSeconds={comment.created_utc}
+		editedTimeSeconds={comment.edited}
+		fontSize="small"
+	/>
 
 	{#if commentHidden}
 		<button class="expand-button" aria-label="expand comment" on:click={toggleCommentVisibility}
@@ -48,18 +45,6 @@
 
 	:global(.dark) .author {
 		color: #aeaedd;
-	}
-
-	.time {
-		font-size: 0.75rem;
-		line-height: 1rem;
-		font-weight: 600;
-		color: #717677;
-		vertical-align: middle;
-	}
-
-	:global(.dark) .time {
-		color: #878b8c;
 	}
 
 	.submitter,
