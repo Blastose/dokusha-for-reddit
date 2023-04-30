@@ -8,4 +8,4 @@
 	$: submission = data.streamed.submission;
 </script>
 
-<CommentContainer {submission} flyKey={key} />
+<CommentContainer {submission} flyKey={key} isSingleComment={true} />

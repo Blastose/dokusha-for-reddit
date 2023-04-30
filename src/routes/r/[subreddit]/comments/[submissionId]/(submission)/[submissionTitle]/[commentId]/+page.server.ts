@@ -7,11 +7,20 @@ export const load = (async ({ params, isDataRequest, url }) => {
 	const commentId = params.commentId;
 	const sort = url.searchParams.get('sort') as Sort | undefined;
 
+	const context = Number(url.searchParams.get('context')) as number | undefined;
+	const depth = Number(url.searchParams.get('depth')) as number | undefined;
+
+	const options = {
+		context,
+		depth,
+		comment: commentId
+	};
+
 	let submission;
 	if (sort) {
-		submission = jsrwrap.getSubmission(submissionId).fetch({ sort, comment: commentId });
+		submission = jsrwrap.getSubmission(submissionId).fetch({ sort, ...options });
 	} else {
-		submission = jsrwrap.getSubmission(submissionId).fetch({ comment: commentId });
+		submission = jsrwrap.getSubmission(submissionId).fetch({ ...options });
 	}
 
 	return {
