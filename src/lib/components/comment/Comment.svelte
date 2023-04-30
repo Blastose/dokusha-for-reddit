@@ -56,6 +56,17 @@
 		return (source.match(/\n/g) || []).length;
 	}
 
+	function buildPermalink(id: string) {
+		// We need to remove the first 3 characters since id starts with t3_
+		const splitPaths = $page.url.pathname.split('/');
+		// The first 6 elements of the splitpath array form the base url for
+		// the new comment permalink
+		const baseUrl = splitPaths.splice(0, 6).join('/');
+
+		const newUrl = `${baseUrl}/${id.slice(3)}`;
+		return newUrl;
+	}
+
 	$: commentBody = comment.type === 'comment' ? comment.body : '';
 	$: commentMediaMetadata = comment.type === 'comment' ? comment.media_metadata : undefined;
 	$: commentHtml = markdownToHtml(commentBody, { media_metadata: commentMediaMetadata });
@@ -109,7 +120,12 @@
 	</div>
 {:else if comment.type === 'more'}
 	{#if comment.id === '_'}
-		<div class="load-more-comments">Continue this thread</div>
+		<a
+			class="load-more-comments"
+			href={buildPermalink(comment.parent_id)}
+			target="_blank"
+			rel="noreferrer">Continue this thread</a
+		>
 	{:else}
 		<button
 			class="load-more-comments text-left"

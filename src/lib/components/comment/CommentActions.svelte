@@ -41,6 +41,8 @@
 		target="_blank"
 		rel="noreferrer">view in reddit</a
 	>
+
+	<a class="text-sm font-semibold" href={comment.permalink}>permalink</a>
 </div>
 
 <style>
