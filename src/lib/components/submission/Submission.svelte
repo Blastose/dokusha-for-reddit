@@ -10,6 +10,7 @@
 	import type { Sort } from 'jsrwrap/types';
 
 	export let submission: SubmissionReturnType | Promise<SubmissionReturnType>;
+	export let isSingleComment: boolean = false;
 
 	// We can ts-ignore the following lines since we know that when the page is ssr'd
 	// the promise for submission is resolved
@@ -47,6 +48,9 @@
 		<div class="flex flex-col gap-2">
 			<p class="text-lg font-semibold">Comments</p>
 			<SubmissionSort {suggestedSort} />
+			{#if isSingleComment}
+				<p>You are viewing a single comment's thread</p>
+			{/if}
 			{#await submission}
 				{#each { length: 5 } as _}
 					<CommentSkeleton />
@@ -70,6 +74,9 @@
 			<div class="flex flex-col gap-2">
 				<p class="text-lg font-semibold">Comments</p>
 				<SubmissionSort {suggestedSort} />
+				{#if isSingleComment}
+					<p>You are viewing a single comment's thread</p>
+				{/if}
 				<SubmissionCommentContainer comments={value.comments} {submissionId} {suggestedSort} />
 			</div>
 		{/await}

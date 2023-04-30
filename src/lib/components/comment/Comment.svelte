@@ -13,6 +13,8 @@
 	export let suggestedSort: Sort;
 	export let updateReplies: ((moreId: string, children: CommentFull[]) => void) | null = null;
 
+	$: highlightCommentId = $page.params.commentId;
+
 	function addReplies(moreId: string, children: CommentFull[]) {
 		if (comment.type === 'comment') {
 			const moreIndex = comment.replies.findIndex((value) => value.id === moreId);
@@ -56,6 +58,17 @@
 		return (source.match(/\n/g) || []).length;
 	}
 
+	function buildPermalink(id: string) {
+		// We need to remove the first 3 characters since id starts with t3_
+		const splitPaths = $page.url.pathname.split('/');
+		// The first 6 elements of the splitpath array form the base url for
+		// the new comment permalink
+		const baseUrl = splitPaths.splice(0, 6).join('/');
+
+		const newUrl = `${baseUrl}/${id.slice(3)}`;
+		return newUrl;
+	}
+
 	$: commentBody = comment.type === 'comment' ? comment.body : '';
 	$: commentMediaMetadata = comment.type === 'comment' ? comment.media_metadata : undefined;
 	$: commentHtml = markdownToHtml(commentBody, { media_metadata: commentMediaMetadata });
@@ -73,7 +86,7 @@
 		<CommentBar {commentHidden} {toggleCommentVisibility} />
 
 		<div class="flex flex-col gap-2">
-			<div>
+			<div class:highlight={highlightCommentId === comment.id}>
 				<CommentInfo {comment} {commentHidden} {toggleCommentVisibility} />
 				<div class:hidden={commentHidden}>
 					<CommentBody {commentHtml} />
@@ -109,7 +122,9 @@
 	</div>
 {:else if comment.type === 'more'}
 	{#if comment.id === '_'}
-		<div class="load-more-comments">Continue this thread</div>
+		<a class="load-more-comments" href={buildPermalink(comment.parent_id)} rel="noreferrer"
+			>Continue this thread</a
+		>
 	{:else}
 		<button
 			class="load-more-comments text-left"
@@ -126,6 +141,16 @@
 	.comment-container {
 		display: grid;
 		grid-template-columns: 22px 1fr;
+	}
+
+	.highlight {
+		background-color: rgba(158, 170, 197, 0.199);
+		border-radius: 0.375rem;
+		padding: 0.125rem 0.5rem;
+	}
+
+	:global(.dark) .highlight {
+		background-color: rgba(73, 71, 82, 0.411);
 	}
 
 	.load-more-comments {

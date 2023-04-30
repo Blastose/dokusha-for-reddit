@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 import { jsrwrap } from '$lib/server/reddit';
 import type { Sort } from 'jsrwrap/types';
 
@@ -20,4 +20,4 @@ export const load = (async ({ params, isDataRequest, setHeaders, url }) => {
 			submission: isDataRequest ? submission : await submission
 		}
 	};
-}) satisfies PageServerLoad;
+}) satisfies LayoutServerLoad;

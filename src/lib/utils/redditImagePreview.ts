@@ -31,17 +31,23 @@ export function getGalleryData(
 
 	for (const item of post.gallery_data.items) {
 		const galleryItem = post.media_metadata[item.media_id];
-		if (galleryItem.e !== 'Image') {
-			continue;
+		if (galleryItem.e === 'Image') {
+			res.push({
+				url: galleryItem.s.u,
+				width: galleryItem.s.x,
+				height: galleryItem.s.y,
+				outboundUrl: item.outbound_url,
+				caption: item.caption
+			});
+		} else if (galleryItem.e === 'AnimatedImage') {
+			res.push({
+				url: galleryItem.s.gif,
+				width: galleryItem.s.x,
+				height: galleryItem.s.y,
+				outboundUrl: item.outbound_url,
+				caption: item.caption
+			});
 		}
-
-		res.push({
-			url: galleryItem.s.u,
-			width: galleryItem.s.x,
-			height: galleryItem.s.y,
-			outboundUrl: item.outbound_url,
-			caption: item.caption
-		});
 	}
 
 	if (res.length < 1) {
