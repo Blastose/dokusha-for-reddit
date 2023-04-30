@@ -120,11 +120,8 @@
 	</div>
 {:else if comment.type === 'more'}
 	{#if comment.id === '_'}
-		<a
-			class="load-more-comments"
-			href={buildPermalink(comment.parent_id)}
-			target="_blank"
-			rel="noreferrer">Continue this thread</a
+		<a class="load-more-comments" href={buildPermalink(comment.parent_id)} rel="noreferrer"
+			>Continue this thread</a
 		>
 	{:else}
 		<button

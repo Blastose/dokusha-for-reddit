@@ -1,7 +1,11 @@
 <script lang="ts">
-	import Submission from '$lib/components/submission/Submission.svelte';
+	import CommentContainer from '$lib/components/comment/CommentContainer.svelte';
+	import { page } from '$app/stores';
 
 	export let data;
+
+	$: key = $page.params.commentId?.toLowerCase();
+	$: submission = data.streamed.submission;
 </script>
 
-<Submission submission={data.streamed.submission} isSingleComment={true} />
+<CommentContainer {submission} flyKey={key} />

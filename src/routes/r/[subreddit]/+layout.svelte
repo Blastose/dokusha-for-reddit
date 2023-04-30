@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { subredditViewStore } from '$lib/stores/subredditViewStore';
 	import SortPosts from '$lib/components/sort/SortPosts.svelte';
-	import { fly } from 'svelte/transition';
-	import { cubicOut } from 'svelte/easing';
-	import { beforeNavigate } from '$app/navigation';
 	import { page } from '$app/stores';
+	import Fly from '$lib/components/layout/Fly.svelte';
 
 	export let data;
 
@@ -16,16 +14,7 @@
 		}
 	}
 
-	beforeNavigate((beforeNavigate) => {
-		if (beforeNavigate.delta && beforeNavigate.delta < 0) {
-			flyDirection = -1;
-		} else {
-			flyDirection = 1;
-		}
-	});
-
-	let flyDirection = 1;
-	$: flyXOffset = 30;
+	$: key = $page.params.subreddit?.toLowerCase();
 
 	$: about = data.about;
 	$: bannerUrl = about.banner_background_image || about.banner_img;
@@ -72,11 +61,9 @@
 			</button>
 		{/if}
 
-		{#key data.pathname}
-			<div in:fly={{ x: flyXOffset * flyDirection, duration: 250, easing: cubicOut }}>
-				<slot />
-			</div>
-		{/key}
+		<Fly {key}>
+			<slot />
+		</Fly>
 	</div>
 </section>
 

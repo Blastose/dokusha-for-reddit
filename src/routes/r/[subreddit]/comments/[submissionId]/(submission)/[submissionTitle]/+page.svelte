@@ -1,13 +1,9 @@
 <script lang="ts">
-	import Submission from '$lib/components/submission/Submission.svelte';
-	import { onMount } from 'svelte';
-	import { submissionStore } from '$lib/stores/submissionStore';
+	import CommentContainer from '$lib/components/comment/CommentContainer.svelte';
 
 	export let data;
 
-	onMount(async () => {
-		submissionStore.set(await data.streamed.submission);
-	});
+	$: submission = data.streamed.submission;
 </script>
 
-<Submission submission={data.streamed.submission} />
+<CommentContainer {submission} />
