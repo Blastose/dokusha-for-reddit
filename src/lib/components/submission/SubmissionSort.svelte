@@ -79,6 +79,7 @@
 		{#each sortOptions as sortOption}
 			<a
 				data-sveltekit-noscroll
+				data-sveltekit-replacestate
 				class="dropdown-item"
 				class:active={sortOption.value === currentSort}
 				href={createNewSortUrl($page.url, sortOption.value)}>{sortOption.display}</a
