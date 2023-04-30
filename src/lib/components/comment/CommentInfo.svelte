@@ -2,6 +2,7 @@
 	import type { Comment } from 'jsrwrap/types';
 	import relativeTime from '$lib/utils/relativeTime';
 	import UserFlair from '$lib/components/subreddit/UserFlair.svelte';
+	import { nowStore } from '$lib/stores/nowStore';
 
 	export let comment: Comment;
 	export let commentHidden: boolean;
@@ -22,11 +23,11 @@
 	{/if}
 
 	<span class="time" title={new Date(comment.created_utc * 1000).toString()}
-		>{relativeTime(comment.created_utc)}</span
+		>{relativeTime($nowStore, comment.created_utc)}</span
 	>
 	{#if typeof comment.edited === 'number'}
 		<span class="time" title={new Date(comment.edited * 1000).toString()}
-			>* (edited {relativeTime(comment.edited)})</span
+			>* (edited {relativeTime($nowStore, comment.edited)})</span
 		>
 	{/if}
 

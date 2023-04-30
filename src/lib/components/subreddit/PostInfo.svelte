@@ -3,6 +3,7 @@
 	import relativeTime from '$lib/utils/relativeTime';
 	import Icon from '$lib/components/icon/Icon.svelte';
 	import UserFlair from './UserFlair.svelte';
+	import { nowStore } from '$lib/stores/nowStore';
 
 	export let post: SubmissionData;
 
@@ -13,10 +14,12 @@
 	<span>Posted by <span class="author">{post.author}</span></span>
 	<UserFlair author={post} />
 
-	<span title={new Date(post.created_utc * 1000).toString()}>{relativeTime(post.created_utc)}</span>
+	<span title={new Date(post.created_utc * 1000).toString()}
+		>{relativeTime($nowStore, post.created_utc)}</span
+	>
 	{#if typeof post.edited === 'number'}
 		<span title={new Date(post.edited * 1000).toString()}
-			>* (edited {relativeTime(post.edited)})</span
+			>* (edited {relativeTime($nowStore, post.edited)})</span
 		>
 	{/if}
 

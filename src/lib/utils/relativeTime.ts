@@ -4,7 +4,8 @@ const unitsInSeconds = {
 	day: 24 * 60 * 60 * 1,
 	hour: 60 * 60 * 1,
 	minute: 60 * 1,
-	second: 1
+	second: 1,
+	now: -9999
 };
 
 const unitsInSecondsShort = {
@@ -21,11 +22,15 @@ const pluralize = (word: string, amount: number) => {
 };
 
 const formatRelativeTimeOutput = (difference: number, unit: string) => {
+	if (difference <= 0) {
+		return 'just now';
+	}
+
 	return `${difference} ${pluralize(unit, difference)} ago`;
 };
 
-const relativeTime = (unixTimestampSeconds: number): string => {
-	const unixTimeNowSeconds = Math.floor(Date.now() / 1000);
+const relativeTime = (now: Date, unixTimestampSeconds: number): string => {
+	const unixTimeNowSeconds = Math.floor(now.getTime() / 1000);
 	const differenceInSeconds = unixTimeNowSeconds - unixTimestampSeconds;
 
 	for (const key in unitsInSeconds) {
