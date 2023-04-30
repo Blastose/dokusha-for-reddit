@@ -13,6 +13,8 @@
 	export let suggestedSort: Sort;
 	export let updateReplies: ((moreId: string, children: CommentFull[]) => void) | null = null;
 
+	$: highlightCommentId = $page.params.commentId;
+
 	function addReplies(moreId: string, children: CommentFull[]) {
 		if (comment.type === 'comment') {
 			const moreIndex = comment.replies.findIndex((value) => value.id === moreId);
@@ -84,7 +86,7 @@
 		<CommentBar {commentHidden} {toggleCommentVisibility} />
 
 		<div class="flex flex-col gap-2">
-			<div>
+			<div class:highlight={highlightCommentId === comment.id}>
 				<CommentInfo {comment} {commentHidden} {toggleCommentVisibility} />
 				<div class:hidden={commentHidden}>
 					<CommentBody {commentHtml} />
@@ -139,6 +141,16 @@
 	.comment-container {
 		display: grid;
 		grid-template-columns: 22px 1fr;
+	}
+
+	.highlight {
+		background-color: rgba(158, 170, 197, 0.199);
+		border-radius: 0.375rem;
+		padding: 0.125rem 0.5rem;
+	}
+
+	:global(.dark) .highlight {
+		background-color: rgba(73, 71, 82, 0.411);
 	}
 
 	.load-more-comments {

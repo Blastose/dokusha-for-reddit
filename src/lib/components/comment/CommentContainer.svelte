@@ -29,7 +29,6 @@
 	function buildShowParentCommentsLink(id: string) {
 		// We need to remove the first 3 characters since id starts with t3_
 		const splitPaths = $page.url.pathname.split('/');
-		console.log(splitPaths);
 		// The first 6 elements of the splitpath array form the base url for
 		// the new comment permalink
 		const baseUrl = splitPaths.splice(0, 6).join('/');
