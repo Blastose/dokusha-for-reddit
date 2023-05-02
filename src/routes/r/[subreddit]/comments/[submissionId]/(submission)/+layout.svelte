@@ -2,18 +2,14 @@
 	import SubmissionBody from '$lib/components/submission/SubmissionBody.svelte';
 	import { submissionStore } from '$lib/stores/submissionStore';
 	import { onMount } from 'svelte';
-	import type { SubmissionData } from 'jsrwrap/types';
 	import Fly from '$lib/components/layout/Fly.svelte';
 	import { page } from '$app/stores';
+	import SubmissionBodySkeleton from '$lib/components/submission/SubmissionBodySkeleton.svelte';
 
 	export let data;
 
 	$: key = $page.params.submissionId?.toLowerCase();
 	$: submission = data.streamed.submission;
-
-	// This line below is only to prevent a TS error in the :else branch below
-	// We know that if the request is SSR'd, then we don't need to await the submission
-	$: submissionAwaited = submission as SubmissionData;
 
 	// We can ts-ignore the following lines since we know that when the page is ssr'd
 	// the promise for submission is resolved
@@ -41,7 +37,7 @@
 				<hr />
 				<slot />
 			{:else}
-				<SubmissionBody submission={submissionAwaited} />
+				<SubmissionBodySkeleton />
 				<hr />
 				<slot />
 			{/if}
