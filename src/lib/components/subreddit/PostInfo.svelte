@@ -3,6 +3,7 @@
 	import Icon from '$lib/components/icon/Icon.svelte';
 	import UserFlair from './UserFlair.svelte';
 	import RelativeTime from '$lib/components/time/RelativeTime.svelte';
+	import { page } from '$app/stores';
 
 	export let post: SubmissionData;
 
@@ -18,6 +19,10 @@
 		editedTimeSeconds={post.edited}
 		fontSize="normal"
 	/>
+
+	{#if $page.params.subreddit !== post.subreddit}
+		<span>in <a href="/r/{post.subreddit}" class="author">r/{post.subreddit}</a></span>
+	{/if}
 
 	{#if post.distinguished === 'moderator'}<span role="img" aria-label="mod post" class="moderator"
 			><Icon class="inline" height={iconDimension} width={iconDimension} name="shield" /></span
