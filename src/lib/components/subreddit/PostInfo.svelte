@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { SubmissionData } from 'jsrwrap/types'; 
+	import type { SubmissionData } from 'jsrwrap/types';
 	import Icon from '$lib/components/icon/Icon.svelte';
-	import UserFlair from './UserFlair.svelte'; 
+	import UserFlair from './UserFlair.svelte';
 	import RelativeTime from '$lib/components/time/RelativeTime.svelte';
 
 	export let post: SubmissionData;
@@ -10,7 +10,7 @@
 </script>
 
 <div class="info-container">
-	<span>Posted by <span class="author">{post.author}</span></span>
+	<span>Posted by <a class="author" href="/u/{post.author}">{post.author}</a></span>
 	<UserFlair author={post} />
 
 	<RelativeTime

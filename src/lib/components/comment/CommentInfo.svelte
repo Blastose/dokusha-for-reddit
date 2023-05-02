@@ -10,7 +10,7 @@
 </script>
 
 <div class:italic={commentHidden}>
-	<span class="author">{comment.author}</span>
+	<a class="author" href="/u/{comment.author}">{comment.author}</a>
 	<UserFlair author={comment} />
 	{#if comment.distinguished === 'moderator'}
 		<span class="mod author">MOD</span>
