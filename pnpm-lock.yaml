@@ -11,7 +11,7 @@ specifiers:
   eslint: ^8.39.0
   eslint-config-prettier: ^8.8.0
   eslint-plugin-svelte3: ^4.0.0
-  jsrwrap: ^0.1.7
+  jsrwrap: ^0.1.8
   postcss: ^8.4.23
   prettier: ^2.8.8
   prettier-plugin-svelte: ^2.10.0
@@ -40,7 +40,7 @@ devDependencies:
   eslint: 8.39.0
   eslint-config-prettier: 8.8.0_eslint@8.39.0
   eslint-plugin-svelte3: 4.0.0_e3tiew2b4q4prbk4th5mqlc2ou
-  jsrwrap: 0.1.7
+  jsrwrap: 0.1.8
   postcss: 8.4.23
   prettier: 2.8.8
   prettier-plugin-svelte: 2.10.0_f6pmxuoopicxy7gb3t3nvoipzy
@@ -1367,8 +1367,8 @@ packages:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
     dev: true
 
-  /jsrwrap/0.1.7:
-    resolution: {integrity: sha512-k2wjl+tomFgQindmZesFLZtNNzVmLfxJfRlPLk314hM2zN09JbklybEKrT1BwIoEPbfUQBqLddh+sTtcn2kL4Q==}
+  /jsrwrap/0.1.8:
+    resolution: {integrity: sha512-GwzQWOfFV/eHoC0cgWJUsnd2RIFBXGBTFY7Ar18+5E1sjh5ZfhGvOjQq0LXAFl3sS0MnxBTcRCAq1vs86jVbFw==}
     engines: {node: '>=14.16'}
     dependencies:
       node-fetch: 3.3.1
