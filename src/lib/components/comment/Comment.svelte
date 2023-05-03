@@ -10,7 +10,7 @@
 
 	export let comment: CommentFull;
 	export let submissionId: string;
-	export let suggestedSort: Sort;
+	export let suggestedSort: Sort = 'confidence';
 	export let updateReplies: ((moreId: string, children: CommentFull[]) => void) | null = null;
 
 	$: highlightCommentId = $page.params.commentId;
