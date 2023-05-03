@@ -20,7 +20,7 @@
 		fontSize="normal"
 	/>
 
-	{#if $page.params.subreddit !== post.subreddit}
+	{#if $page.params.subreddit?.toLowerCase() !== post.subreddit.toLowerCase()}
 		<span>in <a href="/r/{post.subreddit}" class="author">r/{post.subreddit}</a></span>
 	{/if}
 
