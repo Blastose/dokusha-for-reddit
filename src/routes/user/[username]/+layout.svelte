@@ -1,4 +1,6 @@
 <script lang="ts">
+	import UserWhere from '$lib/components/user/UserWhere.svelte';
+
 	export let data;
 
 	function formatDate(date: Date) {
@@ -20,12 +22,7 @@
 	</div>
 
 	<div class="container content-container">
-		<div>
-			<a href="/">overview</a>
-			<a href="comments">comments</a>
-			<a href="submitted">submitted</a>
-			<a href="gilded">gilded</a>
-		</div>
+		<UserWhere />
 
 		<slot />
 	</div>
