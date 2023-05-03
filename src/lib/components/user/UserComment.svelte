@@ -8,10 +8,7 @@
 	export let comment: Comment;
 
 	function buildFullCommentsLink(commentPermalink: string) {
-		// We need to remove the first 3 characters since id starts with t3_
 		const splitPaths = commentPermalink.split('/');
-		// The first 6 elements of the splitpath array form the base url for
-		// the new comment permalink
 		const newUrl = splitPaths.splice(0, 6).join('/');
 		return newUrl;
 	}
@@ -21,7 +18,7 @@
 	}
 </script>
 
-<div class="flex flex-col gap-1 px-6 py-2 rounded-md bg-[#2d2e2e]">
+<div class="comment-container">
 	<span class="text-sm font-bold"
 		><a
 			href={buildFullCommentsLink(comment.permalink)}
@@ -31,28 +28,28 @@
 		by
 		<a class="author" href="/u/{comment.link_author}">u/{comment.link_author}</a>
 		in
-		<a class="author" href={comment.subreddit_name_prefixed}>r/{comment.subreddit}</a></span
+		<a class="author" href="/{comment.subreddit_name_prefixed}">r/{comment.subreddit}</a></span
 	>
 
 	<div>
-		<div class="uwu text-sm font-bold flex items-end gap-1">
-			<p class="author">
-				{comment.author}
+		<p class="author-info text-sm font-bold">
+			<span class="author">
+				<a href="/u/{comment.author}">{comment.author}</a>
 				{#if comment.distinguished === 'moderator'}
 					<span class="mod author">MOD</span>
 				{:else if comment.is_submitter}
 					<span class="submitter author">OP</span>
 				{/if}
-			</p>
-			<p>{comment.score} points</p>
+			</span>
+			<span class="text-xs">{comment.score} points</span>
 			<RelativeTime
 				postedTimeSeconds={comment.created_utc}
 				editedTimeSeconds={comment.edited}
 				fontSize="small"
 			/>
-		</div>
+		</p>
 		<RedditHtml rawHTML={markdownToHtml(comment.body)} />
-		<div class="text-gray-500 flex gap-2 text-sm font-semibold">
+		<div class="actions-container text-sm font-semibold">
 			<a href={buildFullCommentsLink(comment.permalink)}>{comment.num_comments} comments</a>
 			<span>source</span>
 			<a href={comment.permalink} on:click={clearSubmissionStore}>permalink</a>
@@ -62,6 +59,37 @@
 </div>
 
 <style>
+	.comment-container {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.375rem;
+		background-color: #edeef6;
+	}
+
+	:global(.dark) .comment-container {
+		background-color: #2d2e2e;
+	}
+
+	.actions-container {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+		color: #717677;
+		fill: #717677;
+	}
+
+	:global(.dark) .actions-container {
+		color: #878b8c;
+		fill: #878b8c;
+	}
+
+	.author-info > * {
+		vertical-align: middle;
+	}
+
 	.author {
 		font-size: 0.875rem;
 		line-height: 1.25rem;
