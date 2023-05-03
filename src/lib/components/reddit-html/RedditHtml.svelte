@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let rawHTML: string;
 	export let fixedSize = true;
+	export let centerImage = true;
 
 	const addRevealedClass = (event: Event) => {
 		const element = event.currentTarget as HTMLSpanElement;
@@ -22,6 +23,10 @@
 	};
 </script>
 
-<div class="reddit-md {fixedSize ? 'max-w-4xl' : ''}" use:addEventListeners>
+<div
+	class="reddit-md {fixedSize ? 'max-w-4xl' : ''}"
+	class:image-left={!centerImage}
+	use:addEventListeners
+>
 	{@html rawHTML}
 </div>

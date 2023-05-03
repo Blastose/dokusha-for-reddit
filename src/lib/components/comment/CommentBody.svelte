@@ -4,7 +4,7 @@
 </script>
 
 <div class="comment-body-container">
-	<RedditHtml rawHTML={commentHtml} />
+	<RedditHtml rawHTML={commentHtml} centerImage={false} />
 </div>
 
 <style>
