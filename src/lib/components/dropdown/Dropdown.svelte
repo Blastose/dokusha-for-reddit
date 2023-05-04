@@ -5,7 +5,7 @@
 	export let initialDropdownText: string;
 	export let options: { display: string; value: string }[];
 	export let searchParam: string;
-	export let isActive: (current: string) => boolean;
+	export let isActive: (current: string, _url: URL) => boolean;
 
 	function createLinkUrl(url: URL, newSearchParamValue: string) {
 		const urlClone = new URL(url);
@@ -25,7 +25,7 @@
 				data-sveltekit-noscroll
 				data-sveltekit-replacestate
 				class="dropdown-item"
-				class:active={isActive(option.value)}
+				class:active={isActive(option.value, $page.url)}
 				href={createLinkUrl($page.url, option.value)}>{option.display}</a
 			>
 		{/each}
