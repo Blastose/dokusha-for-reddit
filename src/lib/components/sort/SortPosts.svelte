@@ -18,9 +18,11 @@
 		</div>
 	{/each}
 
-	{#if currentSort === 'controversial' || currentSort === 'top'}
-		<TimeOption />
-	{/if}
+	<div class="grow">
+		{#if currentSort === 'controversial' || currentSort === 'top'}
+			<TimeOption />
+		{/if}
+	</div>
 </div>
 
 <style>
