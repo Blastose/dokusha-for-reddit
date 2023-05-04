@@ -50,7 +50,9 @@
 		</p>
 		<RedditHtml rawHTML={markdownToHtml(comment.body)} />
 		<div class="actions-container text-sm font-semibold">
-			<a href={buildFullCommentsLink(comment.permalink)}>{comment.num_comments} comments</a>
+			<a href={buildFullCommentsLink(comment.permalink)} on:click={clearSubmissionStore}
+				>{comment.num_comments} comments</a
+			>
 			<span>source</span>
 			<a href={comment.permalink} on:click={clearSubmissionStore}>permalink</a>
 			<a href="{comment.permalink}?context=3" on:click={clearSubmissionStore}>context</a>
