@@ -3,7 +3,7 @@ import { jsrwrap } from '$lib/server/reddit';
 import type { UserSortOptions, UserTOptions } from 'jsrwrap';
 import type { SubmissionData, Comment } from 'jsrwrap/types';
 
-export const load = (async ({ params, url }) => {
+export const load = (async ({ params, url, isDataRequest }) => {
 	const username = params.username;
 	const where = params.userWhere;
 	const jsrwrapUser = jsrwrap.getUser(username);
@@ -14,28 +14,25 @@ export const load = (async ({ params, url }) => {
 
 	let creations;
 	if (where === 'comments') {
-		creations = await jsrwrapUser.getComments(options);
-		creations = creations.map((v) => {
-			return { ...v, type: 'comment' };
-		});
+		creations = jsrwrapUser.getComments(options);
 	} else if (where === 'submitted') {
-		creations = await jsrwrapUser.getSubmitted(options);
-		creations = creations.map((v) => {
-			return { ...v, type: 'post' };
-		});
+		creations = jsrwrapUser.getSubmitted(options);
 	} else if (where === 'gilded') {
-		creations = await jsrwrapUser.getGilded();
+		creations = jsrwrapUser.getGilded();
 	} else {
-		creations = await jsrwrapUser.getOverview(options);
+		creations = jsrwrapUser.getOverview(options);
 	}
 
-	creations = creations as (
-		| (SubmissionData & {
-				type: 'post';
-		  })
-		| (Comment & {
-				type: 'comment';
-		  })
-	)[];
-	return { creations };
+	creations = creations as Promise<
+		(
+			| (SubmissionData & {
+					type: 'post';
+			  })
+			| (Comment & {
+					type: 'comment';
+			  })
+		)[]
+	>;
+
+	return { streamed: { creations: isDataRequest ? creations : await creations } };
 }) satisfies PageServerLoad;

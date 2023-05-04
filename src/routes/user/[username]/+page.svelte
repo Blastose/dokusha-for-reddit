@@ -6,4 +6,4 @@
 
 <svelte:head><title>overview for {data.about.name}</title></svelte:head>
 
-<UserCreatedContainer created={data.overview} />
+<UserCreatedContainer created={data.streamed.overview} />

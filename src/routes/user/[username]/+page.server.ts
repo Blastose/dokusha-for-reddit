@@ -2,7 +2,7 @@ import type { PageServerLoad } from './$types';
 import { jsrwrap } from '$lib/server/reddit';
 import type { UserSortOptions, UserTOptions } from 'jsrwrap';
 
-export const load = (async ({ params, url }) => {
+export const load = (async ({ params, url, isDataRequest }) => {
 	const username = params.username;
 	const jsrwrapUser = jsrwrap.getUser(username);
 	const sort = url.searchParams.get('sort') as UserSortOptions | undefined;
@@ -10,7 +10,7 @@ export const load = (async ({ params, url }) => {
 
 	const options = { sort, t };
 
-	const overview = await jsrwrapUser.getOverview(options);
+	const overview = jsrwrapUser.getOverview(options);
 
-	return { overview };
+	return { streamed: { overview: isDataRequest ? overview : await overview } };
 }) satisfies PageServerLoad;
