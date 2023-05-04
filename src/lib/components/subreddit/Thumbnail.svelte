@@ -29,15 +29,22 @@
 <style>
 	.thumbnail-image,
 	.thumbnail {
+		display: none;
 		grid-area: thumbnail;
+	}
+
+	@media (min-width: 640px) {
+		.thumbnail-image {
+			display: block;
+		}
+
+		.thumbnail {
+			display: flex;
+		}
 	}
 
 	img {
 		border-radius: 0.125rem;
-	}
-
-	.thumbnail {
-		display: flex;
 	}
 
 	.thumbnail-svg {
