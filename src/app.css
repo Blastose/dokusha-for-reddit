@@ -286,6 +286,10 @@ strike {
 	margin: 24px 0 0 0;
 }
 
+.reddit-md.image-left .reddit-image-container {
+	justify-content: flex-start;
+}
+
 .reddit-md .reddit-image {
 	max-height: 1400px;
 	width: auto;

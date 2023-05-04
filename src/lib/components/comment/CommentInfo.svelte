@@ -2,6 +2,7 @@
 	import type { Comment } from 'jsrwrap/types';
 	import UserFlair from '$lib/components/subreddit/UserFlair.svelte';
 	import RelativeTime from '$lib/components/time/RelativeTime.svelte';
+	import Icon from '$lib/components/icon/Icon.svelte';
 
 	export let comment: Comment;
 	export let commentHidden: boolean;
@@ -9,7 +10,7 @@
 </script>
 
 <div class:italic={commentHidden}>
-	<span class="author">{comment.author}</span>
+	<a class="author" href="/u/{comment.author}">{comment.author}</a>
 	<UserFlair author={comment} />
 	{#if comment.distinguished === 'moderator'}
 		<span class="mod author">MOD</span>
@@ -19,6 +20,12 @@
 
 	{#if comment.stickied}
 		<span class="text-sm align-middle font-semibold mod">*stickied comment*</span>
+	{/if}
+
+	{#if comment.locked}
+		<span role="img" aria-label="locked" class="lock"
+			><Icon class="inline" height={'12'} width={'12'} name="lock" /></span
+		>
 	{/if}
 
 	<RelativeTime
@@ -62,5 +69,11 @@
 
 	.expand-button:hover {
 		text-decoration: underline;
+	}
+
+	.lock {
+		display: inline-flex;
+		vertical-align: middle;
+		fill: #e7c129;
 	}
 </style>

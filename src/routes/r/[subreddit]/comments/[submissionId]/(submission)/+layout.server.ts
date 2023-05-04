@@ -18,6 +18,7 @@ export const load = (async ({ params, isDataRequest, setHeaders, url }) => {
 	return {
 		streamed: {
 			submission: isDataRequest ? submission : await submission
-		}
+		},
+		isDataRequestSubmissionId: isDataRequest
 	};
 }) satisfies LayoutServerLoad;

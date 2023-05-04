@@ -31,6 +31,17 @@ export function getGalleryData(
 
 	for (const item of post.gallery_data.items) {
 		const galleryItem = post.media_metadata[item.media_id];
+		if (galleryItem.status === 'unprocessed') {
+			res.push({
+				url: '',
+				width: 0,
+				height: 0,
+				outboundUrl: item.outbound_url,
+				caption: item.caption
+			});
+			break;
+		}
+
 		if (galleryItem.e === 'Image') {
 			res.push({
 				url: galleryItem.s.u,

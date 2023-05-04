@@ -10,7 +10,7 @@
 
 	export let comment: CommentFull;
 	export let submissionId: string;
-	export let suggestedSort: Sort;
+	export let suggestedSort: Sort = 'confidence';
 	export let updateReplies: ((moreId: string, children: CommentFull[]) => void) | null = null;
 
 	$: highlightCommentId = $page.params.commentId;
@@ -114,7 +114,12 @@
 			{#if comment.replies.length > 0}
 				<div class="flex flex-col gap-4" class:hidden={commentHidden || childCommentsHidden}>
 					{#each comment.replies as reply}
-						<svelte:self comment={reply} {submissionId} updateReplies={addReplies} />
+						<svelte:self
+							comment={reply}
+							{submissionId}
+							updateReplies={addReplies}
+							{suggestedSort}
+						/>
 					{/each}
 				</div>
 			{/if}

@@ -11,11 +11,11 @@ specifiers:
   eslint: ^8.39.0
   eslint-config-prettier: ^8.8.0
   eslint-plugin-svelte3: ^4.0.0
-  jsrwrap: ^0.1.6
+  jsrwrap: ^0.1.8
   postcss: ^8.4.23
   prettier: ^2.8.8
   prettier-plugin-svelte: ^2.10.0
-  reddit-md-to-html: ^0.1.53
+  reddit-md-to-html: ^0.1.55
   svelte: ^3.58.0
   svelte-check: ^3.2.0
   svelte-local-storage-store: ^0.4.0
@@ -26,7 +26,7 @@ specifiers:
   vitest: ^0.25.8
 
 dependencies:
-  reddit-md-to-html: 0.1.53
+  reddit-md-to-html: 0.1.55
   svelte-local-storage-store: 0.4.0_svelte@3.58.0
 
 devDependencies:
@@ -40,7 +40,7 @@ devDependencies:
   eslint: 8.39.0
   eslint-config-prettier: 8.8.0_eslint@8.39.0
   eslint-plugin-svelte3: 4.0.0_e3tiew2b4q4prbk4th5mqlc2ou
-  jsrwrap: 0.1.6
+  jsrwrap: 0.1.8
   postcss: 8.4.23
   prettier: 2.8.8
   prettier-plugin-svelte: 2.10.0_f6pmxuoopicxy7gb3t3nvoipzy
@@ -1367,8 +1367,8 @@ packages:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
     dev: true
 
-  /jsrwrap/0.1.6:
-    resolution: {integrity: sha512-pzjBi7mX3cZed60wgcYlAOycYw72VjNK5JiB/VzlCxGXDmsCda8fj8LQfe4RdMvCgSTRoGhz2F8GZnWqwMaECQ==}
+  /jsrwrap/0.1.8:
+    resolution: {integrity: sha512-GwzQWOfFV/eHoC0cgWJUsnd2RIFBXGBTFY7Ar18+5E1sjh5ZfhGvOjQq0LXAFl3sS0MnxBTcRCAq1vs86jVbFw==}
     engines: {node: '>=14.16'}
     dependencies:
       node-fetch: 3.3.1
@@ -1764,8 +1764,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /reddit-md-to-html/0.1.53:
-    resolution: {integrity: sha512-M9p2ZuupgfSdGlgb9KUjMiUsg6Sax+URHkRvEgLV35Xq2r5uxmGXZRFnFcj6JGzXMUHh8RHm+6XK5/njh++6Sg==}
+  /reddit-md-to-html/0.1.55:
+    resolution: {integrity: sha512-quEkkxb34Kuf3Za93f6bYzXd3bYzY0Q8r/A2FJnHqN0kDTT4KauyqOmMD0TYGTK7IgDVZp4ydlCABFwl3EgPPg==}
     engines: {node: '>=14.16'}
     dependencies:
       simple-markdown: 0.7.3

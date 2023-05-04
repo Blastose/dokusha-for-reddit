@@ -121,7 +121,7 @@
 	}
 
 	.classic-container.thumbnail {
-		grid-template-columns: 2rem 70px 1fr;
+		grid-template-columns: 2rem 0px 1fr;
 		grid-template-rows: min-content min-content min-content min-content;
 
 		grid-template-areas:
@@ -131,6 +131,19 @@
 			'score thumbnail selftext';
 
 		column-gap: 0.5rem;
+	}
+
+	@media (min-width: 640px) {
+		.classic-container.thumbnail {
+			grid-template-columns: 2rem 70px 1fr;
+			grid-template-rows: min-content min-content min-content min-content;
+
+			grid-template-areas:
+				'score thumbnail title'
+				'score thumbnail post-info'
+				'score thumbnail actions'
+				'score thumbnail selftext';
+		}
 	}
 
 	.score {

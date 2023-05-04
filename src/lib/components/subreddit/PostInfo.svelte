@@ -1,8 +1,9 @@
 <script lang="ts">
-	import type { SubmissionData } from 'jsrwrap/types'; 
+	import type { SubmissionData } from 'jsrwrap/types';
 	import Icon from '$lib/components/icon/Icon.svelte';
-	import UserFlair from './UserFlair.svelte'; 
+	import UserFlair from './UserFlair.svelte';
 	import RelativeTime from '$lib/components/time/RelativeTime.svelte';
+	import { page } from '$app/stores';
 
 	export let post: SubmissionData;
 
@@ -10,7 +11,7 @@
 </script>
 
 <div class="info-container">
-	<span>Posted by <span class="author">{post.author}</span></span>
+	<span>Posted by <a class="author" href="/u/{post.author}">{post.author}</a></span>
 	<UserFlair author={post} />
 
 	<RelativeTime
@@ -18,6 +19,10 @@
 		editedTimeSeconds={post.edited}
 		fontSize="normal"
 	/>
+
+	{#if $page.params.subreddit?.toLowerCase() !== post.subreddit.toLowerCase()}
+		<span>in <a href="/r/{post.subreddit}" class="author">r/{post.subreddit}</a></span>
+	{/if}
 
 	{#if post.distinguished === 'moderator'}<span role="img" aria-label="mod post" class="moderator"
 			><Icon class="inline" height={iconDimension} width={iconDimension} name="shield" /></span

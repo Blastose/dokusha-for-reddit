@@ -69,8 +69,8 @@
 		if (navigation.type === 'link') {
 			// TODO better detection of if user is leaving the subreddit for a different subreddit
 			if (
-				navigatingTo.params?.subreddit.toLowerCase() !==
-				navigatingFrom.params?.subreddit.toLowerCase()
+				navigatingTo.params?.subreddit?.toLowerCase() !==
+				navigatingFrom.params?.subreddit?.toLowerCase()
 			) {
 				const subredditStoreObject = get(subredditStore);
 				for (const key of Object.keys(subredditStoreObject)) {

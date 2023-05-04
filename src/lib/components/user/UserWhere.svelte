@@ -1,26 +1,34 @@
 <script lang="ts">
-	import TimeOption from './TimeOption.svelte';
+	import UserTime from './UserTime.svelte';
+	import UserSort from './UserSort.svelte';
 	import { page } from '$app/stores';
+	// TODO this is a copy of SortPosts.svelte so we can refactor both into one component
 
-	const sortOptions = ['hot', 'new', 'top', 'rising', 'controversial'];
+	const whereOptions = ['overview', 'comments', 'submitted', 'gilded'];
 
-	$: currentSubreddit = $page.params.subreddit;
-	$: currentSort = $page.params.sort ?? 'hot';
+	$: currentUsername = $page.params.username;
+	$: currentWhere = $page.params.userWhere ?? 'overview';
+	$: currentSort = $page.url.searchParams.get('sort');
 </script>
 
 <div class="sort-posts-container">
-	{#each sortOptions as sortOption}
-		{@const sortOptionLink = sortOption === 'hot' ? '' : sortOption}
+	{#each whereOptions as whereOption}
+		{@const whereOptionLink = whereOption === 'overview' ? '' : whereOption}
 		<div class="text-sm font-bold sort-post">
-			<a class:current={sortOption === currentSort} href="/r/{currentSubreddit}/{sortOptionLink}"
-				>{sortOption}</a
+			<a class:current={whereOption === currentWhere} href="/u/{currentUsername}/{whereOptionLink}"
+				>{whereOption}</a
 			>
 		</div>
 	{/each}
 
-	<div class="grow">
-		{#if currentSort === 'controversial' || currentSort === 'top'}
-			<TimeOption />
+	<div class="grow flex gap-4">
+		{#if currentWhere !== 'gilded'}
+			<UserSort />
+		{/if}
+		{#if currentSort === 'top' || currentSort === 'controversial'}
+			<div class="grow">
+				<UserTime />
+			</div>
 		{/if}
 	</div>
 </div>

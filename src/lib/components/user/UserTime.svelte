@@ -43,7 +43,7 @@
 		}
 	];
 
-	$: currentTimeSort = ($page.url.searchParams.get('t') ?? 'day') as keyof typeof timeMap;
+	$: currentTimeSort = ($page.url.searchParams.get('t') ?? 'all') as keyof typeof timeMap;
 
 	$: display = `${timeMap[currentTimeSort]}`;
 
