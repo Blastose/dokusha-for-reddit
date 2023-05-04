@@ -1,7 +1,11 @@
 <script lang="ts">
 	import UserWhere from '$lib/components/user/UserWhere.svelte';
+	import Fly from '$lib/components/layout/Fly.svelte';
+	import { page } from '$app/stores';
 
 	export let data;
+
+	$: key = $page.params.userWhere?.toLowerCase();
 
 	function formatDate(date: Date) {
 		const month = date.toLocaleString('default', { month: 'long' });
@@ -24,7 +28,9 @@
 	<div class="container content-container">
 		<UserWhere />
 
-		<slot />
+		<Fly {key}>
+			<slot />
+		</Fly>
 	</div>
 </section>
 
