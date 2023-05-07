@@ -68,9 +68,14 @@
 		{/if}
 	</div>
 	<div class="flex gap-1">
-		<input id="refresh-comments" type="checkbox" bind:checked={autoRefresh} />
+		<input
+			class="accent-[#747CB8]"
+			id="refresh-comments"
+			type="checkbox"
+			bind:checked={autoRefresh}
+		/>
 		<label for="refresh-comments">
-			<span>Auto refresh comments</span>
+			<span class="select-none">Auto refresh comments</span>
 		</label>
 		{#if autoRefresh}
 			{autoRefreshTimeLeft}
