@@ -1,11 +1,85 @@
 <script lang="ts">
 	import Comment from '$lib/components/comment/Comment.svelte';
 	import type { CommentFull, Sort } from 'jsrwrap/types';
+	import type { SubmissionReturnType } from '$lib/types/types';
+	import { page } from '$app/stores';
+	import Icon from '$lib/components/icon/Icon.svelte';
 
 	export let comments: CommentFull[];
 	export let submissionId: string;
 	export let suggestedSort: Sort;
+
+	let intervalId: ReturnType<typeof setInterval>;
+	let loadingComments = false;
+	async function refreshComments() {
+		loadingComments = true;
+		let fetchUrl = `/api/subreddit/comments/${submissionId}`;
+		const sort = $page.url.searchParams.get('sort');
+		if (sort) {
+			fetchUrl = fetchUrl + `?sort=${sort}`;
+		}
+		const res = await fetch(fetchUrl);
+		const newComments = (await res.json()) as SubmissionReturnType['comments'];
+
+		comments = newComments;
+		loadingComments = false;
+	}
+
+	let autoRefreshTimeLeft = 10;
+
+	function setAutoRefreshCommentsTimer() {
+		autoRefreshTimeLeft = 10;
+		intervalId = setInterval(async () => {
+			if (autoRefreshTimeLeft > 0) {
+				autoRefreshTimeLeft--;
+			}
+			if (autoRefreshTimeLeft === 0) {
+				if (loadingComments) {
+					return;
+				}
+				await refreshComments();
+				autoRefreshTimeLeft = 10;
+			}
+		}, 1000);
+	}
+
+	function clearRefreshCommentsTimer() {
+		clearInterval(intervalId);
+	}
+
+	let autoRefresh: boolean;
+
+	$: {
+		if (autoRefresh) {
+			setAutoRefreshCommentsTimer();
+		} else {
+			clearRefreshCommentsTimer();
+		}
+	}
 </script>
+
+<div class="text-sm font-bold">
+	<div class="flex gap-2">
+		<button class="w-fit" on:click={refreshComments} disabled={loadingComments}
+			>Refresh comments</button
+		>
+		{#if loadingComments && !autoRefresh}
+			<Icon class="animate-spin" height="20" width="20" name="loading" />
+		{/if}
+	</div>
+	<div class="flex gap-1">
+		<input id="refresh-comments" type="checkbox" bind:checked={autoRefresh} />
+		<label for="refresh-comments">
+			<span>Auto refresh comments</span>
+		</label>
+		{#if autoRefresh}
+			{autoRefreshTimeLeft}
+		{/if}
+		{#if loadingComments && autoRefresh}
+			<Icon class="animate-spin" height="20" width="20" name="loading" />
+		{/if}
+	</div>
+</div>
 
 <div class="flex flex-col gap-8">
 	{#each comments as comment, index}
