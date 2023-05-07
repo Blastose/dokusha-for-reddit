@@ -5,7 +5,7 @@ const unitsInSeconds = {
 	hour: 60 * 60 * 1,
 	minute: 60 * 1,
 	second: 1,
-	now: -15
+	now: -9999
 };
 
 // const unitsInSecondsShort = {
