@@ -14,10 +14,8 @@
 	async function refreshComments() {
 		loadingComments = true;
 		let fetchUrl = `/api/subreddit/comments/${submissionId}`;
-		const sort = $page.url.searchParams.get('sort');
-		if (sort) {
-			fetchUrl = fetchUrl + `?sort=${sort}`;
-		}
+		const sort = $page.url.searchParams.get('sort') ?? suggestedSort;
+		fetchUrl = fetchUrl + `?sort=${sort}`;
 		const res = await fetch(fetchUrl);
 		const newComments = (await res.json()) as SubmissionReturnType['comments'];
 
