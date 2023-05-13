@@ -8,6 +8,7 @@
 	export let comments: CommentFull[];
 	export let submissionId: string;
 	export let suggestedSort: Sort;
+	export let showRefreshCommentsButtons: boolean = true;
 
 	let intervalId: ReturnType<typeof setInterval>;
 	let loadingComments = false;
@@ -56,33 +57,35 @@
 	}
 </script>
 
-<div class="text-sm font-bold">
-	<div class="flex gap-2">
-		<button class="w-fit" on:click={refreshComments} disabled={loadingComments}
-			>Refresh comments</button
-		>
-		{#if loadingComments && !autoRefresh}
-			<Icon class="animate-spin" height="20" width="20" name="loading" />
-		{/if}
+{#if showRefreshCommentsButtons}
+	<div class="text-sm font-bold">
+		<div class="flex gap-2">
+			<button class="w-fit" on:click={refreshComments} disabled={loadingComments}
+				>Refresh comments</button
+			>
+			{#if loadingComments && !autoRefresh}
+				<Icon class="animate-spin" height="20" width="20" name="loading" />
+			{/if}
+		</div>
+		<div class="flex gap-1">
+			<input
+				class="accent-[#747CB8] hidden"
+				id="refresh-comments"
+				type="checkbox"
+				bind:checked={autoRefresh}
+			/>
+			<label for="refresh-comments" class="cursor-pointer">
+				<span class="select-none">Auto refresh comments</span>
+			</label>
+			{#if autoRefresh}
+				{autoRefreshTimeLeft}
+			{/if}
+			{#if loadingComments && autoRefresh}
+				<Icon class="animate-spin" height="20" width="20" name="loading" />
+			{/if}
+		</div>
 	</div>
-	<div class="flex gap-1">
-		<input
-			class="accent-[#747CB8]"
-			id="refresh-comments"
-			type="checkbox"
-			bind:checked={autoRefresh}
-		/>
-		<label for="refresh-comments">
-			<span class="select-none">Auto refresh comments</span>
-		</label>
-		{#if autoRefresh}
-			{autoRefreshTimeLeft}
-		{/if}
-		{#if loadingComments && autoRefresh}
-			<Icon class="animate-spin" height="20" width="20" name="loading" />
-		{/if}
-	</div>
-</div>
+{/if}
 
 <div class="flex flex-col gap-8">
 	{#each comments as comment, index}

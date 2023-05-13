@@ -60,7 +60,12 @@
 				{/each}
 			</div>
 		{:then value}
-			<SubmissionCommentContainer comments={value.comments} {submissionId} {suggestedSort} />
+			<SubmissionCommentContainer
+				comments={value.comments}
+				{submissionId}
+				{suggestedSort}
+				showRefreshCommentsButtons={!isSingleComment}
+			/>
 		{/await}
 	</Fly>
 </div>
