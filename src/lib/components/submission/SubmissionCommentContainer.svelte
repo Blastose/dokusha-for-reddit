@@ -88,7 +88,7 @@
 {/if}
 
 <div class="flex flex-col gap-8">
-	{#each comments as comment, index}
+	{#each comments as comment, index (comment.id)}
 		{#if comment.type === 'comment'}
 			<Comment {comment} {submissionId} {suggestedSort} />
 		{:else}

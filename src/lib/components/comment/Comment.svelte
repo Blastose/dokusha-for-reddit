@@ -113,7 +113,7 @@
 
 			{#if comment.replies.length > 0}
 				<div class="flex flex-col gap-4" class:hidden={commentHidden || childCommentsHidden}>
-					{#each comment.replies as reply}
+					{#each comment.replies as reply (reply.id)}
 						<svelte:self
 							comment={reply}
 							{submissionId}
