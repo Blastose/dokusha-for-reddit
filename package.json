@@ -38,7 +38,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"reddit-md-to-html": "^0.1.59",
+		"reddit-md-to-html": "^0.1.61",
 		"svelte-local-storage-store": "^0.4.0"
 	}
 }
