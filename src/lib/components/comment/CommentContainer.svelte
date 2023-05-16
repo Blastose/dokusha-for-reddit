@@ -8,6 +8,7 @@
 	import type { SubmissionReturnType } from '$lib/types/types';
 	import Fly from '$lib/components/layout/Fly.svelte';
 	import { page } from '$app/stores';
+	import { articleStore } from '$lib/stores/articleStore';
 
 	export let submission: SubmissionReturnType | Promise<SubmissionReturnType>;
 	export let flyKey: string | null = 'skip';
@@ -24,7 +25,27 @@
 
 	onMount(async () => {
 		submissionStore.set(await submission);
+
+		if (!$articleStore) {
+			articleStore.set({
+				url: $page.url.href.toLowerCase(),
+				loadFromStore: false,
+				article: await submission
+			});
+		} else {
+			if ($page.url.href.toLowerCase() !== $articleStore.url) {
+				articleStore.set({
+					url: $page.url.href.toLowerCase(),
+					loadFromStore: false,
+					article: await submission
+				});
+			}
+		}
 	});
+
+	// If articleStore is defined and loadFromStore is true, we use the articlesStore for the comments;
+	// otherwise, we use the submission prop
+	$: article = $articleStore && $articleStore.loadFromStore ? $articleStore.article : submission;
 
 	function buildShowParentCommentsLink(id: string) {
 		// We need to remove the first 3 characters since id starts with t3_
@@ -53,7 +74,7 @@
 	{/if}
 
 	<Fly key={flyKey}>
-		{#await submission}
+		{#await article}
 			<div class="flex flex-col gap-8">
 				{#each { length: 5 } as _}
 					<CommentSkeleton />
