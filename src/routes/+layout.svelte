@@ -84,7 +84,9 @@
 
 		// article store
 		if (
-			navigatingToHref.match(/^https?:\/\/[A-z0-9:.-]+\/r\/[A-z_0-9]+\/comments\/\w+(?:\/\w+\/?)?$/)
+			navigatingToHref.match(
+				/^https?:\/\/[A-z0-9:.-]+\/r\/[A-z_0-9]+\/comments\/\w+(?:\/\w+\/?)?(?:\?\w+=\w+)?$/
+			)
 		) {
 			if (navigation.type === 'popstate') {
 				if (!$articleStore) return;

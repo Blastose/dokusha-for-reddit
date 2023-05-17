@@ -4,6 +4,8 @@
 	import type { SubmissionReturnType } from '$lib/types/types';
 	import { page } from '$app/stores';
 	import Icon from '$lib/components/icon/Icon.svelte';
+	import { onDestroy, onMount } from 'svelte';
+	import { articleStore } from '$lib/stores/articleStore';
 
 	export let comments: CommentFull[];
 	export let submissionId: string;
@@ -55,6 +57,43 @@
 			clearRefreshCommentsTimer();
 		}
 	}
+
+	onMount(() => {
+		// SubmissionCommentContainer will remount whenever the query param changes (e.g. ?sort=)
+		// so we need to update the comments in the articleStore
+		if ($articleStore) {
+			articleStore.update((prev) => {
+				if (!prev) {
+					return prev;
+				}
+				if (prev.url !== $page.url.href.toLowerCase()) {
+					return {
+						url: $page.url.href.toLowerCase(),
+						loadFromStore: false,
+						article: { ...prev?.article, comments }
+					};
+				}
+				return prev;
+			});
+		}
+	});
+
+	onDestroy(() => {
+		// We want to update the comments when this component is unmounted, since
+		// the user can update comments with a button press
+		if ($articleStore) {
+			articleStore.update((prev) => {
+				if (!prev) {
+					return prev;
+				}
+				return {
+					url: $page.url.href.toLowerCase(),
+					loadFromStore: false,
+					article: { ...prev?.article, comments }
+				};
+			});
+		}
+	});
 </script>
 
 {#if showRefreshCommentsButtons}
