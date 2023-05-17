@@ -100,6 +100,7 @@
 				if ($articleStore) {
 					$articleStore.loadFromStore = false;
 				}
+				return;
 			}
 		}
 

@@ -26,6 +26,10 @@
 	onMount(async () => {
 		submissionStore.set(await submission);
 
+		if (isSingleComment) {
+			return;
+		}
+
 		if (!$articleStore) {
 			articleStore.set({
 				url: $page.url.href.toLowerCase(),
@@ -83,6 +87,7 @@
 		{:then value}
 			<SubmissionCommentContainer
 				comments={value.comments}
+				cacheArticleComments={!isSingleComment}
 				{submissionId}
 				{suggestedSort}
 				showRefreshCommentsButtons={!isSingleComment}

@@ -11,6 +11,7 @@
 	export let submissionId: string;
 	export let suggestedSort: Sort;
 	export let showRefreshCommentsButtons: boolean = true;
+	export let cacheArticleComments: boolean;
 
 	let intervalId: ReturnType<typeof setInterval>;
 	let loadingComments = false;
@@ -60,8 +61,8 @@
 
 	onMount(() => {
 		// SubmissionCommentContainer will remount whenever the query param changes (e.g. ?sort=)
-		// so we need to update the comments in the articleStore
-		if ($articleStore) {
+		// and when it does, we need to update the comments in the articleStore
+		if ($articleStore && cacheArticleComments) {
 			articleStore.update((prev) => {
 				if (!prev) {
 					return prev;
@@ -81,7 +82,7 @@
 	onDestroy(() => {
 		// We want to update the comments when this component is unmounted, since
 		// the user can update comments with a button press
-		if ($articleStore) {
+		if ($articleStore && cacheArticleComments) {
 			articleStore.update((prev) => {
 				if (!prev) {
 					return prev;
