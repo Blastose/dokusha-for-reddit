@@ -10,8 +10,18 @@
 	import RedditGallery from '../reddit-image/RedditGallery.svelte';
 	import RedditVideo from '../reddit-image/RedditVideo.svelte';
 	import { getRedditImageUrlPreview } from '$lib/utils/redditImagePreview';
+	import SubmissionActions from './SubmissionActions.svelte';
 
 	export let submission: SubmissionData;
+	let sourceHidden = true;
+
+	function toggleSourceVisibility() {
+		sourceHidden = !sourceHidden;
+	}
+
+	function countNewLinesInSource(source: string) {
+		return (source.match(/\n/g) || []).length;
+	}
 </script>
 
 <div class="flex flex-col gap-4">
@@ -71,10 +81,41 @@
 		rawHTML={markdownToHtml(submission.selftext, { media_metadata: submission.media_metadata })}
 	/>
 
-	<div>
+	{#if !sourceHidden && submission.selftext}
+		<div class="w-full">
+			<textarea
+				disabled
+				name=""
+				id=""
+				rows={countNewLinesInSource(submission.selftext) + 2}
+				value={submission.selftext}
+			/>
+		</div>
+	{/if}
+
+	<div class="flex flex-col gap-1">
 		<p class="flex gap-4">
 			<span class="font-bold text-[#5b74aa]">{submission.score} points</span>
 			<span class="font-bold text-[#9693bb]">{submission.num_comments} comments</span>
 		</p>
+		<SubmissionActions {submission} {sourceHidden} {toggleSourceVisibility} />
 	</div>
 </div>
+
+<style>
+	textarea {
+		resize: both;
+		padding: 0.5rem;
+		border-radius: 0.375rem;
+		background-color: rgb(238, 242, 248);
+		width: 100%;
+	}
+
+	:global(.dark) textarea {
+		background-color: rgb(54, 54, 58);
+	}
+
+	textarea:focus {
+		outline: none;
+	}
+</style>

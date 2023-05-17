@@ -8,6 +8,7 @@
 	import { subredditStore, getSubredditStore } from '$lib/stores/subredditStore';
 	import { largeScreenStore } from '$lib/stores/largeScreenStore';
 	import { drawerStore } from '$lib/stores/drawerStore';
+	import { articleStore } from '$lib/stores/articleStore';
 
 	const monitorScreenSize = (node: Window) => {
 		const windowQuery = node.matchMedia('(min-width: 1024px)');
@@ -79,12 +80,34 @@
 				return;
 			}
 		}
+		const navigatingToHref = navigatingTo.url.href.toLowerCase();
+
+		// article store
+		if (
+			navigatingToHref.match(
+				/^https?:\/\/[A-z0-9:.-]+\/r\/[A-z_0-9]+\/comments\/\w+(?:\/\w+\/?)?(?:\?\w+=\w+)?$/
+			)
+		) {
+			if (navigation.type === 'popstate') {
+				if (!$articleStore) return;
+				if ($articleStore.url === navigatingToHref) {
+					$articleStore.loadFromStore = true;
+				} else {
+					$articleStore.loadFromStore = false;
+				}
+				return;
+			} else {
+				if ($articleStore) {
+					$articleStore.loadFromStore = false;
+				}
+				return;
+			}
+		}
 
 		if (navigation.delta && navigation.delta >= 0) {
 			return;
 		}
 
-		const navigatingToHref = navigatingTo.url.href.toLowerCase();
 		// We only want to load posts from subreddit (TODO also user pages when that gets implemented) pages
 		if (
 			!navigatingToHref.match(

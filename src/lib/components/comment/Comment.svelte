@@ -43,11 +43,9 @@
 	}
 
 	function toggleCommentVisibility() {
-		commentHidden = !commentHidden;
-	}
-
-	function toggleChildCommentsVisibility() {
-		childCommentsHidden = !childCommentsHidden;
+		if (comment.type === 'comment') {
+			comment.collapsed = !comment.collapsed;
+		}
 	}
 
 	function toggleSourceVisibility() {
@@ -74,9 +72,7 @@
 	$: commentHtml = markdownToHtml(commentBody, { media_metadata: commentMediaMetadata });
 
 	let loadingMoreReplies = false;
-	let commentHidden = comment.type === 'comment' ? comment.collapsed : false;
-
-	let childCommentsHidden = false;
+	$: commentHidden = comment.type === 'comment' ? comment.collapsed : false;
 
 	let sourceHidden = true;
 </script>
@@ -101,19 +97,13 @@
 						/>
 					</div>
 
-					<CommentActions
-						{comment}
-						{childCommentsHidden}
-						{toggleChildCommentsVisibility}
-						{sourceHidden}
-						{toggleSourceVisibility}
-					/>
+					<CommentActions {comment} {sourceHidden} {toggleSourceVisibility} />
 				</div>
 			</div>
 
 			{#if comment.replies.length > 0}
-				<div class="flex flex-col gap-4" class:hidden={commentHidden || childCommentsHidden}>
-					{#each comment.replies as reply}
+				<div class="flex flex-col gap-4" class:hidden={commentHidden}>
+					{#each comment.replies as reply (reply.id)}
 						<svelte:self
 							comment={reply}
 							{submissionId}

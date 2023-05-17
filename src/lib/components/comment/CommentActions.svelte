@@ -3,9 +3,7 @@
 	import type { Comment } from 'jsrwrap/types';
 
 	export let comment: Comment;
-	export let childCommentsHidden: boolean;
 	export let sourceHidden: boolean;
-	export let toggleChildCommentsVisibility: () => void;
 	export let toggleSourceVisibility: () => void;
 </script>
 
@@ -23,13 +21,6 @@
 			<Icon height="24" width="24" name="arrowDownOutline" />
 		</button>
 	</div>
-
-	<button
-		class="text-sm font-semibold"
-		class:hidden={comment.replies.length <= 0}
-		on:click={toggleChildCommentsVisibility}
-		>{childCommentsHidden ? 'show child comments' : 'hide child comments'}</button
-	>
 
 	<button class="text-sm font-semibold" on:click={toggleSourceVisibility}
 		>{sourceHidden ? 'show source' : 'hide source'}</button

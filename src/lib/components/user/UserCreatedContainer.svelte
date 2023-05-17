@@ -20,7 +20,7 @@
 			<UserCreatedSkeleton />
 		{/each}
 	{:then awaitedCreated}
-		{#each awaitedCreated as creation}
+		{#each awaitedCreated as creation (creation.id)}
 			{#if type === 'post'}
 				<SubredditClassic post={creation} />
 			{:else if type === 'comment'}
