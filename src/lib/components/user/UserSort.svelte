@@ -49,4 +49,10 @@
 	}
 </script>
 
-<Dropdown initialDropdownText={display} options={sortOptions} searchParam="sort" {isActive} />
+<Dropdown
+	initialDropdownText={display}
+	options={sortOptions}
+	searchParam="sort"
+	deleteParams={['before', 'after']}
+	{isActive}
+/>
