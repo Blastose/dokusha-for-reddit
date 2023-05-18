@@ -48,7 +48,7 @@
 				fontSize="small"
 			/>
 		</p>
-		<RedditHtml rawHTML={markdownToHtml(comment.body)} />
+		<RedditHtml rawHTML={markdownToHtml(comment.body, {media_metadata: comment.media_metadata})} />
 		<div class="actions-container text-sm font-semibold">
 			<a href={buildFullCommentsLink(comment.permalink)} on:click={clearSubmissionStore}
 				>{comment.num_comments} comments</a
