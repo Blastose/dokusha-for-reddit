@@ -6,10 +6,18 @@
 	export let options: { display: string; value: string }[];
 	export let searchParam: string;
 	export let isActive: (current: string, _url: URL) => boolean;
+	export let deleteParams: string[] | undefined = undefined;
 
 	function createLinkUrl(url: URL, newSearchParamValue: string) {
 		const urlClone = new URL(url);
 		urlClone.searchParams.set(searchParam, newSearchParamValue);
+
+		if (deleteParams) {
+			for (const param of deleteParams) {
+				urlClone.searchParams.delete(param);
+			}
+		}
+
 		return urlClone.toString();
 	}
 </script>

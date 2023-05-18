@@ -52,4 +52,10 @@
 	}
 </script>
 
-<Dropdown initialDropdownText={display} options={timeOptions} searchParam="t" {isActive} />
+<Dropdown
+	initialDropdownText={display}
+	options={timeOptions}
+	searchParam="t"
+	deleteParams={['before', 'after']}
+	{isActive}
+/>

@@ -41,7 +41,7 @@
 			/></span
 		>
 	{/if}
-	{#if post.stickied}<span role="img" aria-label="stickied" class="pin"
+	{#if post.stickied || post.pinned}<span role="img" aria-label="stickied" class="pin"
 			><Icon
 				class="inline rotate-45"
 				height={iconDimension}
