@@ -18,7 +18,7 @@
 	<a
 		href={post.permalink}
 		class="title-text font-bold"
-		class:stickied={post.stickied}
+		class:stickied={post.stickied || post.pinned}
 		on:click={setSubmissionStore}
 	>
 		{post.title}
