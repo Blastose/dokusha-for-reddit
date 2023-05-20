@@ -5,6 +5,7 @@ specifiers:
   '@sveltejs/adapter-auto': ^2.0.0
   '@sveltejs/kit': ^1.15.7
   '@types/marked': ^4.0.8
+  '@types/nprogress': ^0.2.0
   '@typescript-eslint/eslint-plugin': ^5.59.0
   '@typescript-eslint/parser': ^5.59.0
   autoprefixer: ^10.4.14
@@ -12,10 +13,11 @@ specifiers:
   eslint-config-prettier: ^8.8.0
   eslint-plugin-svelte3: ^4.0.0
   jsrwrap: ^0.1.9
+  nprogress: ^0.2.0
   postcss: ^8.4.23
   prettier: ^2.8.8
   prettier-plugin-svelte: ^2.10.0
-  reddit-md-to-html: ^0.1.61
+  reddit-md-to-html: ^0.1.62
   svelte: ^3.58.0
   svelte-check: ^3.2.0
   svelte-local-storage-store: ^0.4.0
@@ -26,7 +28,8 @@ specifiers:
   vitest: ^0.25.8
 
 dependencies:
-  reddit-md-to-html: 0.1.61
+  nprogress: 0.2.0
+  reddit-md-to-html: 0.1.62
   svelte-local-storage-store: 0.4.0_svelte@3.58.0
 
 devDependencies:
@@ -34,6 +37,7 @@ devDependencies:
   '@sveltejs/adapter-auto': 2.0.0_@sveltejs+kit@1.15.7
   '@sveltejs/kit': 1.15.7_svelte@3.58.0+vite@4.3.1
   '@types/marked': 4.0.8
+  '@types/nprogress': 0.2.0
   '@typescript-eslint/eslint-plugin': 5.59.0_chh3ljgpke5ydgcjpmkmu4hz5q
   '@typescript-eslint/parser': 5.59.0_iacogk7kkaymxepzhgcbytyi7q
   autoprefixer: 10.4.14_postcss@8.4.23
@@ -459,6 +463,10 @@ packages:
 
   /@types/node/18.16.0:
     resolution: {integrity: sha512-BsAaKhB+7X+H4GnSjGhJG9Qi8Tw+inU9nJDwmD5CgOmBLEI6ArdhikpLX7DjbjDRDTbqZzU2LSQNZg8WGPiSZQ==}
+    dev: true
+
+  /@types/nprogress/0.2.0:
+    resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
     dev: true
 
   /@types/prop-types/15.7.5:
@@ -1544,6 +1552,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /nprogress/0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+    dev: false
+
   /object-assign/4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
@@ -1764,8 +1776,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /reddit-md-to-html/0.1.61:
-    resolution: {integrity: sha512-hIILCTk92AuGDpT49u5mxR955x+qC+jUUB8IcEafVtOp/McVxZyFIgOmtbemXOFlzBnA5C+0MqXBXJ9I/8SZRg==}
+  /reddit-md-to-html/0.1.62:
+    resolution: {integrity: sha512-Ey92qZrbdQr7fnxqNFAFBZZqDuurpyAZHBMgS2lRohayb/f3hQxMYAL5WELf0ukzHY66rOH4FGFCIB4nr3on5g==}
     engines: {node: '>=14.16'}
     dependencies:
       simple-markdown: 0.7.3
