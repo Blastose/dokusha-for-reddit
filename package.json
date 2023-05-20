@@ -18,6 +18,7 @@
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.15.7",
 		"@types/marked": "^4.0.8",
+		"@types/nprogress": "^0.2.0",
 		"@typescript-eslint/eslint-plugin": "^5.59.0",
 		"@typescript-eslint/parser": "^5.59.0",
 		"autoprefixer": "^10.4.14",
@@ -38,7 +39,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"reddit-md-to-html": "^0.1.61",
+		"nprogress": "^0.2.0",
+		"reddit-md-to-html": "^0.1.62",
 		"svelte-local-storage-store": "^0.4.0"
 	}
 }

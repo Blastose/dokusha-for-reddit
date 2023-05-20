@@ -9,6 +9,9 @@
 	import { largeScreenStore } from '$lib/stores/largeScreenStore';
 	import { drawerStore } from '$lib/stores/drawerStore';
 	import { articleStore } from '$lib/stores/articleStore';
+	import NProgress from 'nprogress';
+	import 'nprogress/nprogress.css';
+	import { navigating } from '$app/stores';
 
 	const monitorScreenSize = (node: Window) => {
 		const windowQuery = node.matchMedia('(min-width: 1024px)');
@@ -30,6 +33,28 @@
 			}
 		};
 	};
+
+	let nprogressTimeoutId: ReturnType<typeof setTimeout>;
+
+	NProgress.configure({
+		showSpinner: false
+	});
+
+	function setTimeoutNprogress() {
+		clearTimeout(nprogressTimeoutId);
+		nprogressTimeoutId = setTimeout(() => {
+			NProgress.start();
+		}, 500);
+	}
+
+	$: {
+		if ($navigating) {
+			setTimeoutNprogress();
+		} else if (!$navigating) {
+			clearTimeout(nprogressTimeoutId);
+			NProgress.done();
+		}
+	}
 
 	onMount(() => {
 		if (!('theme' in localStorage)) {
