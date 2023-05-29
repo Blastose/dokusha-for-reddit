@@ -17,7 +17,7 @@ specifiers:
   postcss: ^8.4.23
   prettier: ^2.8.8
   prettier-plugin-svelte: ^2.10.0
-  reddit-md-to-html: ^0.1.62
+  reddit-md-to-html: ^0.1.65
   svelte: ^3.58.0
   svelte-check: ^3.2.0
   svelte-local-storage-store: ^0.4.0
@@ -29,7 +29,7 @@ specifiers:
 
 dependencies:
   nprogress: 0.2.0
-  reddit-md-to-html: 0.1.62
+  reddit-md-to-html: 0.1.65
   svelte-local-storage-store: 0.4.0_svelte@3.58.0
 
 devDependencies:
@@ -1776,8 +1776,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /reddit-md-to-html/0.1.62:
-    resolution: {integrity: sha512-Ey92qZrbdQr7fnxqNFAFBZZqDuurpyAZHBMgS2lRohayb/f3hQxMYAL5WELf0ukzHY66rOH4FGFCIB4nr3on5g==}
+  /reddit-md-to-html/0.1.65:
+    resolution: {integrity: sha512-6kh/TH/i/PiD2Ld9Ep/PLILVkjUWhW/l4ssml6nruUBWb0UsdMDZA9CSrOUTk7XbeFFE0wm6k+wSHPpMd46btw==}
     engines: {node: '>=14.16'}
     dependencies:
       simple-markdown: 0.7.3
