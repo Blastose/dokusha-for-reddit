@@ -11,8 +11,12 @@
 	import RedditVideo from '../reddit-image/RedditVideo.svelte';
 	import { getRedditImageUrlPreview } from '$lib/utils/redditImagePreview';
 	import SubmissionActions from './SubmissionActions.svelte';
+	import { commentCountStore } from '$lib/stores/commentCountStore';
+	import { browser } from '$app/environment';
 
 	export let submission: SubmissionData;
+	export let initialNumComments: number | undefined = undefined;
+
 	let sourceHidden = true;
 
 	function toggleSourceVisibility() {
@@ -21,6 +25,13 @@
 
 	function countNewLinesInSource(source: string) {
 		return (source.match(/\n/g) || []).length;
+	}
+
+	let numNewComments: number;
+	$: if (browser && submission) {
+		numNewComments =
+			($commentCountStore[submission.id] ?? initialNumComments ?? 0) -
+			(initialNumComments ?? $commentCountStore[submission.id] ?? 0);
 	}
 </script>
 
@@ -96,7 +107,11 @@
 	<div class="flex flex-col gap-1">
 		<p class="flex gap-4">
 			<span class="font-bold text-[#5b74aa]">{submission.score} points</span>
-			<span class="font-bold text-[#9693bb]">{submission.num_comments} comments</span>
+			<span class="font-bold text-[#9693bb]"
+				>{submission.num_comments} comments {#if numNewComments > 0}<span class="text-red-400"
+						>({numNewComments} new)</span
+					>{/if}</span
+			>
 		</p>
 		<SubmissionActions {submission} {sourceHidden} {toggleSourceVisibility} />
 	</div>

@@ -82,7 +82,7 @@
 			{/if}
 		{/each}
 	{:then awaitedPosts}
-		{#each awaitedPosts as post (post.id)}
+		{#each awaitedPosts as post, index (`${post.id}${index}`)}
 			{#if $subredditViewStore === 'card'}
 				<SubredditCard {post} />
 			{:else}

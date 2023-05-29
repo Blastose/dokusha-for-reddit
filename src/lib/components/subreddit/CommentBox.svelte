@@ -1,9 +1,17 @@
 <script lang="ts">
 	import Icon from '$lib/components/icon/Icon.svelte';
 	import type { SubmissionData } from 'jsrwrap/types';
+	import { commentCountStore } from '$lib/stores/commentCountStore';
+	import { browser } from '$app/environment';
 
 	export let post: SubmissionData;
 	export let setSubmissionStore: () => void;
+
+	let numNewComments: number;
+
+	if (browser) {
+		numNewComments = post.num_comments - ($commentCountStore[post.id] ?? post.num_comments);
+	}
 </script>
 
 <a
@@ -12,7 +20,8 @@
 	on:click={setSubmissionStore}
 	data-sveltekit-preload-data="hover"
 >
-	<Icon height="20" width="20" name="comment" /><span>{post.num_comments} comments</span>
+	<Icon height="20" width="20" name="comment" /><span>{post.num_comments} comments</span
+	>{#if numNewComments > 0}<span class="text-red-400">({numNewComments} new)</span>{/if}
 </a>
 
 <style>

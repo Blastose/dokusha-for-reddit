@@ -23,10 +23,12 @@
 	};
 </script>
 
-<div
-	class="reddit-md {fixedSize ? 'max-w-4xl' : ''}"
-	class:image-left={!centerImage}
-	use:addEventListeners
->
-	{@html rawHTML}
-</div>
+{#key rawHTML}
+	<div
+		class="reddit-md {fixedSize ? 'max-w-4xl' : ''}"
+		class:image-left={!centerImage}
+		use:addEventListeners
+	>
+		{@html rawHTML}
+	</div>
+{/key}

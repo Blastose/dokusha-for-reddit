@@ -6,6 +6,7 @@
 	import Icon from '$lib/components/icon/Icon.svelte';
 	import { onDestroy, onMount } from 'svelte';
 	import { articleStore } from '$lib/stores/articleStore';
+	import { submissionStore } from '$lib/stores/submissionStore';
 
 	export let comments: CommentFull[];
 	export let submissionId: string;
@@ -21,9 +22,11 @@
 		const sort = $page.url.searchParams.get('sort') ?? suggestedSort;
 		fetchUrl = fetchUrl + `?sort=${sort}`;
 		const res = await fetch(fetchUrl);
-		const newComments = (await res.json()) as SubmissionReturnType['comments'];
+		const submissionData = (await res.json()) as SubmissionReturnType;
+		const newComments = submissionData.comments;
 
 		comments = newComments;
+		submissionStore.set(submissionData);
 		loadingComments = false;
 	}
 
