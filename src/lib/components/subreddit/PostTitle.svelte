@@ -9,6 +9,13 @@
 	function setSubmissionStore() {
 		submissionStore.set(post);
 	}
+
+	function stripTrailingSlashFromRedditPermalink(s: string) {
+		// All reddit permalink from their API response end with a `/`
+		// We need to remove this for the `:visited` selector since we redirect
+		// trailing backslashes to non-trailing backslashes links
+		return s.substring(0, s.length - 1);
+	}
 </script>
 
 <div>
@@ -16,7 +23,7 @@
 		<Flair linkFlair={post} />
 	{/if}
 	<a
-		href={post.permalink}
+		href={stripTrailingSlashFromRedditPermalink(post.permalink)}
 		class="title-text font-bold"
 		class:stickied={post.stickied || post.pinned}
 		on:click={setSubmissionStore}
@@ -38,6 +45,14 @@
 		line-height: 1.25rem;
 	}
 
+	:global(.dark) a.title-text:visited {
+		color: #777b86;
+	}
+
+	a.title-text:visited {
+		color: #989dc4;
+	}
+
 	.domain {
 		color: #717677;
 	}
@@ -50,7 +65,15 @@
 		color: #3d8a3e;
 	}
 
+	a.title-text.stickied:visited {
+		color: #97c591;
+	}
+
 	:global(.dark) .stickied {
 		color: #6cce6e;
+	}
+
+	:global(.dark) a.title-text.stickied:visited {
+		color: #3d833e;
 	}
 </style>
