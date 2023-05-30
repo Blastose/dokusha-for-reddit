@@ -55,7 +55,7 @@
 	}
 
 	:global(.dark) .classic-container {
-		background-color: #2d2e2e;
+		background-color: #303237;
 	}
 
 	.thumbnail {

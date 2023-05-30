@@ -113,7 +113,7 @@
 	}
 
 	:global(.dark) .sidebar {
-		background-color: #28292b;
+		background-color: #303237;
 	}
 
 	@media (min-width: 1024px) {

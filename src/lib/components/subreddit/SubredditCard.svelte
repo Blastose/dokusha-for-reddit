@@ -70,7 +70,7 @@
 	}
 
 	:global(.dark) .card-container {
-		background-color: #2d2e2e;
+		background-color: #303237;
 	}
 
 	.selftext {
@@ -89,7 +89,7 @@
 	}
 
 	:global(.dark) .selftext::after {
-		background-image: linear-gradient(to top, #2d2e2e, #ffffff00);
+		background-image: linear-gradient(to top, #303237, #ffffff00);
 	}
 
 	.card-selftext {
