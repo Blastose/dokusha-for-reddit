@@ -48,7 +48,9 @@
 				fontSize="small"
 			/>
 		</p>
-		<RedditHtml rawHTML={markdownToHtml(comment.body, {media_metadata: comment.media_metadata})} />
+		<RedditHtml
+			rawHTML={markdownToHtml(comment.body, { media_metadata: comment.media_metadata })}
+		/>
 		<div class="actions-container text-sm font-semibold">
 			<a href={buildFullCommentsLink(comment.permalink)} on:click={clearSubmissionStore}
 				>{comment.num_comments} comments</a
@@ -71,7 +73,7 @@
 	}
 
 	:global(.dark) .comment-container {
-		background-color: #2d2e2e;
+		background-color: #303237;
 	}
 
 	.actions-container {

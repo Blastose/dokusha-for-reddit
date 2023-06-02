@@ -75,7 +75,7 @@
 	}
 
 	:global(.dark) a:hover {
-		background-color: rgb(48, 50, 53);
+		background-color: rgb(64, 65, 75);
 	}
 
 	.highlight,

@@ -44,7 +44,7 @@
 	}
 
 	:global(.dark) .card-container {
-		background-color: #2d2e2e;
+		background-color: #303237;
 	}
 
 	.votes-container {
