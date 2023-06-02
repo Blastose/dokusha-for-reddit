@@ -65,6 +65,10 @@
 		width: 100%;
 		border-radius: 0.75rem;
 		padding: 0.25rem 2.25rem;
+		background-color: rgba(177, 192, 211, 0.377);
+	}
+
+	:global(.dark) input {
 		background-color: rgba(104, 103, 110, 0.377);
 	}
 </style>
