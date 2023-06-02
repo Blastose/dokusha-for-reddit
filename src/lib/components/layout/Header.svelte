@@ -4,6 +4,7 @@
 	import Icon from '../icon/Icon.svelte';
 	import { browser } from '$app/environment';
 	import { sidebarStore } from '$lib/stores/sidebarStore';
+	import SearchBar from './SearchBar.svelte';
 
 	function toggleTheme() {
 		if ($themeStore === 'dark') {
@@ -40,6 +41,8 @@
 		<p class="font-bold text-2xl">Dokusha</p>
 	</div>
 
+	<SearchBar />
+
 	<div class="flex gap-2">
 		<button on:click={toggleTheme}>Theme</button>
 	</div>
@@ -51,6 +54,6 @@
 	}
 
 	:global(.dark) .header {
-		background-color: #212324;
+		background-color: #292b2e;
 	}
 </style>
