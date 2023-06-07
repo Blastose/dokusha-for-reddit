@@ -33,7 +33,7 @@
 		rel="noreferrer">view in reddit</a
 	>
 
-	<a class="text-sm font-semibold" href={comment.permalink}>permalink</a>
+	<a class="text-sm font-semibold" href="{comment.permalink}#comments-start">permalink</a>
 </div>
 
 <style>

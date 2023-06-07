@@ -64,14 +64,16 @@
 </script>
 
 <div class="flex flex-col gap-2">
-	<p class="text-lg font-semibold">Comments</p>
+	<p id="comments-start" class="text-lg font-semibold">Comments</p>
 	<SubmissionSort {suggestedSort} />
 	{#if isSingleComment}
 		{#await submission then value}
 			<div class="reddit-md flex flex-col w-fit">
 				<a href={$submissionStore?.permalink ?? value.permalink}>View all comments</a>
 				{#if value.comments.length > 0 && value.comments[0].parent_id.slice(0, 3) !== 't3_'}
-					<a href={buildShowParentCommentsLink(value.comments[0].id)}>Show parent comments</a>
+					<a href="{buildShowParentCommentsLink(value.comments[0].id)}#comments-start"
+						>Show parent comments</a
+					>
 				{/if}
 			</div>
 		{/await}
