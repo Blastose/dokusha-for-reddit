@@ -45,6 +45,7 @@
 	function toggleCommentVisibility() {
 		if (comment.type === 'comment') {
 			comment.collapsed = !comment.collapsed;
+			currentCommentHidden = comment.collapsed;
 		}
 	}
 
@@ -67,12 +68,22 @@
 		return newUrl;
 	}
 
+	// When a comment is updated (from loading new comments), we want to keep
+	// the last state it was in so it will still be hidden or showed
+	// If it is undefined, then its state has not changed from the api response
+	let currentCommentHidden: boolean | undefined;
+
 	$: commentBody = comment.type === 'comment' ? comment.body : '';
 	$: commentMediaMetadata = comment.type === 'comment' ? comment.media_metadata : undefined;
 	$: commentHtml = markdownToHtml(commentBody, { media_metadata: commentMediaMetadata });
 
 	let loadingMoreReplies = false;
-	$: commentHidden = comment.type === 'comment' ? comment.collapsed : false;
+	$: commentHidden =
+		comment.type === 'comment'
+			? currentCommentHidden !== undefined
+				? currentCommentHidden
+				: comment.collapsed
+			: false;
 
 	let sourceHidden = true;
 </script>
