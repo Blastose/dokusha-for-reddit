@@ -57,7 +57,7 @@
 			>
 			<span>source</span>
 			<a href="{comment.permalink}#comments-start" on:click={clearSubmissionStore}>permalink</a>
-			<a href="{comment.permalink}#comments-start?context=3" on:click={clearSubmissionStore}
+			<a href="{comment.permalink}?context=3#comments-start" on:click={clearSubmissionStore}
 				>context</a
 			>
 		</div>
