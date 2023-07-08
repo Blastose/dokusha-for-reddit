@@ -295,6 +295,10 @@ strike {
 	width: auto;
 }
 
+.comment-body-container .reddit-md .reddit-image {
+	max-width: 512px;
+}
+
 .reddit-md .image-caption {
 	text-align: center;
 	font-size: 0.8rem;

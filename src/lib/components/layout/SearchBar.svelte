@@ -30,8 +30,10 @@
 	class="con"
 	on:submit={async (e) => {
 		e.preventDefault();
+		if (!searchTerm) {
+			return;
+		}
 		await goto(`/r/${searchTerm}`);
-		searchTerm = '';
 	}}
 >
 	<button aria-label="search icon">
