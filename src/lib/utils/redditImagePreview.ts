@@ -99,7 +99,7 @@ export function getRedditVideoData(
 
 	const videoUrl = post.media.reddit_video.fallback_url.replace('?source=fallback', '');
 
-	const audioUrl = videoUrl.replace(/DASH_\d+\.mp4/, 'DASH_audio.mp4');
+	const audioUrl = videoUrl.replace(/DASH_\d+\.mp4/, 'DASH_AUDIO_128.mp4');
 
 	return {
 		videoUrl,

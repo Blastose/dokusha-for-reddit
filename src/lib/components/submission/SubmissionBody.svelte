@@ -35,7 +35,7 @@
 	}
 </script>
 
-<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-2">
 	<div>
 		<div>
 			{#if submission.link_flair_text}

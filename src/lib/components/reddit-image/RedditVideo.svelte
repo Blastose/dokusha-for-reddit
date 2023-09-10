@@ -7,7 +7,7 @@
 	const { videoUrl: a, audioUrl: b } = getRedditVideoData(post) ?? { videoUrl: '', audioUrl: '' };
 
 	export let videoUrl: string = a || 'https://v.redd.it/hn6h8n0sztsa1/DASH_720.mp4';
-	export let audioUrl: string = b || 'https://v.redd.it/hn6h8n0sztsa1/DASH_audio.mp4';
+	export let audioUrl: string = b || 'https://v.redd.it/hn6h8n0sztsa1/DASH_AUDIO_128.mp4';
 
 	let videoElement: HTMLVideoElement;
 	let audioElement: HTMLAudioElement;
