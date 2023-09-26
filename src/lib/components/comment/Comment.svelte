@@ -7,6 +7,7 @@
 	import CommentInfo from './CommentInfo.svelte';
 	import CommentBody from './CommentBody.svelte';
 	import CommentActions from './CommentActions.svelte';
+	import { tick } from 'svelte';
 
 	export let comment: CommentFull;
 	export let submissionId: string;
@@ -42,10 +43,19 @@
 		}
 	}
 
-	function toggleCommentVisibility() {
+	async function toggleCommentVisibility() {
 		if (comment.type === 'comment') {
 			comment.collapsed = !comment.collapsed;
 			currentCommentHidden = comment.collapsed;
+
+			if (comment.collapsed) {
+				await tick();
+				const rect = commentContainer.getBoundingClientRect();
+				if (rect.top < 65) {
+					// 65px is the height of the fixed header
+					commentContainer.scrollIntoView();
+				}
+			}
 		}
 	}
 
@@ -86,10 +96,12 @@
 			: false;
 
 	let sourceHidden = true;
+
+	let commentContainer: HTMLDivElement;
 </script>
 
 {#if comment.type === 'comment'}
-	<div class="comment-container">
+	<div bind:this={commentContainer} class="comment-container">
 		<CommentBar {commentHidden} {toggleCommentVisibility} />
 
 		<div class="flex flex-col gap-2">
@@ -147,6 +159,7 @@
 	.comment-container {
 		display: grid;
 		grid-template-columns: 22px 1fr;
+		scroll-margin-top: 65px;
 	}
 
 	.highlight {
