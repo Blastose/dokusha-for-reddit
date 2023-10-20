@@ -8,7 +8,7 @@
 	import SubredditClassicSkeleton from './SubredditClassicSkeleton.svelte';
 
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import SubredditCardSkeleton from './SubredditCardSkeleton.svelte';
 
 	export let posts: Promise<SubmissionData[]> | SubmissionData[];
@@ -35,11 +35,12 @@
 		})();
 	}
 
+	let interactionObserver: IntersectionObserver | undefined;
 	onMount(async () => {
 		posts = await posts;
 		lastPostId = posts[posts.length - 1].id;
 
-		const interactionObserver = new IntersectionObserver(async (entries) => {
+		interactionObserver = new IntersectionObserver(async (entries) => {
 			if (entries[0].intersectionRatio <= 0) return;
 
 			const subreddit = $page.params.subreddit ?? '';
@@ -65,10 +66,12 @@
 		});
 
 		interactionObserver.observe(loadingElement);
+	});
 
-		return () => {
+	onDestroy(() => {
+		if (interactionObserver) {
 			interactionObserver.unobserve(loadingElement);
-		};
+		}
 	});
 </script>
 
