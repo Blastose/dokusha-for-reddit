@@ -64,6 +64,7 @@
 				<Icon height="24" width="24" name="pencilPlus" />
 			</button>
 			{#if drag}
+				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<div
 					on:drop={onDrop}
 					on:dragover={(e) => {

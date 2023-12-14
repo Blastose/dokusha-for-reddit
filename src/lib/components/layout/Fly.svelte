@@ -21,7 +21,7 @@
 
 {#if key !== 'skip'}
 	{#key key}
-		<div in:fly={{ x: flyXOffset * flyDirection, duration: 250, easing: cubicOut }}>
+		<div in:fly|global={{ x: flyXOffset * flyDirection, duration: 250, easing: cubicOut }}>
 			<slot />
 		</div>
 	{/key}
