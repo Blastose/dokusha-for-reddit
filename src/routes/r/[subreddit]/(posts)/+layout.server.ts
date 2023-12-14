@@ -31,7 +31,7 @@ export const load = (async ({ cookies, params, setHeaders, url, isDataRequest })
 	}
 
 	const posts = jsrWrapsubreddit.getSubmissions({ sort, params: { t } });
-	if (!posts) throw error(500);
+	if (!posts) error(500);
 
 	setHeaders({ 'cache-control': 'public, max-age=60' });
 	return { streamed: { posts: isDataRequest ? posts : await posts } };
