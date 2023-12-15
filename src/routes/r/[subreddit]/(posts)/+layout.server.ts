@@ -6,17 +6,6 @@ import { error } from '@sveltejs/kit';
 type Time = 'hour' | 'day' | 'week' | 'month' | 'year' | 'all';
 
 export const load = (async ({ cookies, params, setHeaders, url, isDataRequest }) => {
-	const subreddit = params.subreddit;
-	let sort = params.sort as 'top' | 'new' | 'controversial' | 'rising' | 'hot' | undefined;
-	if (!sort) {
-		sort = 'hot';
-	}
-
-	let t = url.searchParams.get('t') as Time | null;
-	t = t ?? 'day';
-
-	const jsrWrapsubreddit = jsrwrap.getSubreddit(subreddit);
-
 	if (cookies.get('name') === 'skip') {
 		cookies.set('name', '', {
 			path: '/',
@@ -29,6 +18,17 @@ export const load = (async ({ cookies, params, setHeaders, url, isDataRequest })
 			about: SubredditData;
 		};
 	}
+
+	const subreddit = params.subreddit;
+	let sort = params.sort as 'top' | 'new' | 'controversial' | 'rising' | 'hot' | undefined;
+	if (!sort) {
+		sort = 'hot';
+	}
+
+	let t = url.searchParams.get('t') as Time | null;
+	t = t ?? 'day';
+
+	const jsrWrapsubreddit = jsrwrap.getSubreddit(subreddit);
 
 	const posts = jsrWrapsubreddit.getSubmissions({ sort, params: { t } });
 	if (!posts) error(500);
