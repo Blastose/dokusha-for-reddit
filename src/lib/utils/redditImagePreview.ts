@@ -70,7 +70,8 @@ export function getGalleryData(
 
 export async function getImgurGalleryData(albumHash: string) {
 	const url = `https://api.imgur.com/3/album/${albumHash}/images`;
-	const imgurClientId = 'daa3c15492b75ef';
+	const imgurClientId = 'a85efff3cb2c229';
+
 	const res = await fetch(url, { headers: { Authorization: `Client-ID ${imgurClientId}` } });
 
 	const resJson = (await res.json()) as {
@@ -80,6 +81,8 @@ export async function getImgurGalleryData(albumHash: string) {
 	resJson.data.forEach((e) => {
 		console.log(e.link);
 	});
+
+	console.log(resJson);
 
 	return resJson.data.map((e) => {
 		return {
