@@ -20,6 +20,7 @@
 			if (!match) return;
 			console.log(post.url);
 			galleryData = await getImgurGalleryData(match[1]);
+			totalImagesInGallery = galleryData.length;
 		}
 	});
 
