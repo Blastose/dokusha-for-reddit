@@ -16,7 +16,7 @@
 
 	onMount(async () => {
 		if (isImgur) {
-			const match = post.url.match(/^https?:\/\/imgur\.com\/a\/([a-zA-Z]*)\/?.*/);
+			const match = post.url.match(/^https?:\/\/imgur\.com\/a\/([a-zA-Z0-9]*)\/?.*/);
 			if (!match) return;
 			console.log(post.url);
 			galleryData = await getImgurGalleryData(match[1]);
