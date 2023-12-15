@@ -1,16 +1,28 @@
 <script lang="ts">
-	import { getGalleryData } from '$lib/utils/redditImagePreview';
+	import { getGalleryData, getImgurGalleryData } from '$lib/utils/redditImagePreview';
 	import type { SubmissionData } from 'jsrwrap/types';
 	import RedditImage from './RedditImage.svelte';
 	import Icon from '$lib/components/icon/Icon.svelte';
+	import { onMount } from 'svelte';
 
 	export let post: SubmissionData;
+	export let isImgur: boolean;
 
-	const galleryData = getGalleryData(post) ?? [];
+	let galleryData = !isImgur ? getGalleryData(post) ?? [] : [];
 	let currentImageIndex = 0;
 	let totalImagesInGallery = galleryData.length;
 
-	$: currentImage = galleryData[currentImageIndex].url;
+	$: currentImage = galleryData.at(currentImageIndex)?.url ?? '';
+
+	onMount(async () => {
+		if (isImgur) {
+			const match = post.url.match(/^https?:\/\/imgur\.com\/a\/([a-zA-Z0-9]*)\/?.*/);
+			if (!match) return;
+			console.log(post.url);
+			galleryData = await getImgurGalleryData(match[1]);
+			totalImagesInGallery = galleryData.length;
+		}
+	});
 
 	function incrementCurrentImageIndex() {
 		currentImageIndex = (currentImageIndex + 1) % totalImagesInGallery;
@@ -45,15 +57,15 @@
 	</div>
 
 	<RedditImage imageUrl={currentImage} />
-	{#if galleryData[currentImageIndex].caption}
+	{#if galleryData.at(currentImageIndex)?.caption}
 		<div class="reddit-md">
-			<p>{galleryData[currentImageIndex].caption}</p>
+			<p>{galleryData.at(currentImageIndex)?.caption}</p>
 		</div>
 	{/if}
-	{#if galleryData[currentImageIndex].outboundUrl}
+	{#if galleryData.at(currentImageIndex)?.outboundUrl}
 		<div class="reddit-md">
-			<a href={galleryData[currentImageIndex].outboundUrl} target="_blank" rel="noreferrer"
-				>{galleryData[currentImageIndex].outboundUrl}</a
+			<a href={galleryData.at(currentImageIndex)?.outboundUrl} target="_blank" rel="noreferrer"
+				>{galleryData.at(currentImageIndex)?.outboundUrl}</a
 			>
 		</div>
 	{/if}

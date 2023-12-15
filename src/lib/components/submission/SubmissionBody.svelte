@@ -79,8 +79,11 @@
 			<div>
 				{#if !submission.is_gallery && !submission.is_video && submission.post_hint === 'image'}
 					<RedditImage imageUrl={getRedditImageUrlPreview(submission) ?? ''} />
-				{:else if submission.is_gallery}
-					<RedditGallery post={submission} />
+				{:else if submission.is_gallery || submission.url.startsWith('https://imgur.com/a/')}
+					<RedditGallery
+						post={submission}
+						isImgur={submission.url.startsWith('https://imgur.com/a/')}
+					/>
 				{:else if submission.is_video}
 					<RedditVideo post={submission} />
 				{/if}

@@ -84,8 +84,8 @@
 				{#if post.selftext}
 					<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />
 				{/if}
-			{:else if post.is_gallery}
-				<RedditGallery {post} />
+			{:else if post.is_gallery || post.url.startsWith('https://imgur.com/a/')}
+				<RedditGallery {post} isImgur={post.url.startsWith('https://imgur.com/a/')} />
 				{#if post.selftext}
 					<RedditHtml rawHTML={markdownToHtml(post.selftext)} fixedSize={false} />
 				{/if}
