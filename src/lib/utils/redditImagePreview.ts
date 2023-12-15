@@ -82,6 +82,8 @@ export async function getImgurGalleryData(albumHash: string) {
 		console.log(e.link);
 	});
 
+	// TODO add support for videos responses
+
 	console.log(resJson);
 
 	return resJson.data.map((e) => {
