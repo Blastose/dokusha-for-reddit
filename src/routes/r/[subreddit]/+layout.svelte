@@ -3,6 +3,7 @@
 	import SortPosts from '$lib/components/sort/SortPosts.svelte';
 	import { page } from '$app/stores';
 	import Fly from '$lib/components/layout/Fly.svelte';
+	import SubredditSidebar from '$lib/components/subreddit/sidebar/SubredditSidebar.svelte';
 
 	export let data;
 
@@ -25,34 +26,24 @@
 </script>
 
 <section class="flex flex-col">
-	{#key bannerUrl}
-		<div
-			class:highlight={bannerUrl === ''}
-			class:banner-image={bannerUrl !== ''}
-			class="banner"
-			style={bannerUrl
-				? `background-image: linear-gradient(rgba(27, 27, 27, 0.1), rgba(43, 44, 46, 1)), url(${bannerUrl});`
-				: ''}
-		>
-			<div class="blur-image">
-				<div />
-
-				<div class="text-dark-mode banner-text container mx-auto">
-					{#if icon}
-						{#key icon}
-							<img height="64" width="64" class="icon-image" src={icon} alt="" />
-						{/key}
-					{/if}
-					<p class="font-bold text-2xl">{about.title}</p>
-					<a href="/{about.display_name_prefixed}" class="font-bold text-sm w-fit">
-						{about.display_name_prefixed}
-					</a>
+	<div class="container content-container {showSubredditOptions ? 'pt-4' : 'pt-2'}">
+		{#key bannerUrl}
+			<div>
+				<div
+					class="h-[64px] sm:h-[128px] w-full rounded-md bg-no-repeat bg-cover bg-center"
+					style:background-image="url({bannerUrl})"
+				/>
+				<div class="flex px-2 gap-2 relative bottom-[30px] mb-[-30px]">
+					<img
+						class="border-[#292b2f] bg-[#292b2f] border-4 rounded-full h-[80px] w-[80px]"
+						src={icon}
+						alt=""
+					/>
+					<h1 class="flex self-end font-bold pb-3 text-2xl">{about.display_name_prefixed}</h1>
 				</div>
 			</div>
-		</div>
-	{/key}
+		{/key}
 
-	<div class="container content-container {showSubredditOptions ? 'pt-4' : 'pt-2'}">
 		{#if showSubredditOptions}
 			<SortPosts />
 
@@ -61,20 +52,21 @@
 			</button>
 		{/if}
 
-		<Fly {key}>
-			<slot />
-		</Fly>
+		<div class="grid grid-cols-[1fr_256px] gap-4">
+			<Fly {key}>
+				<slot />
+			</Fly>
+
+			{#if showSubredditOptions}
+				<div class="sticky max-h-7">
+					<SubredditSidebar widgets={data.sidebar} {about} />
+				</div>
+			{/if}
+		</div>
 	</div>
 </section>
 
 <style>
-	.banner-text {
-		display: flex;
-		flex-direction: column;
-		align-self: flex-end;
-		padding: 1rem;
-	}
-
 	.content-container {
 		display: flex;
 		flex-direction: column;
@@ -87,44 +79,9 @@
 	}
 
 	@media (min-width: 1024px) {
-		.banner-text {
-			padding: 1rem 4rem;
-		}
-
 		.content-container {
 			padding-left: 4rem;
 			padding-right: 4rem;
 		}
-	}
-
-	.icon-image {
-		border-radius: 9999px;
-	}
-
-	.banner {
-		min-height: 10rem;
-		display: flex;
-	}
-
-	.banner-image {
-		overflow: hidden;
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center center;
-	}
-
-	.highlight:not(.banner-image) {
-		background: rgb(88, 97, 158);
-	}
-
-	:global(.dark) .highlight:not(.banner-image) {
-		background: rgb(67, 75, 124);
-	}
-
-	.blur-image {
-		width: 100%;
-		backdrop-filter: blur(0px);
-		display: grid;
-		grid-template-rows: 0.5fr 3fr;
 	}
 </style>
