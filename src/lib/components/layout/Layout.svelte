@@ -41,7 +41,7 @@
 	.header {
 		grid-area: header;
 		position: sticky;
-		z-index: 1;
+		z-index: 50;
 		top: 0;
 		height: 65px;
 	}

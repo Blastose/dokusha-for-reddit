@@ -6,12 +6,16 @@
 	import { page } from '$app/stores';
 
 	export let post: SubmissionData;
+	export let includePostedByText: boolean = true;
 
 	const iconDimension = '18';
 </script>
 
 <div class="info-container">
-	<span>Posted by <a class="author" href="/u/{post.author}">{post.author}</a></span>
+	<span
+		>{includePostedByText ? 'Posted by' : ''}
+		<a class="author" href="/u/{post.author}">{post.author}</a></span
+	>
 	<UserFlair author={post} />
 
 	<RelativeTime

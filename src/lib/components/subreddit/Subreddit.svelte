@@ -88,6 +88,7 @@
 		{#each awaitedPosts as post, index (`${post.id}${index}`)}
 			{#if $subredditViewStore === 'card'}
 				<SubredditCard {post} />
+				<hr class="opacity-10" />
 			{:else}
 				<SubredditClassic {post} />
 			{/if}
