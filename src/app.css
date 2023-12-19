@@ -8,6 +8,7 @@ html {
 	color: #3a3a3a;
 	fill: #3a3a3a;
 	background-color: #ffffff;
+	overflow-wrap: anywhere;
 }
 
 .dark {
@@ -86,6 +87,16 @@ strike {
 	margin-bottom: 1rem;
 } */
 
+.inherit-text-size .reddit-md h1,
+.inherit-text-size .reddit-md h2,
+.inherit-text-size .reddit-md h3,
+.inherit-text-size .reddit-md h4,
+.inherit-text-size .reddit-md h5,
+.inherit-text-size .reddit-md h6 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+
 .reddit-md h1 {
 	font-size: larger;
 	font-weight: bold;
@@ -138,7 +149,7 @@ strike {
 }
 
 .dark .reddit-md hr {
-	border-color: rgba(88, 88, 88, 0.658);
+	border-color: rgb(201 201 201 / 66%);
 }
 
 .reddit-md li {
@@ -307,4 +318,28 @@ strike {
 
 .reddit-md div > a > img {
 	margin: 8px 0;
+}
+
+.container-doku {
+	width: 100%;
+}
+@media (min-width: 640px) {
+	.container-doku {
+		max-width: 640px;
+	}
+}
+@media (min-width: 768px) {
+	.container-doku {
+		max-width: 768px;
+	}
+}
+@media (min-width: 1024px) {
+	.container-doku {
+		max-width: 1024px;
+	}
+}
+@media (min-width: 1280px) {
+	.container-doku {
+		max-width: 1280px;
+	}
 }

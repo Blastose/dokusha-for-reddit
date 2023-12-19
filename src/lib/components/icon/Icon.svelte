@@ -102,8 +102,8 @@
 
 <script lang="ts">
 	export let name: IconType;
-	export let width: string;
-	export let height: string;
+	export let width: string = '24';
+	export let height: string = '24';
 	export let hidden: boolean = true;
 	let className: string = '';
 	export { className as class };

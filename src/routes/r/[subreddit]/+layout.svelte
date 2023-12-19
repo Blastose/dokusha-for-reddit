@@ -26,11 +26,12 @@
 </script>
 
 <section class="flex flex-col">
-	<div class="container content-container {showSubredditOptions ? 'pt-4' : 'pt-2'}">
+	<div class="container-doku content-container pt-2">
 		{#key bannerUrl}
 			<div>
 				<div
-					class="h-[64px] sm:h-[128px] w-full rounded-md bg-no-repeat bg-cover bg-center"
+					class="{bannerUrl ? '' : 'bg-[#434b7c]'}
+						 h-[64px] sm:h-[128px] w-full rounded-md bg-no-repeat bg-cover bg-center"
 					style:background-image="url({bannerUrl})"
 				/>
 				<div class="flex px-2 gap-2 relative bottom-[30px] mb-[-30px]">
@@ -52,13 +53,13 @@
 			</button>
 		{/if}
 
-		<div class="grid grid-cols-[1fr_256px] gap-4">
+		<div class="grid {showSubredditOptions ? 'grid-cols-[1fr_256px]' : 'grid-cols-1'} gap-4">
 			<Fly {key}>
 				<slot />
 			</Fly>
 
 			{#if showSubredditOptions}
-				<div class="sticky max-h-7">
+				<div class="sticky">
 					<SubredditSidebar widgets={data.sidebar} {about} />
 				</div>
 			{/if}

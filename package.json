@@ -28,7 +28,7 @@
 		"eslint": "^8.39.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-svelte": "^2.30.0",
-		"jsrwrap": "^0.1.13",
+		"jsrwrap": "^0.1.15",
 		"postcss": "^8.4.23",
 		"prettier": "^2.8.8",
 		"prettier-plugin-svelte": "^2.10.1",
@@ -44,7 +44,7 @@
 	"type": "module",
 	"dependencies": {
 		"nprogress": "^0.2.0",
-		"reddit-md-to-html": "^0.1.69",
+		"reddit-md-to-html": "^0.1.71",
 		"svelte-local-storage-store": "^0.6.4"
 	}
 }
