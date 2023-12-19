@@ -1,17 +1,22 @@
 <script lang="ts">
 	import type { WidgetPostFlair } from 'jsrwrap/types';
+	import Flair from '../Flair.svelte';
+	import WidgetContainer from './WidgetContainer.svelte';
 
 	export let widget: WidgetPostFlair;
 </script>
 
-<div>
-	<p>{widget.shortName}</p>
-	<div class="flex flex-wrap gap-2 text-sm">
+<WidgetContainer sectionHeading={widget.shortName}>
+	<div class="flex flex-wrap gap-2">
 		{#each Object.entries(widget.templates) as [_, flair]}
-			<span
-				class="rounded-md px-2 text-sm {flair.textColor === 'light' ? 'text-white' : 'text-black'}"
-				style:background-color={flair.backgroundColor}>{flair.text}</span
-			>
+			{@const linkFlair = {
+				link_flair_richtext: flair.richtext,
+				link_flair_background_color: flair.backgroundColor,
+				link_flair_text_color: flair.textColor,
+				link_flair_type: flair.type,
+				link_flair_text: flair.text
+			}}
+			<Flair {linkFlair} />
 		{/each}
 	</div>
-</div>
+</WidgetContainer>

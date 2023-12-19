@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { WidgetCalendar } from 'jsrwrap/types';
+	import WidgetContainer from './WidgetContainer.svelte';
 
 	export let widget: WidgetCalendar;
 </script>
 
-<div>
-	<p>{widget.shortName}</p>
+<WidgetContainer sectionHeading={widget.shortName}>
 	<div class="flex flex-wrap gap-2">
 		{#each widget.data as cal}
 			<div>
@@ -14,4 +14,4 @@
 			</div>
 		{/each}
 	</div>
-</div>
+</WidgetContainer>

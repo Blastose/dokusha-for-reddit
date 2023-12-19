@@ -1,12 +1,11 @@
 <script lang="ts">
 	import type { WidgetCommunityList } from 'jsrwrap/types';
+	import WidgetContainer from './WidgetContainer.svelte';
 
 	export let widget: WidgetCommunityList;
 </script>
 
-<div>
-	<p>{widget.shortName}</p>
-
+<WidgetContainer sectionHeading={widget.shortName}>
 	<div class="reddit-md flex flex-col gap-2">
 		{#each widget.data as sub}
 			<div class="reddit-md flex flex-col">
@@ -15,4 +14,4 @@
 			</div>
 		{/each}
 	</div>
-</div>
+</WidgetContainer>

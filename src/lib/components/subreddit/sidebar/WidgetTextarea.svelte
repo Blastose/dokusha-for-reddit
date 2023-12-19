@@ -2,14 +2,13 @@
 	import RedditHtml from '$lib/components/reddit-html/RedditHtml.svelte';
 	import { markdownToHtml } from '$lib/utils/markdownToHtml';
 	import type { WidgetTextarea } from 'jsrwrap/types';
+	import WidgetContainer from './WidgetContainer.svelte';
 
 	export let widget: WidgetTextarea;
 </script>
 
-<div>
-	<p>{widget.shortName}</p>
-
-	<div class="reddit-md flex flex-col gap-2">
+<WidgetContainer sectionHeading={widget.shortName}>
+	<div class="flex flex-col gap-2">
 		<RedditHtml rawHTML={markdownToHtml(widget.text)} />
 	</div>
-</div>
+</WidgetContainer>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { WidgetIdCard, SubredditData } from 'jsrwrap/types';
+	import WidgetContainer from './WidgetContainer.svelte';
 
 	const formatter = Intl.NumberFormat('en', { notation: 'compact' });
 
@@ -11,18 +12,17 @@
 	export let about: SubredditData;
 </script>
 
-<section>
-	<h2 class="font-bold">{about.title}</h2>
-	<p class="opacity-70">{widget.description}</p>
+<WidgetContainer sectionHeading={about.display_name}>
+	<p class="text-neutral-400">{widget.description}</p>
 
 	<div>
 		<p>
 			<span>{formatNumber(widget.subscribersCount)}</span>
-			<span>{widget.subscribersText || 'members'}</span>
+			<span class="text-neutral-400">{widget.subscribersText || 'members'}</span>
 		</p>
 		<p>
 			<span>{formatNumber(widget.currentlyViewingCount)}</span>
-			<span>{widget.currentlyViewingText || 'online'}</span>
+			<span class="text-neutral-400">{widget.currentlyViewingText || 'online'}</span>
 		</p>
 	</div>
-</section>
+</WidgetContainer>

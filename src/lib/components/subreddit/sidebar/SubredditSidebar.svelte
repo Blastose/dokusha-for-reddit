@@ -10,17 +10,18 @@
 	import WidgetCommunityList from './WidgetCommunityList.svelte';
 	import WidgetButton from './WidgetButton.svelte';
 	import WidgetCalendar from './WidgetCalendar.svelte';
+	import WidgetCustom from './WidgetCustom.svelte';
 
 	export let widgets: Widget[];
 	export let about: SubredditData;
 </script>
 
-<aside class="flex flex-col gap-2">
-	{#each widgets as widget}
+<aside class="flex flex-col gap-2 inherit-text-size text-sm p-4 bg-neutral-800 rounded-md">
+	{#each widgets as widget, index}
 		{#if widget.kind === 'id-card'}
 			<WidgetIdCard {widget} {about} />
 		{:else if widget.kind === 'menu'}
-			<WidgetMenu {widget} />
+			<WidgetMenu {widget} {about} />
 		{:else if widget.kind === 'post-flair'}
 			<WidgetPostFlair {widget} />
 		{:else if widget.kind === 'subreddit-rules'}
@@ -37,7 +38,11 @@
 			<WidgetButton {widget} />
 		{:else if widget.kind === 'calendar'}
 			<WidgetCalendar {widget} />
+		{:else if widget.kind === 'custom'}
+			<WidgetCustom {widget} />
 		{/if}
-		<hr class="opacity-40" />
+		{#if index !== widgets.length - 1}
+			<hr class="opacity-10" />
+		{/if}
 	{/each}
 </aside>

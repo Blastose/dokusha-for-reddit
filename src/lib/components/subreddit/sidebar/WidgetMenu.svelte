@@ -1,20 +1,34 @@
 <script lang="ts">
-	import type { WidgetMenu } from 'jsrwrap/types';
+	import type { SubredditData, WidgetMenu } from 'jsrwrap/types';
+	import WidgetMenuItemDropdown from './WidgetMenuItemDropdown.svelte';
+	import WidgetContainer from './WidgetContainer.svelte';
 
 	export let widget: WidgetMenu;
+	export let about: SubredditData;
 </script>
 
-<div>
-	<p>Menu</p>
+<WidgetContainer sectionHeading={'Menu'}>
 	<div class="flex flex-col gap-2">
-		{#each widget.data as menuItem}
-			{#if menuItem.url}
-				<p class="text-center rounded-2xl p-2 bg-gray-600">
-					<a href={menuItem.url}>{menuItem.text}</a>
-				</p>
-			{:else if menuItem.children}
-				<p>{menuItem.text}^</p>
-			{/if}
-		{/each}
+		{#if widget.showWiki}
+			<a
+				class="w-full text-center px-2 py-1 rounded-2xl bg-gray-600"
+				target="_blank"
+				rel="noreferrer"
+				href="/{about.display_name_prefixed}/wiki/index">Wiki</a
+			>
+		{:else}
+			{#each widget.data as menuItem}
+				{#if menuItem.url}
+					<a
+						class="w-full text-center px-2 py-1 rounded-2xl bg-gray-600"
+						target="_blank"
+						rel="noreferrer"
+						href={menuItem.url}>{menuItem.text}</a
+					>
+				{:else if menuItem.children}
+					<WidgetMenuItemDropdown {menuItem} />
+				{/if}
+			{/each}
+		{/if}
 	</div>
-</div>
+</WidgetContainer>
