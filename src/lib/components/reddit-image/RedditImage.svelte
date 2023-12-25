@@ -107,7 +107,7 @@
 	let imgRatio: number;
 </script>
 
-<div class="w-0">
+<div class="w-0 relative z-[9999]">
 	<div class="resize" use:resize={'both'} style="width: {width}px">
 		<img
 			use:resize={'resizeOnly'}
