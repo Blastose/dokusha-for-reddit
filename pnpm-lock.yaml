@@ -9,8 +9,8 @@ dependencies:
     specifier: ^0.2.0
     version: 0.2.0
   reddit-md-to-html:
-    specifier: ^0.1.71
-    version: 0.1.71
+    specifier: ^0.1.72
+    version: 0.1.72
   svelte-local-storage-store:
     specifier: ^0.6.4
     version: 0.6.4(svelte@4.2.8)
@@ -2300,8 +2300,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /reddit-md-to-html@0.1.71:
-    resolution: {integrity: sha512-H+q7AMu4De8MXmL8leTijewBI0onQADSkBXaquJM9dN8eT04WhF5CQEvcRaRAgv3W/flOOESBz2eXdXNSAyisA==}
+  /reddit-md-to-html@0.1.72:
+    resolution: {integrity: sha512-JxHmGITctV3nZL7pIP/G6FftJ6zW7oTcDiMtzUATRtrXPJWJRs5VTrn/xPHIVZjhbr8VLwwt4G+WUjWSr3CKXw==}
     engines: {node: '>=14.16'}
     dependencies:
       simple-markdown: 0.7.3
